@@ -1,5 +1,11 @@
+import { Outlet } from "react-router-dom";
+
 const App = () => {
-	return <div>DeCon</div>;
+	return (
+		<>
+			<Outlet />
+		</>
+	);
 };
 
 export default App;
