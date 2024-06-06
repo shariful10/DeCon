@@ -47,10 +47,10 @@ const BuildingInfo = () => {
 	};
 
 	const handleImageChange = (e) => {
-		const file = e.target.files[0];
+		const file = URL.createObjectURL(e.target.files[0]);
 		if (file) {
 			setBuilding({ ...building, image: file });
-			setImagePreview(URL.createObjectURL(file));
+			setImagePreview(file);
 		}
 	};
 
