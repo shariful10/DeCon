@@ -13,10 +13,7 @@ const BuildingInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { buildingInfo } = useSelector((state) => state.buildingInfo);
-  console.log(
-    "🚀 ~ file: BuildingInfo.jsx:16 ~ BuildingInfo ~ buildingInfo:",
-    buildingInfo.country
-  );
+
   const [imagePreview, setImagePreview] = useState(null);
   const [building, setBuilding] = useState({
     buildingType: "",
@@ -302,6 +299,7 @@ const BuildingInfo = () => {
                     id="image"
                     className="opacity-0 absolute top-0 left-0 w-full h-full"
                     accept="image/*"
+                    required
                   />
                   {imagePreview ? (
                     <img
