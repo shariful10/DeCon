@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  construction_type: [],
+  construction_type: null,
 };
 
 export const constructionTypeSlice = createSlice({
