@@ -1,11 +1,11 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/utils/Button";
 import Navbar from "../components/shared/Navbar";
 import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
-import Button from "../components/utils/Button";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
-import { useNavigate } from "react-router-dom";
 
 const BuildingInfo = () => {
 	const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const BuildingInfo = () => {
 		postCode: "",
 		city: "",
 		street: "",
-		no: "",
+		no: 0,
 		area: "",
 		constructionDate: "",
 		calculationDate: "",
@@ -170,7 +170,7 @@ const BuildingInfo = () => {
 																			no: e.target.value,
 																		})
 																	}
-																	type="tell"
+																	type="number"
 																	className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 																	name="no"
 																	id="no"

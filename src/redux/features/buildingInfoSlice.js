@@ -9,7 +9,7 @@ export const buildingInfoSlice = createSlice({
 	initialState,
 	reducers: {
 		addBuildingInfo: (state, action) => {
-			state.buildingInfo.push({ ...action.payload });
+			state.buildingInfo = action.payload;
 		},
 	},
 });
