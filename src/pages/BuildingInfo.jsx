@@ -199,6 +199,7 @@ const BuildingInfo = () => {
 										name="image"
 										id="image"
 										className="opacity-0 absolute top-0 left-0 w-full h-full"
+										accept="image/*"
 									/>
 									<label
 										htmlFor="image"
