@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Container from "../components/container/Container";
 import Button from "../components/utils/Button";
 import { addConstructionType } from "../redux/features/constructionTypeSlice";
 
-export default function ConstructionsType() {
+export default function ConstructionsType({ next, prev }) {
   const dispatch = useDispatch();
   const constructionType = useSelector(
     (state) => state.constructionType.construction_type
@@ -20,7 +19,7 @@ export default function ConstructionsType() {
 
   return (
     <Container>
-      <div className="flex justify-evenly items-center gap-10 h-screen w-full relative">
+      <div className="flex justify-evenly items-center gap-10 h-screen w-full relative -top-24">
         <div className="flex justify-evenly items-center gap-10 max-h-max w-full relative">
           <p className="min-w-max">Select the construction type: </p>
 
@@ -52,11 +51,17 @@ export default function ConstructionsType() {
           </div>
 
           <div className="flex items-end max-h-max">
-            {constructionType && (
-              <Link to="#" className="absolute bottom-0 -translate-x-1/2">
-                <Button btnTitle="Next" />
+            <div className="absolute -bottom-[20%] -translate-x-1/2 flex items-center justify-center gap-4">
+              <Link to="#">
+                <Button btnTitle="Pvs" onClick={prev} />
               </Link>
-            )}
+
+              {constructionType && (
+                <Link to="#">
+                  <Button btnTitle="Next" onClick={next} />
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
