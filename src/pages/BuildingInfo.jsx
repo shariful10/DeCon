@@ -32,19 +32,6 @@ const BuildingInfo = () => {
 		image: "",
 	});
 
-	// Retrieve form data from local storage when the component mounts
-	useEffect(() => {
-		const savedBuilding = JSON.parse(localStorage.getItem("buildingInfo"));
-		if (savedBuilding) {
-			setBuilding(savedBuilding);
-		}
-	}, []);
-
-	// Save form data to local storage whenever it changes
-	useEffect(() => {
-		localStorage.setItem("buildingInfo", JSON.stringify(building));
-	}, [building]);
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(addBuildingInfo(building));
