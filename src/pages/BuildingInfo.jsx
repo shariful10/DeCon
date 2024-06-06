@@ -6,10 +6,17 @@ import Navbar from "../components/shared/Navbar";
 import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const BuildingInfo = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { buildingInfo } = useSelector((state) => state.buildingInfo);
+	console.log(
+		"🚀 ~ file: BuildingInfo.jsx:16 ~ BuildingInfo ~ buildingInfo:",
+		buildingInfo
+	);
 
 	const [building, setBuilding] = useState({
 		buildingType: "",
@@ -24,6 +31,19 @@ const BuildingInfo = () => {
 		softwareVersion: "",
 		image: "",
 	});
+
+	// Retrieve form data from local storage when the component mounts
+	useEffect(() => {
+		const savedBuilding = JSON.parse(localStorage.getItem("buildingInfo"));
+		if (savedBuilding) {
+			setBuilding(savedBuilding);
+		}
+	}, []);
+
+	// Save form data to local storage whenever it changes
+	useEffect(() => {
+		localStorage.setItem("buildingInfo", JSON.stringify(building));
+	}, [building]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
