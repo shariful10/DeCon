@@ -2,8 +2,35 @@ import Navbar from "../components/shared/Navbar";
 import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
 import Button from "../components/utils/Button";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
+import { useNavigate } from "react-router-dom";
 
 const BuildingInfo = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [building, setBuilding] = useState({
+		buildingType: "",
+		country: "",
+		postCode: "",
+		city: "",
+		street: "",
+		no: "",
+		area: "",
+		constructionDate: "",
+		calculationDate: "",
+		softwareVersion: "",
+		image: "",
+	});
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(addBuildingInfo(building));
+		navigate("/constructions-type");
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -11,14 +38,14 @@ const BuildingInfo = () => {
 				<div className="w-full md:w-[70%] mx-auto my-[50px]">
 					<h1 className="text-2xl font-semibold">Building information:</h1>
 					<div className="mt-14">
-						<form>
+						<form onSubmit={handleSubmit}>
 							<div className="grid xl:grid-cols-3 gap-10">
 								<div className="xl:col-span-2">
 									<div className="">
 										<div className="grid grid-cols-3 items-end mb-4">
 											<div className="flex flex-col">
 												<label
-													htmlFor="building-type"
+													htmlFor="buildingType"
 													className="whitespace-nowrap"
 												>
 													Building type:
@@ -26,10 +53,17 @@ const BuildingInfo = () => {
 											</div>
 											<div className="col-span-2">
 												<input
+													onChange={(e) =>
+														setBuilding({
+															...building,
+															buildingType: e.target.value,
+														})
+													}
 													type="text"
 													className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
-													name="building-type"
-													id="building-type"
+													name="buildingType"
+													id="buildingType"
+													required
 												/>
 											</div>
 										</div>
@@ -42,23 +76,37 @@ const BuildingInfo = () => {
 											<div className="col-span-2">
 												<div className="flex justify-between items-end gap-4">
 													<input
+														onChange={(e) =>
+															setBuilding({
+																...building,
+																country: e.target.value,
+															})
+														}
 														type="text"
 														className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-[35%]"
 														name="country"
 														id="country"
+														required
 													/>
 													<div className="flex items-end justify-between gap-4">
 														<label
-															htmlFor="post-code"
+															htmlFor="postCode"
 															className="whitespace-nowrap"
 														>
 															Post code:
 														</label>
 														<input
+															onChange={(e) =>
+																setBuilding({
+																	...building,
+																	postCode: e.target.value,
+																})
+															}
 															type="text"
 															className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
-															name="post-code"
-															id="post-code"
+															name="postCode"
+															id="postCode"
+															required
 														/>
 													</div>
 												</div>
@@ -73,10 +121,17 @@ const BuildingInfo = () => {
 											<div className="col-span-2">
 												<div className="flex justify-between items-end gap-4">
 													<input
+														onChange={(e) =>
+															setBuilding({
+																...building,
+																city: e.target.value,
+															})
+														}
 														type="text"
 														className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-[55%]"
 														name="city"
 														id="city"
+														required
 													/>
 													<div className="flex items-end justify-between gap-4">
 														<div className="flex justify-between items-center gap-4">
@@ -88,10 +143,17 @@ const BuildingInfo = () => {
 																	Street:
 																</label>
 																<input
+																	onChange={(e) =>
+																		setBuilding({
+																			...building,
+																			street: e.target.value,
+																		})
+																	}
 																	type="text"
 																	className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 																	name="street"
 																	id="street"
+																	required
 																/>
 															</div>
 															<div className="flex justify-between items-end gap-4 w-[31%]">
@@ -102,10 +164,17 @@ const BuildingInfo = () => {
 																	No:
 																</label>
 																<input
+																	onChange={(e) =>
+																		setBuilding({
+																			...building,
+																			no: e.target.value,
+																		})
+																	}
 																	type="tell"
 																	className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 																	name="no"
 																	id="no"
+																	required
 																/>
 															</div>
 														</div>
@@ -122,10 +191,17 @@ const BuildingInfo = () => {
 											<div className="col-span-2">
 												<div className="flex justify-between items-end gap-4">
 													<input
+														onChange={(e) =>
+															setBuilding({
+																...building,
+																area: e.target.value,
+															})
+														}
 														type="text"
 														className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-[35%]"
 														name="area"
 														id="area"
+														required
 													/>
 												</div>
 											</div>
@@ -133,7 +209,7 @@ const BuildingInfo = () => {
 										<div className="grid grid-cols-3 items-end mb-4">
 											<div className="flex flex-col">
 												<label
-													htmlFor="construction-date"
+													htmlFor="constructionDate"
 													className="whitespace-nowrap"
 												>
 													Construction date:
@@ -142,10 +218,17 @@ const BuildingInfo = () => {
 											<div className="col-span-2">
 												<div className="flex justify-between items-end gap-4">
 													<input
+														onChange={(e) =>
+															setBuilding({
+																...building,
+																constructionDate: e.target.value,
+															})
+														}
 														type="date"
 														className="bg-gray-200 py-1.5 px-3 focus:outline-none w-[35%]"
-														name="construction-date"
-														id="construction-date"
+														name="constructionDate"
+														id="constructionDate"
+														required
 													/>
 												</div>
 											</div>
@@ -153,7 +236,7 @@ const BuildingInfo = () => {
 										<div className="grid grid-cols-3 items-end mb-4">
 											<div className="flex flex-col">
 												<label
-													htmlFor="calculation-date"
+													htmlFor="calculationDate"
 													className="whitespace-nowrap"
 												>
 													Calculation date:
@@ -162,10 +245,17 @@ const BuildingInfo = () => {
 											<div className="col-span-2">
 												<div className="flex justify-between items-end gap-4">
 													<input
+														onChange={(e) =>
+															setBuilding({
+																...building,
+																calculationDate: e.target.value,
+															})
+														}
 														type="date"
 														className="bg-gray-200 py-1.5 px-3 focus:outline-none w-[35%]"
-														name="calculation-date"
-														id="calculation-date"
+														name="calculationDate"
+														id="calculationDate"
+														required
 													/>
 												</div>
 											</div>
@@ -173,7 +263,7 @@ const BuildingInfo = () => {
 										<div className="grid grid-cols-3 items-end mb-4">
 											<div className="flex flex-col">
 												<label
-													htmlFor="software-version"
+													htmlFor="softwareVersion"
 													className="whitespace-nowrap"
 												>
 													Software version:
@@ -182,10 +272,17 @@ const BuildingInfo = () => {
 											<div className="col-span-2">
 												<div className="flex justify-between items-end gap-4">
 													<input
+														onChange={(e) =>
+															setBuilding({
+																...building,
+																softwareVersion: e.target.value,
+															})
+														}
 														type="text"
 														className="bg-gray-200 py-1.5 px-3 focus:outline-none w-[35%]"
-														name="software-version"
-														id="software-version"
+														name="softwareVersion"
+														id="softwareVersion"
+														required
 													/>
 												</div>
 											</div>
@@ -195,11 +292,18 @@ const BuildingInfo = () => {
 								{/* Image upload from here */}
 								<div className="border-2 border-gray-300 relative p-10">
 									<input
+										onChange={(e) =>
+											setBuilding({
+												...building,
+												image: e.target.value,
+											})
+										}
 										type="file"
 										name="image"
 										id="image"
 										className="opacity-0 absolute top-0 left-0 w-full h-full"
 										accept="image/*"
+										required
 									/>
 									<label
 										htmlFor="image"
