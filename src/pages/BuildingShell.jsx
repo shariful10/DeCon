@@ -4,7 +4,7 @@ import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
 
-export default function BuildingCore() {
+export default function BuildingShell() {
   return (
     <div className="w-full px-10">
       <div className="flex flex-col">
@@ -16,14 +16,12 @@ export default function BuildingCore() {
               <Button btnTitle="Column & Bearing wall" />
               <Button btnTitle="Column & Foundation" />
               <Button btnTitle="Beam & Slab" />
-              <Button btnTitle="Slab & Bearing wall" />
             </div>
           </div>
 
           <div className="flex-1">
             <h3>Connection</h3>
             <div className="flex flex-col gap-4">
-              <SelectDropdown />
               <SelectDropdown />
               <SelectDropdown />
               <SelectDropdown />
@@ -38,7 +36,6 @@ export default function BuildingCore() {
               <SelectDropdown />
               <SelectDropdown />
               <SelectDropdown />
-              <SelectDropdown />
             </div>
           </div>
 
@@ -49,7 +46,6 @@ export default function BuildingCore() {
               <SelectDropdown />
               <SelectDropdown />
               <SelectDropdown />
-              <SelectDropdown />
             </div>
           </div>
 
@@ -60,14 +56,12 @@ export default function BuildingCore() {
               <SelectDropdown />
               <SelectDropdown />
               <SelectDropdown />
-              <SelectDropdown />
             </div>
           </div>
 
           <div className="">
             <h3>Connection number</h3>
             <div className="flex flex-col gap-4">
-              <Input />
               <Input />
               <Input />
               <Input />
@@ -82,7 +76,6 @@ export default function BuildingCore() {
               <SelectDropdown />
               <SelectDropdown />
               <SelectDropdown />
-              <SelectDropdown />
             </div>
           </div>
 
@@ -93,14 +86,12 @@ export default function BuildingCore() {
               <Input />
               <Input />
               <Input />
-              <Input />
             </div>
           </div>
 
           <div className="">
             <h3>Connection number</h3>
             <div className="flex flex-col gap-4">
-              <Input />
               <Input />
               <Input />
               <Input />
