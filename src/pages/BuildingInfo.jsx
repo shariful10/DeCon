@@ -7,55 +7,54 @@ import Navbar from "../components/shared/Navbar";
 import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
-import ProgressBar from "../components/utils/ProgressBar";
 
 const BuildingInfo = () => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { buildingInfo } = useSelector((state) => state.buildingInfo);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { buildingInfo } = useSelector((state) => state.buildingInfo);
 
-	const [imagePreview, setImagePreview] = useState(null);
-	const [building, setBuilding] = useState({
-		buildingType: "",
-		country: "",
-		postCode: "",
-		city: "",
-		street: "",
-		no: 0,
-		area: "",
-		constructionDate: "",
-		calculationDate: "",
-		softwareVersion: "",
-		image: "",
-	});
+  const [imagePreview, setImagePreview] = useState(null);
+  const [building, setBuilding] = useState({
+    buildingType: "",
+    country: "",
+    postCode: "",
+    city: "",
+    street: "",
+    no: 0,
+    area: "",
+    constructionDate: "",
+    calculationDate: "",
+    softwareVersion: "",
+    image: "",
+  });
 
-	useEffect(() => {
-		if (buildingInfo) {
-			setBuilding(buildingInfo);
-		}
-	}, [buildingInfo]);
+  useEffect(() => {
+    if (buildingInfo) {
+      setBuilding(buildingInfo);
+    }
+  }, [buildingInfo]);
 
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setBuilding({
-			...building,
-			[name]: value,
-		});
-	};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBuilding({
+      ...building,
+      [name]: value,
+    });
+  };
 
-	const handleImageChange = (e) => {
-		const file = URL.createObjectURL(e.target.files[0]);
-		if (file) {
-			setBuilding({ ...building, image: file });
-			setImagePreview(file);
-		}
-	};
+  const handleImageChange = (e) => {
+    const file = URL.createObjectURL(e.target.files[0]);
+    if (file) {
+      setBuilding({ ...building, image: file });
+      setImagePreview(file);
+    }
+  };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		dispatch(addBuildingInfo(building));
-		navigate("/constructions-type");
-	};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addBuildingInfo(building));
+    navigate("/constructions-type");
+  };
 
 	return (
 		<>
