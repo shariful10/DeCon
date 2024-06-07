@@ -58,7 +58,6 @@ const BuildingInfo = () => {
 
 	return (
 		<>
-			<Navbar />
 			<Container>
 				<div className="w-full md:w-[70%] mx-auto my-[50px]">
 					<div className="w-3/4 my-5"></div>
