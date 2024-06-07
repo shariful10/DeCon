@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/utils/Button";
 import Navbar from "../components/shared/Navbar";
 import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
-import { useEffect } from "react";
 
 const BuildingInfo = () => {
 	const dispatch = useDispatch();
@@ -84,7 +83,7 @@ const BuildingInfo = () => {
 													className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 													name="buildingType"
 													id="buildingType"
-													value={
+													defaultValue={
 														building.buildingType || buildingInfo.buildingType
 													}
 													required
@@ -105,7 +104,9 @@ const BuildingInfo = () => {
 														className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-[35%]"
 														name="country"
 														id="country"
-														value={building.country || buildingInfo.country}
+														defaultValue={
+															building.country || buildingInfo.country
+														}
 														required
 													/>
 													<div className="flex items-end justify-between gap-4">
@@ -121,7 +122,9 @@ const BuildingInfo = () => {
 															className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 															name="postCode"
 															id="postCode"
-															value={building.postCode || buildingInfo.postCode}
+															defaultValue={
+																building.postCode || buildingInfo.postCode
+															}
 															required
 														/>
 													</div>
@@ -142,7 +145,7 @@ const BuildingInfo = () => {
 														className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-[55%]"
 														name="city"
 														id="city"
-														value={building.city || buildingInfo.city}
+														defaultValue={building.city || buildingInfo.city}
 														required
 													/>
 													<div className="flex items-end justify-between gap-4">
@@ -160,7 +163,9 @@ const BuildingInfo = () => {
 																	className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 																	name="street"
 																	id="street"
-																	value={building.street || buildingInfo.street}
+																	defaultValue={
+																		building.street || buildingInfo.street
+																	}
 																	required
 																/>
 															</div>
@@ -177,7 +182,7 @@ const BuildingInfo = () => {
 																	className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-full"
 																	name="no"
 																	id="no"
-																	value={building.no || buildingInfo.no}
+																	defaultValue={building.no || buildingInfo.no}
 																	required
 																/>
 															</div>
@@ -200,7 +205,7 @@ const BuildingInfo = () => {
 														className="bg-gray-200 py-1.5 pl-3 focus:outline-none w-[35%]"
 														name="area"
 														id="area"
-														value={building.area || buildingInfo.area}
+														defaultValue={building.area || buildingInfo.area}
 														required
 													/>
 												</div>
@@ -223,7 +228,7 @@ const BuildingInfo = () => {
 														className="bg-gray-200 py-1.5 px-3 focus:outline-none w-[35%]"
 														name="constructionDate"
 														id="constructionDate"
-														value={
+														defaultValue={
 															building.constructionDate ||
 															buildingInfo.calculationDate
 														}
@@ -249,7 +254,7 @@ const BuildingInfo = () => {
 														className="bg-gray-200 py-1.5 px-3 focus:outline-none w-[35%]"
 														name="calculationDate"
 														id="calculationDate"
-														value={
+														defaultValue={
 															building.calculationDate ||
 															buildingInfo.calculationDate
 														}
@@ -287,11 +292,7 @@ const BuildingInfo = () => {
 									</div>
 								</div>
 								{/* Image upload from here */}
-								<div
-									className={`border-2 border-gray-300 relative ${
-										imagePreview ? "flex items-center p-5" : "p-10"
-									}`}
-								>
+								<div className={`border-2 border-gray-300 relative p-10`}>
 									<input
 										onChange={handleImageChange}
 										type="file"
@@ -299,11 +300,16 @@ const BuildingInfo = () => {
 										id="image"
 										className="opacity-0 absolute top-0 left-0 w-full h-full"
 										accept="image/*"
-										required
 									/>
 									{imagePreview ? (
 										<img
 											src={imagePreview}
+											alt="Building Preview"
+											className="w-full rounded-lg h-full"
+										/>
+									) : buildingInfo.image ? (
+										<img
+											src={buildingInfo.image}
 											alt="Building Preview"
 											className="w-full rounded-lg"
 										/>
