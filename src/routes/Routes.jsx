@@ -4,6 +4,7 @@ import BuildingInfo from "../pages/BuildingInfo";
 import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
 import BuildingCore from "../pages/BuildingCore";
+import BuildingShell from "../pages/BuildingShell";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/building-core",
         element: <BuildingCore />,
+      },
+      {
+        path: "/building-shell",
+        element: <BuildingShell />,
       },
       {
         path: "/constructions-type",
