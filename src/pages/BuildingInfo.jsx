@@ -7,6 +7,7 @@ import Navbar from "../components/shared/Navbar";
 import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
+import ProgressBar from "../components/utils/ProgressBar";
 
 const BuildingInfo = () => {
 	const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const BuildingInfo = () => {
 			<Navbar />
 			<Container>
 				<div className="w-full md:w-[70%] mx-auto my-[50px]">
+					<div className="w-3/4 my-5"></div>
 					<h1 className="text-2xl font-semibold">Building information:</h1>
 					<div className="mt-14">
 						<form onSubmit={handleSubmit}>
