@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "../components/container/Container";
 import Button from "../components/utils/Button";
 import { addConstructionType } from "../redux/features/constructionTypeSlice";
+import SelectDropdown from "../components/Select/SelectDropdown";
 
 export default function ConstructionsType({ next, prev }) {
   const dispatch = useDispatch();
@@ -52,12 +53,12 @@ export default function ConstructionsType({ next, prev }) {
 
           <div className="flex items-end max-h-max">
             <div className="absolute -bottom-[20%] -translate-x-1/2 flex items-center justify-center gap-4">
-              <Link to="#">
-                <Button btnTitle="Pvs" onClick={prev} />
+              <Link to="/building-information">
+                <Button btnTitle="Previous" onClick={prev} />
               </Link>
 
               {constructionType && (
-                <Link to="#">
+                <Link to="/building-core">
                   <Button btnTitle="Next" onClick={next} />
                 </Link>
               )}
