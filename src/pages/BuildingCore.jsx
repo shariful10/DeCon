@@ -3,6 +3,8 @@ import SelectDropdown from "../components/Select/SelectDropdown";
 import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
+import { Link } from "react-router-dom";
+import ProgressBar from "../components/utils/ProgressBar";
 
 export default function BuildingCore() {
   return (
