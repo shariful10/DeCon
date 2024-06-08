@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	buildingInfo: [],
+	buildingInfo: JSON.parse(localStorage.getItem("buildingInfo")) || [],
 };
 
 export const buildingInfoSlice = createSlice({
@@ -9,7 +9,8 @@ export const buildingInfoSlice = createSlice({
 	initialState,
 	reducers: {
 		addBuildingInfo: (state, action) => {
-			state.buildingInfo.push({ ...action.payload });
+			state.buildingInfo = action.payload;
+			localStorage.setItem("buildingInfo", JSON.stringify(state.buildingInfo));
 		},
 	},
 });
