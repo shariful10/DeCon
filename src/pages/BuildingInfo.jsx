@@ -57,7 +57,7 @@ const BuildingInfo = () => {
   return (
     <>
       <Container>
-        <div className="my-[50px]">
+        <div className="w-full md:w-[70%] mx-auto my-[50px]">
           <div className="w-3/4 my-5"></div>
           <h1 className="text-2xl font-semibold">Building information:</h1>
           <div className="mt-14">
