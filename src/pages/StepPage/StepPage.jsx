@@ -14,11 +14,15 @@ export default function StepPage() {
 
   const steps = [
     {
-      title: <span>Home</span>,
+      title: <span className="text-wrap w-full capitalize">Home</span>,
       content: "Home content",
     },
     {
-      title: <span>Building information:</span>,
+      title: (
+        <span className="text-wrap w-full capitalize">
+          Building information:
+        </span>
+      ),
       content: "Building information:",
     },
     {
