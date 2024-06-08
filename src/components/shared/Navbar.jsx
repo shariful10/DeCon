@@ -1,7 +1,7 @@
-import { Steps } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.jpeg";
 import Container from "../container/Container";
+import ProgressIndicator from "./ProgressIndicator";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -17,7 +17,8 @@ const Navbar = () => {
         </Link>
 
         <div className="w-1/2">
-          <Steps
+          <ProgressIndicator />
+          {/* <Steps
             className="navbar-steps w-full"
             current={2}
             items={[
@@ -54,7 +55,7 @@ const Navbar = () => {
                 ),
               },
             ]}
-          />
+          /> */}
         </div>
       </div>
     </Container>
