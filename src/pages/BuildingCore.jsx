@@ -68,7 +68,7 @@ export default function BuildingCore() {
             </div>
           </div>
 
-          <div className="flex-1">
+          <div className="w-[100px]">
             <h3 className="text-center mb-3">Connection number</h3>
             <div className="flex flex-col gap-4">
               <Input />
@@ -90,7 +90,7 @@ export default function BuildingCore() {
             </div>
           </div>
 
-          <div className="flex-1">
+          <div className="w-[100px]">
             <h3 className="text-center mb-3">Barriers number</h3>
             <div className="flex flex-col gap-4">
               <Input />
@@ -131,7 +131,9 @@ export default function BuildingCore() {
             </div>
             <div className="w-full flex items-center gap-5">
               <Button btnTitle="Previous" />
-              <Button btnTitle="Next" />
+              <Link to="/building-shell">
+                <Button btnTitle="Next" />
+              </Link>
             </div>
           </div>
         </div>
