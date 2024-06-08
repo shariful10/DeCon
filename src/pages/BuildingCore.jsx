@@ -10,7 +10,7 @@ export default function BuildingCore() {
       <div className="flex flex-col">
         <div className="flex gap-5 mb-20">
           <div className="flex-1">
-            <h3>Connection</h3>
+            <h3 className="text-center mb-3">Connection</h3>
             <div className="flex flex-col gap-4">
               <Button btnTitle="Column & Beam" />
               <Button btnTitle="Column & Bearing wall" />
@@ -21,7 +21,7 @@ export default function BuildingCore() {
           </div>
 
           <div className="flex-1">
-            <h3>Connection</h3>
+            <h3 className="text-center mb-3">Connection type</h3>
             <div className="flex flex-col gap-4">
               <SelectDropdown />
               <SelectDropdown />
@@ -32,7 +32,7 @@ export default function BuildingCore() {
           </div>
 
           <div className="flex-1">
-            <h3>Connection type</h3>
+            <h3 className="text-center mb-3">Connection Accessibility</h3>
             <div className="flex flex-col gap-4">
               <SelectDropdown />
               <SelectDropdown />
@@ -43,7 +43,7 @@ export default function BuildingCore() {
           </div>
 
           <div className="flex-1">
-            <h3>Connection Accessibility</h3>
+            <h3 className="text-center mb-3">Independency</h3>
             <div className="flex flex-col gap-4">
               <SelectDropdown />
               <SelectDropdown />
@@ -54,7 +54,9 @@ export default function BuildingCore() {
           </div>
 
           <div className="flex-1">
-            <h3>Independency</h3>
+            <h3 className="text-center mb-3">
+              Geometry of product edge of Element
+            </h3>
             <div className="flex flex-col gap-4">
               <SelectDropdown />
               <SelectDropdown />
@@ -64,8 +66,8 @@ export default function BuildingCore() {
             </div>
           </div>
 
-          <div className="">
-            <h3>Connection number</h3>
+          <div className="flex-1">
+            <h3 className="text-center mb-3">Connection number</h3>
             <div className="flex flex-col gap-4">
               <Input />
               <Input />
@@ -76,7 +78,7 @@ export default function BuildingCore() {
           </div>
 
           <div className="flex-1">
-            <h3>Independency</h3>
+            <h3 className="text-center mb-3">Barriers</h3>
             <div className="flex flex-col gap-4">
               <SelectDropdown />
               <SelectDropdown />
@@ -86,8 +88,8 @@ export default function BuildingCore() {
             </div>
           </div>
 
-          <div className="">
-            <h3>Connection number</h3>
+          <div className="flex-1">
+            <h3 className="text-center mb-3">Barriers number</h3>
             <div className="flex flex-col gap-4">
               <Input />
               <Input />
@@ -97,14 +99,16 @@ export default function BuildingCore() {
             </div>
           </div>
 
-          <div className="">
-            <h3>Connection number</h3>
+          <div className="flex-1">
+            <h3 className="text-center mb-3">
+              Disassembly Potential of the Connection DPC
+            </h3>
             <div className="flex flex-col gap-4">
-              <Input />
-              <Input />
-              <Input />
-              <Input />
-              <Input />
+              <Input className="bg-[#E1EFD8]" />
+              <Input className="bg-[#E1EFD8]" />
+              <Input className="bg-[#E1EFD8]" />
+              <Input className="bg-[#E1EFD8]" />
+              <Input className="bg-[#E1EFD8]" />
             </div>
           </div>
         </div>
