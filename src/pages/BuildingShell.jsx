@@ -134,6 +134,288 @@ export default function BuildingShell() {
     },
   ];
 
+  const connectionAccessibility = [
+    {
+      label: "Connection accessibility",
+      value: "connection_accessibility",
+      options: [
+        {
+          label: "Freely accessible without additional actions",
+          value: "freely_accessible_without_additional_actions",
+          score: 1.0,
+        },
+        {
+          label: "Accessible with additional actions that do not cause damage",
+          value: "accessible_with_additional_actions_that_do_not_cause_damage",
+          score: 0.8,
+        },
+        {
+          label:
+            "Accessible with additional actions with fully repairable damage",
+          value:
+            "accessible_with_additional_actions_with fully_repairable_damage",
+          score: 0.6,
+        },
+        {
+          label:
+            "Accessible with additional actions with partially repairable damage",
+          value:
+            "accessible_with_additional_actions_with_partially_repairable_damage",
+          score: 0.4,
+        },
+      ],
+    },
+  ];
+
+  const Independency = [
+    {
+      label: "Independency",
+      value: "independency",
+      options: [
+        {
+          label:
+            "No independency - modular zoning of products or elements from different layers",
+          value:
+            "no_independency_modular_zoning_of_products_or_elements_from_different_layers",
+          score: 1.0,
+        },
+        {
+          label:
+            "Occasional independency of products or elements from different layers",
+          value:
+            "occasional_independency_of_products_or_elements_from_different_layers",
+          score: 0.4,
+        },
+        {
+          label:
+            "Full integration of products or elements from different layers",
+          value:
+            "full_integration_of_products_or_elements_from_different_layers",
+          score: 0.1,
+        },
+      ],
+    },
+  ];
+
+  const GeometryOfProductEdge = [
+    {
+      label: "Geometry of product edge",
+      value: "geometry_of_product_edge",
+      options: [
+        {
+          label:
+            "Open, no obstacle to the (interim) removal of products or elements",
+          value:
+            "open_no_obstacle_to_the_(interim)_removal_of_products_or_elements",
+          score: 1.0,
+        },
+        {
+          label:
+            "Overlapping, partial obstruction to the (interim) removal of products or elements",
+          value:
+            "overlapping_partial_obstruction_to_the_interim_removal_of_products_or_elements",
+          score: 0.4,
+        },
+        {
+          label:
+            "Closed, complete obstruction to the (interim) removal of products or elements",
+          value:
+            "closed_complete_obstruction_to_the_interim_removal_of_products_or_elements",
+          score: 0.1,
+        },
+      ],
+    },
+  ];
+
+  const Barriers = [
+    {
+      label: "Design barriers",
+      value: "design_barriers",
+      options: [
+        {
+          label: "Design errors",
+          value: "design_errors",
+          score: 0.1,
+        },
+        {
+          label: "Incompatible, omitted, or unsuitable choice of materials",
+          value: "incompatible_omitted_unsuitable_choice_of_materials",
+          score: 0.1,
+        },
+        {
+          label: "Incorrect design of the connections",
+          value: "incorrect_design_of_the_connections",
+          score: 0.1,
+        },
+        {
+          label: "Areas inaccessible to disassembly",
+          value: "areas_inaccessible_to_disassembly",
+          score: 0.1,
+        },
+        {
+          label: "Deficient care in detailing connections",
+          value: "deficient_care_in_detailing_connections",
+          score: 0.1,
+        },
+        {
+          label: "Defect in peripheral elements",
+          value: "defect_in_peripheral_elements",
+          score: 0.1,
+        },
+        {
+          label: "Excessive deformations",
+          value: "excessive_deformations",
+          score: 0.1,
+        },
+      ],
+    },
+    {
+      label: "Execution errors",
+      value: "execution_errors",
+      options: [
+        {
+          label: "Use of non-prescribed and/or incompatible materials",
+          value: "use_of_non_prescribed_and_or_incompatible_materials",
+          score: 0.08,
+        },
+        {
+          label: "Application in extreme environmental conditions",
+          value: "application_in_extreme_environmental_conditions",
+          score: 0.08,
+        },
+        {
+          label: "Disregard the connection's default lifespan",
+          value: "disregard_the_connections_default_lifespan",
+          score: 0.08,
+        },
+        {
+          label: "Use of misplaced connections",
+          value: "use_of_misplaced_connections",
+          score: 0.08,
+        },
+        {
+          label: "Incomplete contact between the elements",
+          value: "incomplete_contact_between_the_elements",
+          score: 0.08,
+        },
+        {
+          label: "Joints of insufficient width or depth/missing joints",
+          value: "joints_of_insufficient_width_or_depth_missing_joints",
+          score: 0.08,
+        },
+        {
+          label: "Metal accessories unprotected in the connections",
+          value: "metal_accessories_unprotected_in_the_connections",
+          score: 0.08,
+        },
+        {
+          label: "Lack of maintenance",
+          value: "lack_of_maintenance",
+          score: 0.08,
+        },
+      ],
+    },
+    {
+      label: "Accidental actions",
+      value: "accidental_actions",
+      options: [
+        {
+          label: "Vandalism",
+          value: "vandalism",
+          score: 0.06,
+        },
+        {
+          label: "Stress concentration on the connections",
+          value: "stress_concentration_on_the_connections",
+          score: 0.06,
+        },
+        {
+          label: "Deformation",
+          value: "deformation",
+          score: 0.06,
+        },
+        {
+          label: "Fire and burnt connections",
+          value: "fire_and_burnt_connections",
+          score: 0.06,
+        },
+      ],
+    },
+    {
+      label: "Environmental actions",
+      value: "environmental_actions",
+      options: [
+        {
+          label: "Damp within connections",
+          value: "damp_within_connections",
+          score: 0.04,
+        },
+        {
+          label: "Mold within connections",
+          value: "mold_within_connections",
+          score: 0.04,
+        },
+        {
+          label: "Water leakage inside the connections",
+          value: "water_leakage_inside_the_connections",
+          score: 0.04,
+        },
+        {
+          label: "Biological action",
+          value: "biological_action",
+          score: 0.04,
+        },
+        {
+          label: "Air pollution",
+          value: "air_pollution",
+          score: 0.04,
+        },
+      ],
+    },
+    {
+      label: "Management issues",
+      value: "management_issues",
+      options: [
+        {
+          label:
+            "Rules or standards to organize the construction of reused materials or elements",
+          value:
+            "rules_or_standards_to_organize_the_construction_of_reused_materials_or_elements",
+          score: 0.02,
+        },
+        {
+          label:
+            "Limited demand for reusing materials in the construction market",
+          value:
+            "limited_demand_for_reusing_materials_in_the_construction_market",
+          score: 0.02,
+        },
+        {
+          label: "Deconstruction time compared to mechanical demolition",
+          value: "deconstruction_time_compared_to_mechanical_demolition",
+          score: 0.02,
+        },
+        {
+          label: "Deconstruction costs compared to mechanical demolition",
+          value: "deconstruction_costs_compared_to_mechanical_demolition",
+          score: 0.02,
+        },
+        {
+          label: "Deconstruction contractual issues",
+          value: "deconstruction_contractual_issues",
+          score: 0.02,
+        },
+        {
+          label:
+            "Manufacturers' lack of interest and responsibility in reducing waste",
+          value:
+            "manufacturers_lack_of_interest_and_responsibility_in_reducing_waste",
+          score: 0.02,
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="w-full px-10">
       <div className="flex flex-col">
@@ -181,20 +463,20 @@ export default function BuildingShell() {
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Connection Accessibility</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
+              <SelectDropdown contents={connectionAccessibility} />
+              <SelectDropdown contents={connectionAccessibility} />
+              <SelectDropdown contents={connectionAccessibility} />
+              <SelectDropdown contents={connectionAccessibility} />
             </div>
           </div>
 
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Independency</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
+              <SelectDropdown contents={Independency} />
+              <SelectDropdown contents={Independency} />
+              <SelectDropdown contents={Independency} />
+              <SelectDropdown contents={Independency} />
             </div>
           </div>
 
@@ -203,10 +485,10 @@ export default function BuildingShell() {
               Geometry of product edge of Element
             </h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
+              <SelectDropdown contents={GeometryOfProductEdge} />
+              <SelectDropdown contents={GeometryOfProductEdge} />
+              <SelectDropdown contents={GeometryOfProductEdge} />
+              <SelectDropdown contents={GeometryOfProductEdge} />
             </div>
           </div>
 
@@ -223,10 +505,10 @@ export default function BuildingShell() {
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Barriers</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
-              <SelectDropdown />
+              <SelectDropdown contents={Barriers} />
+              <SelectDropdown contents={Barriers} />
+              <SelectDropdown contents={Barriers} />
+              <SelectDropdown contents={Barriers} />
             </div>
           </div>
 

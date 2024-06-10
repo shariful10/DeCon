@@ -40,7 +40,7 @@ export default function SelectDropdown({ contents }) {
           <h3>{value ? value : "Select"}</h3>
           {expandOptions && (
             <div
-              className="absolute top-0 left-full right-0 w-full z-[200] h-auto p-2 rounded bg-slate-300 flex flex-col gap-1"
+              className="absolute top-0 left-full right-0 w-full z-[200] h-auto rounded bg-white flex flex-col gap-[2px] m-0 p-0"
               onClick={(e) => e.stopPropagation()}
             >
               {contents?.map((content, index) => (
@@ -50,13 +50,15 @@ export default function SelectDropdown({ contents }) {
                   onMouseLeave={() => setHoveredOption(null)}
                   className="relative"
                 >
-                  <span className="block p-2">{content?.label}</span>
+                  <span className="block p-2 bg-[#E8EBF5] hover:bg-[#8DA9DB]">
+                    {content?.label}
+                  </span>
                   {hoveredOption === index && content?.options && (
-                    <div className="absolute top-0 left-full w-full z-[200] h-auto p-2 rounded bg-slate-500 flex flex-col gap-1">
+                    <div className="absolute top-0 left-full right-[-15px] w-full z-[200] h-auto rounded bg-[#fff] flex flex-col gap-[2px]">
                       {content.options.map((option, subIndex) => (
                         <span
                           key={subIndex}
-                          className="block p-2"
+                          className="block py-1 px-2 bg-[#E8EBF5]"
                           onClick={() => handleSetValue(option)}
                         >
                           {option.label}
