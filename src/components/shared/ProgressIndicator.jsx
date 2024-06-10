@@ -1,11 +1,9 @@
-// ./src/ProgressIndicator.jsx
-import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const ProgressIndicator = () => {
   const location = useLocation();
-  const [steps, setSteps] = React.useState([
+  const [steps, setSteps] = useState([
     {
       label: "Construction type",
       completed: false,
@@ -16,9 +14,8 @@ const ProgressIndicator = () => {
     { label: "Result & Report", completed: false, path: "result-report" },
   ]);
 
-  console.log("location ", location);
+  // console.log("location ", location);
 
-  // Update the steps based on the current location
   useEffect(() => {
     const updatedSteps = steps.map((step) => {
       if (location.pathname === step.path) {
@@ -28,7 +25,7 @@ const ProgressIndicator = () => {
       }
     });
 
-    return () => setSteps(updatedSteps);
+    setSteps(updatedSteps);
   }, [location]);
 
   return (
