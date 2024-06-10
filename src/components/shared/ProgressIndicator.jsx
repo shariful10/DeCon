@@ -1,14 +1,33 @@
-// ./src/ProgressIndicator.jsx
-import React from "react";
-
-const steps = [
-  { label: "Construction type", completed: true },
-  { label: "Core", completed: true },
-  { label: "Shell", completed: false },
-  { label: "Result & Report", completed: false },
-];
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const ProgressIndicator = () => {
+  const location = useLocation();
+  const [steps, setSteps] = useState([
+    {
+      label: "Construction type",
+      completed: false,
+      path: "/constructions-type",
+    },
+    { label: "Core", completed: false, path: "/building-core" },
+    { label: "Shell", completed: false, path: "/building-shell" },
+    { label: "Result & Report", completed: false, path: "result-report" },
+  ]);
+
+  // console.log("location ", location);
+
+  useEffect(() => {
+    const updatedSteps = steps.map((step) => {
+      if (location.pathname === step.path) {
+        return { ...step, completed: true };
+      } else {
+        return step;
+      }
+    });
+
+    setSteps(updatedSteps);
+  }, [location]);
+
   return (
     <div className="flex items-center justify-center">
       {steps.map((step, index) => (

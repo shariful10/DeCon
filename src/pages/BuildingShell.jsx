@@ -550,10 +550,10 @@ export default function BuildingShell() {
               <Button btnTitle="Total DPC of the building’s core:" />
             </div>
             <div className="w-full flex items-center gap-5">
-              <Link to={"/building-core"}>
+              <Link to="/building-core">
                 <Button btnTitle="Previous" />
               </Link>
-              <Link to="/">
+              <Link to="/#">
                 <Button btnTitle="Next" />
               </Link>
             </div>
