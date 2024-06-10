@@ -3,6 +3,7 @@ import SelectDropdown from "../components/Select/SelectDropdown";
 import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
+import { Link } from "react-router-dom";
 
 export default function BuildingShell() {
   return (
@@ -115,8 +116,12 @@ export default function BuildingShell() {
               <Button btnTitle="Total DPC of the building’s core:" />
             </div>
             <div className="w-full flex items-center gap-5">
-              <Button btnTitle="Previous" />
-              <Button btnTitle="Next" />
+              <Link to="/building-core">
+                <Button btnTitle="Previous" />
+              </Link>
+              <Link to="/report">
+                <Button btnTitle="Next" />
+              </Link>
             </div>
           </div>
         </div>

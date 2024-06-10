@@ -16,47 +16,11 @@ const Navbar = () => {
           <img src={logo} className="w-[120px]" alt="" />
         </Link>
 
-        <div className="w-1/2">
-          <ProgressIndicator />
-          {/* <Steps
-            className="navbar-steps w-full"
-            current={2}
-            items={[
-              {
-                title: (
-                  <h2 className="min-w-max">
-                    Construction <br /> type
-                  </h2>
-                ),
-              },
-              {
-                title: (
-                  <h2>
-                    Co
-                    <br />
-                    re
-                  </h2>
-                ),
-              },
-              {
-                title: (
-                  <h2>
-                    sh
-                    <br />
-                    ell
-                  </h2>
-                ),
-              },
-              {
-                title: (
-                  <h2>
-                    Result & <br /> Report
-                  </h2>
-                ),
-              },
-            ]}
-          /> */}
-        </div>
+        {location.pathname !== "/building-information" && (
+          <div className="w-1/2">
+            <ProgressIndicator />
+          </div>
+        )}
       </div>
     </Container>
   );

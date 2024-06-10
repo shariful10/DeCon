@@ -130,7 +130,9 @@ export default function BuildingCore() {
               <Button btnTitle="Total DPC of the building’s core:" />
             </div>
             <div className="w-full flex items-center gap-5">
-              <Button btnTitle="Previous" />
+              <Link to="/constructions-type">
+                <Button btnTitle="Previous" />
+              </Link>
               <Link to="/building-shell">
                 <Button btnTitle="Next" />
               </Link>
