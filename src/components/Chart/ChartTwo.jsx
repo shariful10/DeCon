@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-export default function Charts({ title, color }) {
+export default function ChartTwo({ title, color }) {
   const series = [
     {
       name: "Actual",

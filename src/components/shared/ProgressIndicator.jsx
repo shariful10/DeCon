@@ -11,7 +11,7 @@ const ProgressIndicator = () => {
     },
     { label: "Core", completed: false, path: "/building-core" },
     { label: "Shell", completed: false, path: "/building-shell" },
-    { label: "Result & Report", completed: false, path: "result-report" },
+    { label: "Result & Report", completed: false, path: "/result-and-report" },
   ]);
 
   // console.log("location ", location);

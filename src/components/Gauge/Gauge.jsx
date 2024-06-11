@@ -16,7 +16,7 @@ export default function Gauge({ value }) {
           "#008000",
         ]}
         needleColor={"#000000"}
-        currentValueText={"Current Value: ${value}"}
+        currentValueText={"${value}"}
         minValue={0}
         maxValue={100}
         value={value}
