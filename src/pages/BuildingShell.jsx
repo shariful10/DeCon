@@ -553,7 +553,7 @@ export default function BuildingShell() {
               <Link to="/building-core">
                 <Button btnTitle="Previous" />
               </Link>
-              <Link to="/#">
+              <Link to="/result-and-report">
                 <Button btnTitle="Next" />
               </Link>
             </div>
