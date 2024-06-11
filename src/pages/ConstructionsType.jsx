@@ -4,18 +4,28 @@ import Container from "../components/container/Container";
 import Button from "../components/utils/Button";
 import { addConstructionType } from "../redux/features/constructionTypeSlice";
 import SelectDropdown from "../components/Select/SelectDropdown";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function ConstructionsType({ next, prev }) {
   const dispatch = useDispatch();
   const constructionType = useSelector(
     (state) => state.constructionType.construction_type
   );
+  const [typeCon, setTypeCon] = useState("");
 
-  console.log("constructionType ", constructionType);
+  useEffect(() => {
+    if (constructionType) {
+      setTypeCon(constructionType);
+    }
+  }, [constructionType]);
 
   const handleType = (e) => {
     // console.log("type -> ", e);
-    dispatch(addConstructionType(e));
+    setTypeCon(e);
+    if (typeCon) {
+      dispatch(addConstructionType(e));
+    }
   };
 
   return (

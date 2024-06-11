@@ -13,7 +13,6 @@
 		"@reduxjs/toolkit": "^2.2.5",
 		"@syncfusion/ej2-react-circulargauge": "^25.2.3",
 		"@syncfusion/ej2-react-grids": "^25.2.7",
-		"antd": "^5.18.0",
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-apexcharts": "^1.4.1",

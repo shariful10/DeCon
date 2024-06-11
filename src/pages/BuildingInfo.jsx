@@ -1,11 +1,9 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/utils/Button";
-import Navbar from "../components/shared/Navbar";
-import UploadIcon from "../components/icons/UploadIcon";
 import Container from "../components/container/Container";
+import UploadIcon from "../components/icons/UploadIcon";
+import Button from "../components/utils/Button";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
 import Gauge from "../components/utils/Gauge";
 

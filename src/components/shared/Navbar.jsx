@@ -1,24 +1,26 @@
-import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.jpeg";
 import Container from "../container/Container";
-import { Link } from "react-router-dom";
+import ProgressIndicator from "./ProgressIndicator";
+import "./navbar.css";
 
 const Navbar = () => {
+  const location = useLocation();
+
+  console.log("location", location);
+
   return (
     <Container>
-      <div className="px-5 md:px-20 py-5 flex items-center justify-between">
+      <div className="py-5 flex items-center justify-between">
         <Link to="/">
           <img src={logo} className="w-[120px]" alt="" />
         </Link>
 
-        <div>
-          <div>
-            <label htmlFor=""> Construction type </label>
-            <div className="size-9 rounded-full border border-green-600 bg-green-200 text-right !text-white">
-              <span className="text-right !text-white text-xl -right-1">✔</span>
-            </div>
+        {location.pathname !== "/building-information" && (
+          <div className="w-1/2">
+            <ProgressIndicator />
           </div>
-        </div>
+        )}
       </div>
     </Container>
   );
