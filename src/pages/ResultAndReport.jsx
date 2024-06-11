@@ -24,7 +24,8 @@ export default function ResultAndReport() {
           </div>
 
           <div className="w-full">
-            <Gauge value={75} />
+            {/* <Gauge value={75} /> */}
+            <Gauge value={80} />
 
             {/* button */}
             <Button btnTitle="result and report" />
