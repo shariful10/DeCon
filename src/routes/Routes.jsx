@@ -6,6 +6,7 @@ import BuildingShell from "../pages/BuildingShell";
 import ConstructionsType from "../pages/ConstructionsType";
 import Home from "../pages/Home";
 import Report from "../pages/Result/Report";
+import ResultAndReport from "../pages/ResultAndReport";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +34,8 @@ export const router = createBrowserRouter([
         element: <ConstructionsType />,
       },
       {
-        path: "/report",
-        element: <Report />,
+        path: "/result-and-report",
+        element: <ResultAndReport />,
       },
     ],
   },

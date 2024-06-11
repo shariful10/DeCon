@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.jpeg";
 import Container from "../container/Container";
 import ProgressIndicator from "./ProgressIndicator";
-import "./navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
