@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Container from "../components/container/Container";
-import UploadIcon from "../components/icons/UploadIcon";
 import Button from "../components/utils/Button";
+import { useDispatch, useSelector } from "react-redux";
+import UploadIcon from "../components/icons/UploadIcon";
+import Container from "../components/container/Container";
 import { addBuildingInfo } from "../redux/features/buildingInfoSlice";
-import Gauge from "../components/utils/Gauge";
 
 const BuildingInfo = () => {
 	const dispatch = useDispatch();
@@ -58,7 +57,6 @@ const BuildingInfo = () => {
 	return (
 		<>
 			<Container>
-				<Gauge value={70} />
 				<div className="w-full md:w-[70%] mx-auto my-[50px]">
 					<div className="w-3/4 my-5"></div>
 					<h1 className="text-2xl font-semibold">Building information:</h1>
