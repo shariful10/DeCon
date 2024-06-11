@@ -419,9 +419,6 @@ export default function BuildingShell() {
 
   return (
     <div className="w-full px-10">
-      <div className="flex justify-center mb-6">
-        <Button btnTitle="Disassembly Potential of the Building’s shell" />
-      </div>
       <div className="flex flex-col">
         <div class="flex gap-5 justify-between">
           <div class="flex-1 box-border text-center">Connection</div>
