@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.jpeg";
 import Container from "../container/Container";
 import ProgressIndicator from "./ProgressIndicator";
+import Button from "../utils/Button";
 
 const Navbar = () => {
   const location = useLocation();
@@ -14,6 +15,14 @@ const Navbar = () => {
         <Link to="/">
           <img src={logo} className="w-[120px]" alt="" />
         </Link>
+
+        {location?.pathname === "/building-core" && (
+          <Button btnTitle="Disassembly Potential of the Building’s core" />
+        )}
+
+        {location?.pathname === "/building-shell" && (
+          <Button btnTitle="Disassembly Potential of the Building’s shell" />
+        )}
 
         {location.pathname !== "/building-information" && (
           <div className="w-1/2">

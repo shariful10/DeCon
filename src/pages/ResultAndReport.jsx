@@ -28,6 +28,8 @@ export default function ResultAndReport() {
             {/* <Gauge value={75} /> */}
             <Gauge value={55} />
 
+            <p> Total disassembly potential </p>
+
             {/* button */}
             <Button btnTitle="Download report" />
           </div>
