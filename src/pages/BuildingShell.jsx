@@ -576,11 +576,7 @@ export default function BuildingShell() {
               <Link to="/building-core">
                 <Button btnTitle="Previous" />
               </Link>
-<<<<<<< HEAD
               <Link to="/result-and-report">
-=======
-              <Link to="/report">
->>>>>>> ae5484e00bcbc184aebbaaa4fad9e2e0fd7d408b
                 <Button btnTitle="Next" />
               </Link>
             </div>
