@@ -4,6 +4,7 @@ import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
 import { Link } from "react-router-dom";
+import ProgressBar from "../components/utils/ProgressBar";
 
 export default function BuildingShell() {
   const connectionType = [
@@ -418,6 +419,9 @@ export default function BuildingShell() {
 
   return (
     <div className="w-full px-10">
+      <div className="flex justify-center mb-6">
+        <Button btnTitle="Disassembly Potential of the Building’s shell" />
+      </div>
       <div className="flex flex-col">
         <div class="flex gap-5 justify-between">
           <div class="flex-1 box-border text-center">Connection</div>
@@ -558,6 +562,7 @@ export default function BuildingShell() {
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
+              <ProgressBar progress={60} />
               <Button
                 btnTitle="Total core connections:"
                 className="!text-left text-base !px-2 !bg-[#D5DBE5]"
