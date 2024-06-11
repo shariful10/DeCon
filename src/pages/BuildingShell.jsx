@@ -443,10 +443,22 @@ export default function BuildingShell() {
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Connection</h3> */}
             <div className="flex flex-col gap-4">
-              <Button btnTitle="Column & Beam" />
-              <Button btnTitle="Column & Bearing wall" />
-              <Button btnTitle="Column & Foundation" />
-              <Button btnTitle="Beam & Slab" />
+              <Button
+                btnTitle="Column & Shell element"
+                className="!bg-[#F4B081] !px-3"
+              />
+              <Button
+                btnTitle="Beam & Shell element"
+                className="!bg-[#F4B081] !px-3"
+              />
+              <Button
+                btnTitle="Slab & Shell element"
+                className="!bg-[#F4B081] !px-3"
+              />
+              <Button
+                btnTitle="Bearing wall & Shell element"
+                className="!bg-[#F4B081] !px-3"
+              />
             </div>
           </div>
 
@@ -546,8 +558,14 @@ export default function BuildingShell() {
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
-              <Button btnTitle="Total core connections:" />
-              <Button btnTitle="Total DPC of the building’s core:" />
+              <Button
+                btnTitle="Total core connections:"
+                className="!text-left text-base !px-2 !bg-[#D5DBE5]"
+              />
+              <Button
+                btnTitle="Total DPC of the building’s shell:"
+                className="!text-left text-base !px-2"
+              />
             </div>
             <div className="w-full flex items-center gap-5">
               <Link to={"/building-core"}>
