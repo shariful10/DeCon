@@ -7,7 +7,7 @@ import Button from "../utils/Button";
 const Navbar = () => {
   const location = useLocation();
 
-  console.log("location", location);
+  // console.log("location", location);
 
   return (
     <Container>
@@ -24,7 +24,7 @@ const Navbar = () => {
           <Button btnTitle="Disassembly Potential of the Building’s shell" />
         )}
 
-        {location.pathname !== "/building-information" && (
+        {location.pathname !== "/" && (
           <div className="w-1/2">
             <ProgressIndicator />
           </div>
