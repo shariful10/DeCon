@@ -9,14 +9,6 @@ export default function Charts({ title, color }) {
         {
           x: "2011",
           y: 1292,
-          //   goals: [
-          //     {
-          //       name: "Expected",
-          //       value: 1400,
-          //       strokeHeight: 5,
-          //       strokeColor: "#775DD0",
-          //     },
-          //   ],
         },
         {
           x: "2012",

@@ -4,6 +4,7 @@ import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
 import { Link } from "react-router-dom";
+import ProgressBar from "../components/utils/ProgressBar";
 
 export default function BuildingCore() {
   const connectionType = [
@@ -443,10 +444,23 @@ export default function BuildingCore() {
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Connection</h3> */}
             <div className="flex flex-col gap-4">
-              <Button btnTitle="Column & Shell element" />
-              <Button btnTitle="Beam & Shell element" />
-              <Button btnTitle="Slab & Shell element" />
-              <Button btnTitle="Bearing wall & Shell element" />
+              <Button
+                btnTitle="Column & Beam"
+                className="!bg-[#F4B081] !px-3"
+              />
+              <Button
+                btnTitle="Column & Bearing wall"
+                className="!bg-[#F4B081] !px-3"
+              />
+              <Button
+                btnTitle="Column & Foundation"
+                className="!bg-[#F4B081] !px-3"
+              />
+              <Button btnTitle="Beam & Slab" className="!bg-[#F4B081] !px-2" />
+              <Button
+                btnTitle="Slab & Bearing wall"
+                className="!bg-[#F4B081] !px-3"
+              />
             </div>
           </div>
 
@@ -554,8 +568,15 @@ export default function BuildingCore() {
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
-              <Button btnTitle="Total core connections:" />
-              <Button btnTitle="Total DPC of the building’s core:" />
+              <ProgressBar progress={60} />
+              <Button
+                btnTitle="Total core connections:"
+                className="!text-left text-base !px-2 !bg-[#D5DBE5]"
+              />
+              <Button
+                btnTitle="Total DPC of the building’s core:"
+                className="!text-left text-base !px-2"
+              />
             </div>
             <div className="w-full flex items-center gap-5">
               <Link to={"/constructions-type"}>
