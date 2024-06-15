@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function SelectDropdown({ contents }) {
+export default function SelectDropdown(props) {
+  const { contents, attributesValue, handleSetData } = props;
   const [value, setValue] = useState("");
   const [expandOptions, setExpandOptions] = useState(false);
   const [hoveredOption, setHoveredOption] = useState(null);
@@ -19,6 +20,11 @@ export default function SelectDropdown({ contents }) {
 
   const handleSetValue = (optionValue) => {
     setExpandOptions(false);
+    handleSetData({
+      connectionName: attributesValue?.connectionName,
+      attributeKey: attributesValue?.attributeKey,
+      controlValue: optionValue,
+    });
     setValue(optionValue?.label);
   };
 

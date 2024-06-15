@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SelectDropdown from "../components/Select/SelectDropdown";
 import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
@@ -7,6 +7,16 @@ import { Link } from "react-router-dom";
 import ProgressBar from "../components/utils/ProgressBar";
 
 export default function BuildingCore() {
+  const [buildingCoreData, setBuildingCoreData] = useState([
+    {
+      columnAndBeam: {},
+      columnAndBearingWall: {},
+      columnAndFoundation: {},
+      columnAndSlab: {},
+      slabAndBearingWall: {},
+    },
+  ]);
+
   const connectionType = [
     {
       label: "Dry Connection",
@@ -168,7 +178,7 @@ export default function BuildingCore() {
     },
   ];
 
-  const Independency = [
+  const independency = [
     {
       label: "Independency",
       value: "independency",
@@ -228,7 +238,7 @@ export default function BuildingCore() {
     },
   ];
 
-  const Barriers = [
+  const barriers = [
     {
       label: "Design barriers",
       value: "design_barriers",
@@ -417,6 +427,11 @@ export default function BuildingCore() {
     },
   ];
 
+  const handleSetData = (props) => {
+    const { connectionName, attributeKey, controlValue } = props;
+    console.log(connectionName, attributeKey, controlValue);
+  };
+
   return (
     <div className="w-full px-10">
       <div className="flex flex-col">
@@ -464,89 +479,322 @@ export default function BuildingCore() {
             </div>
           </div>
 
+          {/* Connection Type  */}
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Connection type</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "connectionType",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "connectionType",
+                }}
+              />
+
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "connectionType",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "connectionType",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "connectionType",
+                }}
+              />
             </div>
           </div>
 
+          {/* Connection Accessibility */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Connection Accessibility</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
             </div>
           </div>
 
+          {/* Independency */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Independency</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "independency",
+                }}
+              />
             </div>
           </div>
 
+          {/* Geometry of product edge of Element */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">
-              Geometry of product edge of Element
-            </h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "gpe",
+                }}
+              />
             </div>
           </div>
 
+          {/* Connection number */}
           <div className="w-[100px]">
-            {/* <h3 className="text-center mb-3">Connection number</h3> */}
             <div className="flex flex-col gap-4">
-              <Input />
-              <Input />
-              <Input />
-              <Input />
-              <Input />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "connectionNumber",
+                }}
+              />
             </div>
           </div>
 
+          {/* Barriers */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Barriers</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "barriers",
+                }}
+              />
             </div>
           </div>
 
+          {/* Barriers number */}
           <div className="w-[100px]">
-            {/* <h3 className="text-center mb-3">Barriers number</h3> */}
             <div className="flex flex-col gap-4">
-              <Input />
-              <Input />
-              <Input />
-              <Input />
-              <Input />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "barriersNumber",
+                }}
+              />
             </div>
           </div>
 
+          {/* Disassembly Potential of the Connection DPC */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">
-              Disassembly Potential of the Connection DPC
-            </h3> */}
             <div className="flex flex-col gap-4">
               <Input className="bg-[#E1EFD8]" />
               <Input className="bg-[#E1EFD8]" />
