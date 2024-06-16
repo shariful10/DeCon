@@ -1,13 +1,16 @@
 import React from "react";
 import Gauge from "../Gauge/Gauge";
 import Charts from "../Chart/Chart";
-import Button from "../utils/Button";
 import ChartTwo from "../Chart/ChartTwo";
+import { useSelector } from "react-redux";
 import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
 import building from "../../assets/images/building.jpg";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
+	const { buildingInfo } = useSelector((state) => state.buildingInfo);
+	console.log(buildingInfo);
+
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
 			<div className="flex justify-between gap-6 items-center mb-5">
@@ -33,7 +36,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-full pl-2 py-0.5 focus:outline-none"
 										readOnly
-										value="Office"
+										value={buildingInfo.buildingType}
 									/>
 								</div>
 							</div>
@@ -44,7 +47,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none"
 										readOnly
-										value="USA"
+										value={buildingInfo.country}
 									/>
 									<div className="flex items-end gap-2">
 										<h2 className="whitespace-nowrap">Post Code:</h2>
@@ -52,7 +55,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[114px] pl-2 py-0.5 focus:outline-none"
 											readOnly
-											value="1862"
+											value={buildingInfo.postCode}
 										/>
 									</div>
 								</div>
@@ -64,15 +67,15 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[87px] pl-2 py-0.5 focus:outline-none"
 										readOnly
-										value="New York"
+										value={buildingInfo.city}
 									/>
 									<div className="flex items-end gap-2">
 										<h2 className="whitespace-nowrap">Street:</h2>
 										<input
 											type="text"
-											className="w-[87px] pl-2 py-0.5 focus:outline-none"
+											className="w-[87px] px-2 py-0.5 focus:outline-none"
 											readOnly
-											value="49 Street"
+											value={buildingInfo.street}
 										/>
 									</div>
 									<div className="flex items-end gap-2">
@@ -81,7 +84,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[34px] pl-2 py-0.5 focus:outline-none"
 											readOnly
-											value={80}
+											value={buildingInfo.no}
 										/>
 									</div>
 								</div>
@@ -91,9 +94,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none"
+										className="w-[114px] px-2 py-0.5 focus:outline-none"
 										readOnly
-										value="5000 sq ft"
+										value={buildingInfo.area}
 									/>
 								</div>
 							</div>
@@ -104,7 +107,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none"
 										readOnly
-										value="2020-01-01"
+										value={buildingInfo.constructionDate}
 									/>
 								</div>
 							</div>
@@ -115,7 +118,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none"
 										readOnly
-										value="2024-06-15"
+										value={buildingInfo.calculationDate}
 									/>
 								</div>
 							</div>
@@ -126,7 +129,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none"
 										readOnly
-										value="1.0.0"
+										value={buildingInfo.softwareVersion}
 									/>
 								</div>
 							</div>
@@ -145,7 +148,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 							</div>
 						</div>
 						<div className="">
-							<img src={building} alt="building" />
+							<img src={buildingInfo.image} alt="building" />
 						</div>
 					</div>
 				</div>
