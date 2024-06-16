@@ -22,6 +22,21 @@ export default function BuildingCore() {
     slabAndBearingWallDPC: "",
   });
 
+  const {
+    columnAndBeamDPC,
+    columnAndBearingWallDPC,
+    columnAndFoundationDPC,
+    columnAndSlabDPC,
+    slabAndBearingWallDPC,
+  } = dpc;
+
+  const [totalValue, setTotalValue] = useState({
+    totalCoreConnections: "",
+    totalDPCOfBuildingCore: "",
+  });
+
+  const { totalCoreConnections, totalDPCOfBuildingCore } = totalValue;
+
   const connectionType = [
     {
       label: "Dry Connection",
@@ -449,6 +464,7 @@ export default function BuildingCore() {
     let columnAndFoundationDPC = "";
     let columnAndSlabDPC = "";
     let slabAndBearingWallDPC = "";
+    let connectionNumbers = "";
     // Column and beam calculation
     if (buildingCoreData["columnAndBeam"]) {
       // EQ One
@@ -473,12 +489,18 @@ export default function BuildingCore() {
       const DividedCAn = CAn / 1;
       const DividedIDn = IDn / 1;
       const DividedGPEn = GPEn / 1;
-      const DBn = barriersScore / barriersNumber;
+      const DBn = barriersScore / barriersNumber || 0;
 
-      const DPcn = 2 / (DividedCTn + DividedCAn);
-      const DPcen = 2 / (DividedIDn + DividedGPEn);
-      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPcnTotalValue = DividedCTn + DividedCAn;
+      const DPcenTotalValue = DividedIDn + DividedGPEn;
+
+      const DPcn = 2 / DPcnTotalValue;
+      const DPcen = 2 / DPcenTotalValue;
+      const DPCSliceOne = DPcn / 1;
+      const DPCSliceTwo = DPcen / 1;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
       const DPCSliceResult = 2 / DPCSlice;
+      // console.log(barriersScore / barriersNumber);
       columnAndBeamDPC = DPCSliceResult - DBn;
       if (columnAndBeamDPC) {
         setDPC({
@@ -489,20 +511,200 @@ export default function BuildingCore() {
     }
 
     if (buildingCoreData["columnAndBearingWall"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndBearingWall"]?.["connectionType"]?.[
+          "score"
+        ] || 0;
+      const CAn =
+        buildingCoreData["columnAndBearingWall"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndBearingWall"]?.["independency"]?.["score"] ||
+        0;
+      const GPEn =
+        buildingCoreData["columnAndBearingWall"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndBearingWall"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndBearingWall"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = CTn / 1;
+      const DividedCAn = CAn / 1;
+      const DividedIDn = IDn / 1;
+      const DividedGPEn = GPEn / 1;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndBearingWallDPC = DPCSliceResult - DBn;
+      if (columnAndBearingWallDPC) {
+        setDPC({
+          ...dpc,
+          columnAndBearingWallDPC: columnAndBearingWallDPC,
+        });
+      }
     }
 
     if (buildingCoreData["columnAndFoundation"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndFoundation"]?.["connectionType"]?.[
+          "score"
+        ] || 0;
+      const CAn =
+        buildingCoreData["columnAndFoundation"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndFoundation"]?.["independency"]?.["score"] ||
+        0;
+      const GPEn =
+        buildingCoreData["columnAndFoundation"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndFoundation"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndFoundation"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = CTn / 1;
+      const DividedCAn = CAn / 1;
+      const DividedIDn = IDn / 1;
+      const DividedGPEn = GPEn / 1;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndFoundationDPC = DPCSliceResult - DBn;
+      if (columnAndFoundationDPC) {
+        setDPC({
+          ...dpc,
+          columnAndFoundationDPC: columnAndFoundationDPC,
+        });
+      }
     }
 
     if (buildingCoreData["columnAndSlab"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndSlab"]?.["connectionType"]?.["score"] || 0;
+      const CAn =
+        buildingCoreData["columnAndSlab"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndSlab"]?.["independency"]?.["score"] || 0;
+      const GPEn = buildingCoreData["columnAndSlab"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndSlab"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndSlab"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = CTn / 1;
+      const DividedCAn = CAn / 1;
+      const DividedIDn = IDn / 1;
+      const DividedGPEn = GPEn / 1;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndSlabDPC = DPCSliceResult - DBn;
+      if (columnAndSlabDPC) {
+        setDPC({
+          ...dpc,
+          columnAndSlabDPC: columnAndSlabDPC,
+        });
+      }
     }
 
     if (buildingCoreData["slabAndBearingWall"]) {
-    }
-    console.log(columnAndBeamDPC);
-  }, [buildingCoreData]);
+      // EQ One
+      const CTn =
+        buildingCoreData["slabAndBearingWall"]?.["connectionType"]?.["score"] ||
+        0;
+      const CAn =
+        buildingCoreData["slabAndBearingWall"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["slabAndBearingWall"]?.["independency"]?.["score"] ||
+        0;
+      const GPEn =
+        buildingCoreData["slabAndBearingWall"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["slabAndBearingWall"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["slabAndBearingWall"]?.["barriersNumber"] || 0;
 
-  console.log(dpc);
+      // Total calculation
+      const DividedCTn = CTn / 1;
+      const DividedCAn = CAn / 1;
+      const DividedIDn = IDn / 1;
+      const DividedGPEn = GPEn / 1;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceResult = 2 / DPCSlice;
+      slabAndBearingWallDPC = DPCSliceResult - DBn;
+      if (slabAndBearingWallDPC) {
+        setDPC({
+          ...dpc,
+          slabAndBearingWallDPC: slabAndBearingWallDPC,
+        });
+      }
+    }
+
+    const connectionNumberOne =
+      buildingCoreData["columnAndBeam"]?.["connectionNumber"] || 0;
+    const connectionNumberTwo =
+      buildingCoreData["columnAndBearingWall"]?.["connectionNumber"] || 0;
+    const connectionNumberThree =
+      buildingCoreData["columnAndFoundation"]?.["connectionNumber"] || 0;
+    const connectionNumberFour =
+      buildingCoreData["columnAndSlab"]?.["connectionNumber"] || 0;
+    const connectionNumberFive =
+      buildingCoreData["slabAndBearingWall"]?.["connectionNumber"] || 0;
+
+    connectionNumbers =
+      connectionNumberOne +
+      connectionNumberTwo +
+      connectionNumberThree +
+      connectionNumberFour +
+      connectionNumberFive;
+
+    // const totalCoreConnections =
+    const totalDPCOfBuildingCore =
+      dpc?.columnAndBeamDPC +
+      dpc?.columnAndBearingWallDPC +
+      dpc?.columnAndFoundationDPC +
+      dpc?.columnAndSlabDPC +
+      dpc?.slabAndBearingWallDPC;
+
+    setTotalValue({
+      ...totalValue,
+      totalCoreConnections: connectionNumbers || 0,
+      totalDPCOfBuildingCore: totalDPCOfBuildingCore || 0,
+    });
+  }, [buildingCoreData]);
 
   return (
     <div className="w-full px-10">
@@ -869,25 +1071,25 @@ export default function BuildingCore() {
 
           {/* Disassembly Potential of the Connection DPC */}
           <div className="flex-1">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-stretch">
               <Button
-                btnTitle={dpc?.columnAndBeamDPC}
+                btnTitle={dpc?.columnAndBeamDPC || " "}
                 className="!bg-[#E1EFD8] !px-3"
               />
               <Button
-                btnTitle={dpc?.columnAndBeamDPC}
+                btnTitle={dpc?.columnAndBearingWallDPC || ""}
                 className="!bg-[#E1EFD8] !px-3"
               />
               <Button
-                btnTitle={dpc?.columnAndBeamDPC}
+                btnTitle={dpc?.columnAndFoundationDPC || ""}
                 className="!bg-[#E1EFD8] !px-3"
               />
               <Button
-                btnTitle={dpc?.columnAndBeamDPC}
+                btnTitle={dpc?.columnAndSlabDPC || ""}
                 className="!bg-[#E1EFD8] !px-3"
               />
               <Button
-                btnTitle={dpc?.columnAndBeamDPC}
+                btnTitle={dpc?.slabAndBearingWallDPC || ""}
                 className="!bg-[#E1EFD8] !px-3"
               />
             </div>
@@ -898,20 +1100,70 @@ export default function BuildingCore() {
           <Charts
             color="#4472C4"
             title="Disassembly potential of the core connections DPC"
+            data={[
+              {
+                x: "Column and beam",
+                y: parseFloat(columnAndBeamDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Column and slab",
+                y: parseFloat(columnAndBearingWallDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Column and bearing wall",
+                y: parseFloat(columnAndFoundationDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Beam and slab",
+                y: parseFloat(columnAndSlabDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Beam and bearing wall",
+                y: parseFloat(slabAndBearingWallDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Slab and bearing wall",
+                y: parseFloat(columnAndBearingWallDPC)?.toFixed(2) || 0,
+              },
+            ]}
           />
           <Charts
             color="#F4B081"
             title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
+            data={[
+              {
+                x: "Connection type",
+                y: 1292,
+              },
+              {
+                x: "Connection accessibility",
+                y: 4432,
+              },
+              {
+                x: "Independency",
+                y: 5423,
+              },
+              {
+                x: "Geometry of product edge",
+                y: 6653,
+              },
+              {
+                x: "Barriers",
+                y: 8133,
+              },
+            ]}
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
               <ProgressBar progress={60} />
               <Button
-                btnTitle="Total core connections:"
+                btnTitle={`Total core connections: ${totalValue?.totalCoreConnections}`}
                 className="!text-left text-base !px-2 !bg-[#D5DBE5]"
               />
               <Button
-                btnTitle="Total DPC of the building’s core:"
+                btnTitle={`Total DPC of the building’s core: ${parseFloat(
+                  totalDPCOfBuildingCore
+                )?.toFixed(2)}`}
                 className="!text-left text-base !px-2"
               />
             </div>
