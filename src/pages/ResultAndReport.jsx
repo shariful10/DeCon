@@ -1,10 +1,10 @@
 import React from "react";
 import Gauge from "../components/Gauge/Gauge";
 import Charts from "../components/Chart/Chart";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/utils/Button";
 import ChartTwo from "../components/Chart/ChartTwo";
 import Container from "../components/container/Container";
-import { useNavigate } from "react-router-dom";
 
 export default function ResultAndReport() {
 	const navigate = useNavigate();
@@ -26,14 +26,9 @@ export default function ResultAndReport() {
 							title="Disassembly potential of the core connections DPC"
 						/>
 					</div>
-
 					<div className="w-1/2 flex flex-col items-center justify-center gap-7">
-						{/* <Gauge value={75} /> */}
 						<Gauge value={55} />
-
 						<p> Total disassembly potential </p>
-
-						{/* button */}
 						<div onClick={() => navigate("/report")}>
 							<Button btnTitle="Download report" />
 						</div>
