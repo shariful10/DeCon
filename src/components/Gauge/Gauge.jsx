@@ -1,12 +1,12 @@
 import React from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
-export default function Gauge({ value, className }) {
+export default function Gauge({ value, className, widthOne, widthTwo }) {
 	return (
 		<div className={`relative ${className ? className : ""}`}>
 			<div className="mt-8 ml-8">
 				<ReactSpeedometer
-					width={300}
+					width={widthOne}
 					height={200}
 					forceRender={true}
 					maxSegmentLabels={0}
@@ -32,7 +32,7 @@ export default function Gauge({ value, className }) {
 			</div>
 			<div className="absolute top-0 left-0">
 				<ReactSpeedometer
-					width={362}
+					width={widthTwo}
 					height={200}
 					forceRender={true}
 					maxSegmentLabels={10}

@@ -27,7 +27,7 @@ export default function ResultAndReport() {
 						/>
 					</div>
 					<div className="w-1/2 flex flex-col items-center justify-center gap-7">
-						<Gauge value={55} />
+						<Gauge value={55} widthOne={300} widthTwo={362} />
 						<p> Total disassembly potential </p>
 						<div onClick={() => navigate("/report")}>
 							<Button btnTitle="Download report" />
