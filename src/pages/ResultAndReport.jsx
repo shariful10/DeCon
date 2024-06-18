@@ -1,10 +1,10 @@
 import React from "react";
-import Gauge from "../components/Gauge/Gauge";
-import Charts from "../components/Chart/Chart";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/utils/Button";
+import Charts from "../components/Chart/Chart";
 import ChartTwo from "../components/Chart/ChartTwo";
+import Gauge from "../components/Gauge/Gauge";
 import Container from "../components/container/Container";
+import Button from "../components/utils/Button";
 
 export default function ResultAndReport() {
 	const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function ResultAndReport() {
 						/>
 					</div>
 					<div className="w-1/2 flex flex-col items-center justify-center gap-7">
-						<Gauge value={55} />
+						<Gauge value={55} widthOne={300} widthTwo={362} />
 						<p> Total disassembly potential </p>
 						<div onClick={() => navigate("/report")}>
 							<Button btnTitle="Download report" />

@@ -5,11 +5,9 @@ import ChartTwo from "../Chart/ChartTwo";
 import { useSelector } from "react-redux";
 import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
-import building from "../../assets/images/building.jpg";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
 	const { buildingInfo } = useSelector((state) => state.buildingInfo);
-	console.log(buildingInfo);
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
@@ -30,30 +28,30 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					<div className="grid grid-cols-3 gap-6">
 						<div className="col-span-2">
 							<div className="grid grid-cols-3 mb-3">
-								<h2>Building type:</h2>
+								<h2 className="text-sm">Building type:</h2>
 								<div className="col-span-2">
 									<input
 										type="text"
-										className="w-full pl-2 py-0.5 focus:outline-none"
+										className="w-full pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.buildingType}
 									/>
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2>Country:</h2>
+								<h2 className="text-sm">Country:</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none"
+										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.country}
 									/>
 									<div className="flex items-end gap-2">
-										<h2 className="whitespace-nowrap">Post Code:</h2>
+										<h2 className="whitespace-nowrap text-sm">Post Code:</h2>
 										<input
 											type="text"
-											className="w-[114px] pl-2 py-0.5 focus:outline-none"
+											className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 											readOnly
 											value={buildingInfo.postCode}
 										/>
@@ -61,28 +59,28 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2>City:</h2>
+								<h2 className="text-sm">City:</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[87px] pl-2 py-0.5 focus:outline-none"
+										className="w-[87px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.city}
 									/>
 									<div className="flex items-end gap-2">
-										<h2 className="whitespace-nowrap">Street:</h2>
+										<h2 className="whitespace-nowrap text-sm">Street:</h2>
 										<input
 											type="text"
-											className="w-[87px] px-2 py-0.5 focus:outline-none"
+											className="w-[87px] px-2 py-0.5 focus:outline-none text-sm"
 											readOnly
 											value={buildingInfo.street}
 										/>
 									</div>
 									<div className="flex items-end gap-2">
-										<h2 className="whitespace-nowrap">No:</h2>
+										<h2 className="text-sm">No:</h2>
 										<input
 											type="text"
-											className="w-[34px] pl-2 py-0.5 focus:outline-none"
+											className="w-[34px] pl-2 py-0.5 focus:outline-none text-sm"
 											readOnly
 											value={buildingInfo.no}
 										/>
@@ -90,59 +88,59 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2>Area:</h2>
+								<h2 className="text-sm">Area:</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] px-2 py-0.5 focus:outline-none"
+										className="w-[114px] px-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.area}
 									/>
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2>Construction date:</h2>
+								<h2 className="text-sm">Construction date:</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none"
+										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.constructionDate}
 									/>
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2>Calculation date:</h2>
+								<h2 className="text-sm">Calculation date:</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none"
+										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.calculationDate}
 									/>
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2>Software version:</h2>
+								<h2 className="text-sm">Software version:</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none"
+										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={buildingInfo.softwareVersion}
 									/>
 								</div>
 							</div>
 							<div className="grid grid-cols-3 mb-3">
-								<h2 className="font-medium">
+								<h2 className="font-medium text-sm">
 									Total <br /> building DPC:
 								</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none text-[26px] "
+										className="w-[114px] pl-2 py-0.5 focus:outline-none text-2xl"
 										readOnly
-										value="84%"
+										value={`${84}%`}
 									/>
 								</div>
 							</div>
@@ -158,23 +156,23 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						<div className="flex justify-between">
 							<div className="">
 								<div className="grid grid-cols-2 gap-10 mb-3">
-									<div className="">
-										<h1>Number of connection:</h1>
+									<div>
+										<h1 className="text-sm">Number of connection:</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
-									<div className="">
-										<h1>Number of barriers:</h1>
+									<div>
+										<h1 className="text-sm">Number of barriers:</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
@@ -182,12 +180,12 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 							</div>
 							<div className="">
 								<div className="grid grid-cols-2 gap-10">
-									<div className="">
-										<h1>Total DPC of the core:</h1>
+									<div>
+										<h1 className="text-sm">Total DPC of the core:</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
@@ -205,38 +203,38 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					<h1 className="font-medium mt-5">Building's shell:</h1>
 					<div className="mt-3 p-5 bg-[#c4c4c4da]">
 						<div className="flex justify-between">
-							<div className="">
+							<div>
 								<div className="grid grid-cols-2 gap-10 mb-3">
-									<div className="">
-										<h1>Number of connection:</h1>
+									<div>
+										<h1 className="text-sm">Number of connection:</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
-									<div className="">
-										<h1>Number of barriers:</h1>
+									<div>
+										<h1 className="text-sm">Number of barriers:</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
 								</div>
 							</div>
-							<div className="">
+							<div>
 								<div className="grid grid-cols-2 gap-10">
-									<div className="">
-										<h1>Total DPC of the shell:</h1>
+									<div>
+										<h1 className="text-sm">Total DPC of the shell:</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
@@ -256,23 +254,27 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						<div className="flex justify-between">
 							<div className="">
 								<div className="grid grid-cols-2 gap-10 mb-3">
-									<div className="">
-										<h1 className="whitespace-nowrap">Number of connection:</h1>
+									<div>
+										<h1 className="whitespace-nowrap text-sm">
+											Number of connection:
+										</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
-									<div className="">
-										<h1 className="whitespace-nowrap">Number of barriers:</h1>
+									<div>
+										<h1 className="whitespace-nowrap text-sm">
+											Number of barriers:
+										</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
@@ -280,14 +282,14 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 							</div>
 							<div className="">
 								<div className="grid grid-cols-2 gap-10">
-									<div className="">
-										<h1>
+									<div>
+										<h1 className="text-sm">
 											Total DPC of the <br /> building's core and shell:
 										</h1>
 									</div>
 									<input
 										type="text"
-										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none"
+										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
 										readOnly
 										value={80}
 									/>
@@ -310,7 +312,12 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 								</div>
 
 								<div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
-									<Gauge value={55} className="mr-[50px]" />
+									<Gauge
+										value={55}
+										widthOne={200}
+										widthTwo={262}
+										className="mr-[50px]"
+									/>
 								</div>
 							</div>
 						</div>
