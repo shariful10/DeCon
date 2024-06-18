@@ -227,7 +227,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 									/>
 								</div>
 							</div>
-							<div className="">
+							<div>
 								<div className="grid grid-cols-2 gap-10">
 									<div>
 										<h1 className="text-sm">Total DPC of the shell:</h1>
