@@ -36,7 +36,9 @@ export default function SelectDropdown(props) {
   }, []);
 
   useEffect(() => {
-    setValue(value || defaultValue?.label);
+    if (defaultValue) {
+      setValue(value || defaultValue?.label);
+    }
   }, [value, defaultValue]);
 
   return (
