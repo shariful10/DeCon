@@ -18,7 +18,7 @@ export default function BuildingCore() {
 	const navigate = useNavigate();
 	const { buildingCore } = useSelector((state) => state.buildingCore);
 	const { buildingCoreInfo } = useSelector((state) => state.buildingCore);
-	console.log(buildingCore.columnAndBeamDPC);
+	console.log(buildingCore);
 	console.log(buildingCoreInfo.columnAndBeam.connectionType.label);
 
 	const [buildingCoreData, setBuildingCoreData] = useState({
