@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 export default function SelectDropdown(props) {
-  const { contents, attributesValue, handleSetData } = props;
+  const { contents, attributesValue, handleSetData, defaultValue } = props;
   const [value, setValue] = useState("");
   const [expandOptions, setExpandOptions] = useState(false);
   const [hoveredOption, setHoveredOption] = useState(null);
@@ -34,6 +34,10 @@ export default function SelectDropdown(props) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setValue(value || defaultValue?.label);
+  }, [value, defaultValue]);
 
   return (
     <>

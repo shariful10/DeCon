@@ -622,6 +622,7 @@ export default function BuildingCore() {
     console.log("hello");
   };
 
+  console.log(buildingCoreData);
   return (
     <div className="w-full px-10">
       <form onSubmit={handleSubmit} className="flex flex-col">
@@ -677,6 +678,9 @@ export default function BuildingCore() {
                   connectionName: "columnAndBeam",
                   attributeKey: "connectionType",
                 }}
+                defaultValue={
+                  buildingCoreData["columnAndBeam"]?.["connectionType"]
+                }
               />
               <SelectDropdown
                 contents={connectionType}
