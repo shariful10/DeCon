@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 export default function BuildingCore() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
 	const { buildingCore } = useSelector((state) => state.buildingCore);
 	const { buildingCoreInfo } = useSelector((state) => state.buildingCore);
 	const buildingCoreTotalValue = useSelector(
