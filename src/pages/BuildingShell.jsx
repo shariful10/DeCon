@@ -420,22 +420,24 @@ export default function BuildingShell() {
   return (
     <div className="w-full px-10">
       <div className="flex flex-col">
-        <div class="flex gap-5 justify-between">
-          <div class="flex-1 box-border text-center">Connection</div>
-          <div class="flex-1 box-border text-center">Connection type</div>
-          <div class="flex-1 box-border text-center">
+        <div className="flex gap-5 justify-between">
+          <div className="flex-1 box-border text-center">Connection</div>
+          <div className="flex-1 box-border text-center">Connection type</div>
+          <div className="flex-1 box-border text-center">
             Connection Accessibility
           </div>
-          <div class="flex-1 box-border text-center">Independency</div>
-          <div class="flex-1 box-border text-center">
+          <div className="flex-1 box-border text-center">Independency</div>
+          <div className="flex-1 box-border text-center">
             Geometry of product edge of Element
           </div>
-          <div class="w-[100px] box-border text-center">Connection number</div>
-          <div class="flex-1 box-border text-center">Barriers</div>
-          <div class="p-[10px] box-border text-center w-[100px]">
+          <div className="w-[100px] box-border text-center">
+            Connection number
+          </div>
+          <div className="flex-1 box-border text-center">Barriers</div>
+          <div className="p-[10px] box-border text-center w-[100px]">
             Barriers number
           </div>
-          <div class="flex-1 box-border text-center">
+          <div className="flex-1 box-border text-center">
             Disassembly Potential of the Connection DPC
           </div>
         </div>
