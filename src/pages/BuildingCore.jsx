@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SelectDropdown from "../components/Select/SelectDropdown";
 import Button from "../components/utils/Button";
 import Input from "../components/Input/Input";
@@ -7,6 +7,36 @@ import { Link } from "react-router-dom";
 import ProgressBar from "../components/utils/ProgressBar";
 
 export default function BuildingCore() {
+  const [buildingCoreData, setBuildingCoreData] = useState({
+    columnAndBeam: {},
+    columnAndBearingWall: {},
+    columnAndFoundation: {},
+    columnAndSlab: {},
+    slabAndBearingWall: {},
+  });
+  const [dpc, setDPC] = useState({
+    columnAndBeamDPC: "",
+    columnAndBearingWallDPC: "",
+    columnAndFoundationDPC: "",
+    columnAndSlabDPC: "",
+    slabAndBearingWallDPC: "",
+  });
+
+  const {
+    columnAndBeamDPC,
+    columnAndBearingWallDPC,
+    columnAndFoundationDPC,
+    columnAndSlabDPC,
+    slabAndBearingWallDPC,
+  } = dpc;
+
+  const [totalValue, setTotalValue] = useState({
+    totalCoreConnections: "",
+    totalDPCOfBuildingCore: "",
+  });
+
+  const { totalCoreConnections, totalDPCOfBuildingCore } = totalValue;
+
   const connectionType = [
     {
       label: "Dry Connection",
@@ -168,7 +198,7 @@ export default function BuildingCore() {
     },
   ];
 
-  const Independency = [
+  const independency = [
     {
       label: "Independency",
       value: "independency",
@@ -228,7 +258,7 @@ export default function BuildingCore() {
     },
   ];
 
-  const Barriers = [
+  const barriers = [
     {
       label: "Design barriers",
       value: "design_barriers",
@@ -417,142 +447,655 @@ export default function BuildingCore() {
     },
   ];
 
+  const handleSetData = (props) => {
+    const { connectionName, attributeKey, controlValue } = props;
+    setBuildingCoreData({
+      ...buildingCoreData,
+      [connectionName]: {
+        ...buildingCoreData[connectionName],
+        [attributeKey]: controlValue,
+      },
+    });
+  };
+
+  useEffect(() => {
+    let columnAndBeamDPC;
+    let columnAndBearingWallDPC = "";
+    let columnAndFoundationDPC = "";
+    let columnAndSlabDPC = "";
+    let slabAndBearingWallDPC = "";
+    let connectionNumbers = "";
+    // Column and beam calculation
+    if (buildingCoreData["columnAndBeam"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndBeam"]?.["connectionType"]?.["score"] || 0;
+      const CAn =
+        buildingCoreData["columnAndBeam"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndBeam"]?.["independency"]?.["score"] || 0;
+      const GPEn = buildingCoreData["columnAndBeam"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndBeam"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndBeam"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore * barriersNumber || 0;
+
+      const DPcnTotalValue = DividedCTn + DividedCAn;
+      const DPcenTotalValue = DividedIDn + DividedGPEn;
+
+      const DPcn = 2 / DPcnTotalValue;
+      const DPcen = 2 / DPcenTotalValue;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndBeamDPC = DPCSliceResult - DBn;
+      if (columnAndBeamDPC) {
+        setDPC({
+          ...dpc,
+          columnAndBeamDPC: columnAndBeamDPC,
+        });
+      }
+    }
+
+    if (buildingCoreData["columnAndBearingWall"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndBearingWall"]?.["connectionType"]?.[
+          "score"
+        ] || 0;
+      const CAn =
+        buildingCoreData["columnAndBearingWall"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndBearingWall"]?.["independency"]?.["score"] ||
+        0;
+      const GPEn =
+        buildingCoreData["columnAndBearingWall"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndBearingWall"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndBearingWall"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore * barriersNumber;
+
+      const DPcnTotalValue = DividedCTn + DividedCAn;
+      const DPcenTotalValue = DividedIDn + DividedGPEn;
+
+      const DPcn = 2 / DPcnTotalValue;
+      const DPcen = 2 / DPcenTotalValue;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndBearingWallDPC = DPCSliceResult - DBn;
+      if (columnAndBearingWallDPC) {
+        setDPC({
+          ...dpc,
+          columnAndBearingWallDPC: columnAndBearingWallDPC,
+        });
+      }
+    }
+
+    if (buildingCoreData["columnAndFoundation"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndFoundation"]?.["connectionType"]?.[
+          "score"
+        ] || 0;
+      const CAn =
+        buildingCoreData["columnAndFoundation"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndFoundation"]?.["independency"]?.["score"] ||
+        0;
+      const GPEn =
+        buildingCoreData["columnAndFoundation"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndFoundation"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndFoundation"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndFoundationDPC = DPCSliceResult - DBn;
+      if (columnAndFoundationDPC) {
+        setDPC({
+          ...dpc,
+          columnAndFoundationDPC: columnAndFoundationDPC,
+        });
+      }
+    }
+
+    if (buildingCoreData["columnAndSlab"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["columnAndSlab"]?.["connectionType"]?.["score"] || 0;
+      const CAn =
+        buildingCoreData["columnAndSlab"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["columnAndSlab"]?.["independency"]?.["score"] || 0;
+      const GPEn = buildingCoreData["columnAndSlab"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["columnAndSlab"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["columnAndSlab"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
+      const DPCSliceResult = 2 / DPCSlice;
+      columnAndSlabDPC = DPCSliceResult - DBn;
+      if (columnAndSlabDPC) {
+        setDPC({
+          ...dpc,
+          columnAndSlabDPC: columnAndSlabDPC,
+        });
+      }
+    }
+
+    if (buildingCoreData["slabAndBearingWall"]) {
+      // EQ One
+      const CTn =
+        buildingCoreData["slabAndBearingWall"]?.["connectionType"]?.["score"] ||
+        0;
+      const CAn =
+        buildingCoreData["slabAndBearingWall"]?.["connectionAccessibility"]?.[
+          "score"
+        ] || 0;
+      // EQ Two
+      const IDn =
+        buildingCoreData["slabAndBearingWall"]?.["independency"]?.["score"] ||
+        0;
+      const GPEn =
+        buildingCoreData["slabAndBearingWall"]?.["gpe"]?.["score"] || 0;
+      // EQ Three
+      const barriersScore =
+        buildingCoreData["slabAndBearingWall"]?.["barriers"]?.["score"] || 0;
+      const barriersNumber =
+        buildingCoreData["slabAndBearingWall"]?.["barriersNumber"] || 0;
+
+      // Total calculation
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore / barriersNumber;
+
+      const DPcn = 2 / (DividedCTn + DividedCAn);
+      const DPcen = 2 / (DividedIDn + DividedGPEn);
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
+      const DPCSliceResult = 2 / DPCSlice;
+      slabAndBearingWallDPC = DPCSliceResult - DBn;
+      if (slabAndBearingWallDPC) {
+        setDPC({
+          ...dpc,
+          slabAndBearingWallDPC: slabAndBearingWallDPC,
+        });
+      }
+    }
+
+    const connectionNumberOne =
+      buildingCoreData["columnAndBeam"]?.["connectionNumber"] || 0;
+    const connectionNumberTwo =
+      buildingCoreData["columnAndBearingWall"]?.["connectionNumber"] || 0;
+    const connectionNumberThree =
+      buildingCoreData["columnAndFoundation"]?.["connectionNumber"] || 0;
+    const connectionNumberFour =
+      buildingCoreData["columnAndSlab"]?.["connectionNumber"] || 0;
+    const connectionNumberFive =
+      buildingCoreData["slabAndBearingWall"]?.["connectionNumber"] || 0;
+
+    connectionNumbers =
+      connectionNumberOne +
+      connectionNumberTwo +
+      connectionNumberThree +
+      connectionNumberFour +
+      connectionNumberFive;
+
+    // const totalCoreConnections =
+    const totalDPCOfBuildingCore =
+      dpc?.columnAndBeamDPC +
+      dpc?.columnAndBearingWallDPC +
+      dpc?.columnAndFoundationDPC +
+      dpc?.columnAndSlabDPC +
+      dpc?.slabAndBearingWallDPC;
+
+    setTotalValue({
+      ...totalValue,
+      totalCoreConnections: connectionNumbers || 0,
+      totalDPCOfBuildingCore: totalDPCOfBuildingCore || 0,
+    });
+  }, [buildingCoreData]);
+
+  console.log(columnAndBeamDPC);
+
   return (
     <div className="w-full px-10">
       <div className="flex flex-col">
-        <div class="flex gap-5 justify-between">
-          <div class="flex-1 box-border text-center">Connection</div>
-          <div class="flex-1 box-border text-center">Connection type</div>
-          <div class="flex-1 box-border text-center">
+        <div className="flex gap-5 justify-between">
+          <div className="flex-1 box-border text-center">Connection</div>
+          <div className="flex-1 box-border text-center">Connection type</div>
+          <div className="flex-1 box-border text-center">
             Connection Accessibility
           </div>
-          <div class="flex-1 box-border text-center">Independency</div>
-          <div class="flex-1 box-border text-center">
+          <div className="flex-1 box-border text-center">Independency</div>
+          <div className="flex-1 box-border text-center">
             Geometry of product edge of Element
           </div>
-          <div class="w-[100px] box-border text-center">Connection number</div>
-          <div class="flex-1 box-border text-center">Barriers</div>
-          <div class="p-[10px] box-border text-center w-[100px]">
+          <div className="w-[100px] box-border text-center">
+            Connection number
+          </div>
+          <div className="flex-1 box-border text-center">Barriers</div>
+          <div className="p-[10px] box-border text-center w-[100px]">
             Barriers number
           </div>
-          <div class="flex-1 box-border text-center">
+          <div className="flex-1 box-border text-center">
             Disassembly Potential of the Connection DPC
           </div>
         </div>
 
         <div className="flex gap-5 justify-between mb-20">
-          <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Connection</h3> */}
-            <div className="flex flex-col gap-4">
-              <Button
-                btnTitle="Column & Beam"
-                className="!bg-[#F4B081] !px-3"
-              />
-              <Button
-                btnTitle="Column & Bearing wall"
-                className="!bg-[#F4B081] !px-3"
-              />
-              <Button
-                btnTitle="Column & Foundation"
-                className="!bg-[#F4B081] !px-3"
-              />
-              <Button btnTitle="Beam & Slab" className="!bg-[#F4B081] !px-2" />
-              <Button
-                btnTitle="Slab & Bearing wall"
-                className="!bg-[#F4B081] !px-3"
-              />
-            </div>
+          <div className="flex-1 flex flex-col justify-between gap-4">
+            <Button btnTitle="Column & Beam" className="!bg-[#F4B081] !px-3" />
+            <Button
+              btnTitle="Column & Bearing wall"
+              className="!bg-[#F4B081] !px-3"
+            />
+            <Button
+              btnTitle="Column & Foundation"
+              className="!bg-[#F4B081] !px-3"
+            />
+            <Button btnTitle="Beam & Slab" className="!bg-[#F4B081] !px-2" />
+            <Button
+              btnTitle="Slab & Bearing wall"
+              className="!bg-[#F4B081] !px-3"
+            />
           </div>
 
+          {/* Connection Type  */}
           <div className="flex-1">
             {/* <h3 className="text-center mb-3">Connection type</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
-              <SelectDropdown contents={connectionType} />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "connectionType",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "connectionType",
+                }}
+              />
+
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "connectionType",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "connectionType",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionType}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "connectionType",
+                }}
+              />
             </div>
           </div>
 
+          {/* Connection Accessibility */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Connection Accessibility</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
-              <SelectDropdown contents={connectionAccessibility} />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
+              <SelectDropdown
+                contents={connectionAccessibility}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "connectionAccessibility",
+                }}
+              />
             </div>
           </div>
 
+          {/* Independency */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Independency</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
-              <SelectDropdown contents={Independency} />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "independency",
+                }}
+              />
+              <SelectDropdown
+                contents={independency}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "independency",
+                }}
+              />
             </div>
           </div>
 
+          {/* Geometry of product edge of Element */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">
-              Geometry of product edge of Element
-            </h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
-              <SelectDropdown contents={GeometryOfProductEdge} />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "gpe",
+                }}
+              />
+              <SelectDropdown
+                contents={GeometryOfProductEdge}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "gpe",
+                }}
+              />
             </div>
           </div>
 
+          {/* Connection number */}
           <div className="w-[100px]">
-            {/* <h3 className="text-center mb-3">Connection number</h3> */}
             <div className="flex flex-col gap-4">
-              <Input />
-              <Input />
-              <Input />
-              <Input />
-              <Input />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "connectionNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "connectionNumber",
+                }}
+              />
             </div>
           </div>
 
+          {/* Barriers */}
           <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Barriers</h3> */}
             <div className="flex flex-col gap-4">
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
-              <SelectDropdown contents={Barriers} />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "barriers",
+                }}
+              />
+              <SelectDropdown
+                contents={barriers}
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "barriers",
+                }}
+              />
             </div>
           </div>
 
+          {/* Barriers number */}
           <div className="w-[100px]">
-            {/* <h3 className="text-center mb-3">Barriers number</h3> */}
             <div className="flex flex-col gap-4">
-              <Input />
-              <Input />
-              <Input />
-              <Input />
-              <Input />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBeam",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndBearingWall",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndFoundation",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "columnAndSlab",
+                  attributeKey: "barriersNumber",
+                }}
+              />
+              <Input
+                handleSetData={handleSetData}
+                attributesValue={{
+                  connectionName: "slabAndBearingWall",
+                  attributeKey: "barriersNumber",
+                }}
+              />
             </div>
           </div>
 
-          <div className="flex-1">
-            {/* <h3 className="text-center mb-3">
-              Disassembly Potential of the Connection DPC
-            </h3> */}
-            <div className="flex flex-col gap-4">
-              <Input className="bg-[#E1EFD8]" />
-              <Input className="bg-[#E1EFD8]" />
-              <Input className="bg-[#E1EFD8]" />
-              <Input className="bg-[#E1EFD8]" />
-              <Input className="bg-[#E1EFD8]" />
+          {/* Disassembly Potential of the Connection DPC */}
+          <div className="flex-1 flex flex-col gap-5 justify-between">
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndBeamDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndBearingWallDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndFoundationDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndSlabDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.slabAndBearingWallDPC || ""}</span>
             </div>
           </div>
         </div>
@@ -561,20 +1104,70 @@ export default function BuildingCore() {
           <Charts
             color="#4472C4"
             title="Disassembly potential of the core connections DPC"
+            data={[
+              {
+                x: "Column and beam",
+                y: parseFloat(columnAndBeamDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Column and slab",
+                y: parseFloat(columnAndBearingWallDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Column and bearing wall",
+                y: parseFloat(columnAndFoundationDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Beam and slab",
+                y: parseFloat(columnAndSlabDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Beam and bearing wall",
+                y: parseFloat(slabAndBearingWallDPC)?.toFixed(2) || 0,
+              },
+              {
+                x: "Slab and bearing wall",
+                y: parseFloat(columnAndBearingWallDPC)?.toFixed(2) || 0,
+              },
+            ]}
           />
           <Charts
             color="#F4B081"
             title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
+            data={[
+              {
+                x: "Connection type",
+                y: 1292,
+              },
+              {
+                x: "Connection accessibility",
+                y: 4432,
+              },
+              {
+                x: "Independency",
+                y: 5423,
+              },
+              {
+                x: "Geometry of product edge",
+                y: 6653,
+              },
+              {
+                x: "Barriers",
+                y: 8133,
+              },
+            ]}
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
               <ProgressBar progress={60} />
               <Button
-                btnTitle="Total core connections:"
+                btnTitle={`Total core connections: ${totalValue?.totalCoreConnections}`}
                 className="!text-left text-base !px-2 !bg-[#D5DBE5]"
               />
               <Button
-                btnTitle="Total DPC of the building’s core:"
+                btnTitle={`Total DPC of the building’s core: ${parseFloat(
+                  totalDPCOfBuildingCore
+                )?.toFixed(2)}`}
                 className="!text-left text-base !px-2"
               />
             </div>
