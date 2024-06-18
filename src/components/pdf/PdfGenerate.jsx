@@ -8,6 +8,10 @@ import logo from "../../assets/images/logo.jpeg";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
 	const { buildingInfo } = useSelector((state) => state.buildingInfo);
+	const { buildingCoreTotalValue } = useSelector((state) => state.buildingCore);
+	const { buildingShellTotalValue } = useSelector(
+		(state) => state.buildingShell
+	);
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
@@ -163,7 +167,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingCoreTotalValue.totalConnectionNumberScore
+										).toFixed(2)}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
@@ -174,7 +180,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingCoreTotalValue.totalBarriersScore
+										).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -187,7 +195,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingCoreTotalValue.totalDPCOfBuildingCore
+										).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -212,7 +222,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingShellTotalValue.totalConnectionNumberScore
+										).toFixed(2)}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
@@ -223,7 +235,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingShellTotalValue.totalBarriersScore
+										).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -236,7 +250,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingShellTotalValue.totalDPCOfBuildingCore
+										).toFixed(2)}
 									/>
 								</div>
 							</div>

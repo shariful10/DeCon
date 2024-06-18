@@ -3,11 +3,13 @@ import buildingInfoReducer from "./features/buildingInfoSlice";
 import buildingCoreReducer from "./features/buildingCoreSlice";
 import buildingShellReducer from "./features/buildingShellSlice";
 import constructionTypeReducer from "./features/constructionTypeSlice";
+import buildingCoreTotalValueReducer from "./features/buildingCoreSlice";
 
 export const store = configureStore({
 	reducer: {
 		buildingInfo: buildingInfoReducer,
 		buildingCore: buildingCoreReducer,
+		buildingCoreTotalValue: buildingCoreTotalValueReducer,
 		buildingShell: buildingShellReducer,
 		constructionType: constructionTypeReducer,
 	},

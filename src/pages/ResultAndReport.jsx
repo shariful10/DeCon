@@ -1,13 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import Gauge from "../components/Gauge/Gauge";
 import { useNavigate } from "react-router-dom";
 import Charts from "../components/Chart/Chart";
-import ChartTwo from "../components/Chart/ChartTwo";
-import Gauge from "../components/Gauge/Gauge";
-import Container from "../components/container/Container";
 import Button from "../components/utils/Button";
+import ChartTwo from "../components/Chart/ChartTwo";
+import Container from "../components/container/Container";
 
 export default function ResultAndReport() {
 	const navigate = useNavigate();
+	const { buildingCoreTotalValue } = useSelector((state) => state.buildingCore);
+	const { buildingShellTotalValue } = useSelector(
+		(state) => state.buildingShell
+	);
+	console.log(buildingShellTotalValue.totalDPCOfBuildingCore);
 
 	return (
 		<Container>
@@ -27,7 +33,16 @@ export default function ResultAndReport() {
 						/>
 					</div>
 					<div className="w-1/2 flex flex-col items-center justify-center">
-						<Gauge value={55} widthOne={300} widthTwo={362} />
+						<Gauge
+							value={
+								Number(
+									buildingCoreTotalValue.totalDPCOfBuildingCore +
+										buildingShellTotalValue.totalDPCOfBuildingCore
+								).toFixed(2) / 100
+							}
+							widthOne={300}
+							widthTwo={362}
+						/>
 						<p> Total disassembly potential </p>
 						<div className="flex items-center gap-4 mt-5 -mr-5">
 							<div onClick={() => navigate("/building-shell")}>
