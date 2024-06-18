@@ -10,7 +10,7 @@ export default function Input(props) {
     handleSetData({
       connectionName: attributesValue?.connectionName,
       attributeKey: attributesValue?.attributeKey,
-      controlValue: Number(controlValue),
+      controlValue: { score: Number(controlValue) },
     });
   };
 

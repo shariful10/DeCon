@@ -31,11 +31,24 @@ export default function BuildingCore() {
   } = dpc;
 
   const [totalValue, setTotalValue] = useState({
-    totalCoreConnections: "",
+    totalConnectionTypesScore: "",
+    connectionAccessibilityScore: "",
+    totalGpeScore: "",
+    totalIndependencyScore: "",
+    totalConnectionNumberScore: "",
+    totalBarriersScore: "",
     totalDPCOfBuildingCore: "",
   });
 
-  const { totalCoreConnections, totalDPCOfBuildingCore } = totalValue;
+  const {
+    totalConnectionTypesScore,
+    connectionAccessibilityScore,
+    totalGpeScore,
+    totalIndependencyScore,
+    totalConnectionNumberScore,
+    totalBarriersScore,
+    totalDPCOfBuildingCore,
+  } = totalValue;
 
   const connectionType = [
     {
@@ -165,7 +178,7 @@ export default function BuildingCore() {
     },
   ];
 
-  const connectionAccessibility = [
+  const connectionAccessibilityOptions = [
     {
       label: "Connection accessibility",
       value: "connection_accessibility",
@@ -458,13 +471,21 @@ export default function BuildingCore() {
     });
   };
 
+  const calculateTotalScores = (data, attributeKey) => {
+    return Object.values(data)?.reduce((acc, item) => {
+      const accNumber = acc || 0;
+      const itemNumber = item?.[attributeKey]?.score || 0;
+      const totalScores = accNumber + itemNumber;
+      return totalScores;
+    }, 0);
+  };
+
   useEffect(() => {
     let columnAndBeamDPC;
     let columnAndBearingWallDPC = "";
     let columnAndFoundationDPC = "";
     let columnAndSlabDPC = "";
     let slabAndBearingWallDPC = "";
-    let connectionNumbers = "";
     // Column and beam calculation
     if (buildingCoreData["columnAndBeam"]) {
       // EQ One
@@ -684,24 +705,6 @@ export default function BuildingCore() {
       }
     }
 
-    const connectionNumberOne =
-      buildingCoreData["columnAndBeam"]?.["connectionNumber"] || 0;
-    const connectionNumberTwo =
-      buildingCoreData["columnAndBearingWall"]?.["connectionNumber"] || 0;
-    const connectionNumberThree =
-      buildingCoreData["columnAndFoundation"]?.["connectionNumber"] || 0;
-    const connectionNumberFour =
-      buildingCoreData["columnAndSlab"]?.["connectionNumber"] || 0;
-    const connectionNumberFive =
-      buildingCoreData["slabAndBearingWall"]?.["connectionNumber"] || 0;
-
-    connectionNumbers =
-      connectionNumberOne +
-      connectionNumberTwo +
-      connectionNumberThree +
-      connectionNumberFour +
-      connectionNumberFive;
-
     // const totalCoreConnections =
     const totalDPCOfBuildingCore =
       dpc?.columnAndBeamDPC +
@@ -710,14 +713,48 @@ export default function BuildingCore() {
       dpc?.columnAndSlabDPC +
       dpc?.slabAndBearingWallDPC;
 
+    // Total connection types numbers
+    const totalConnectionTypeScore = calculateTotalScores(
+      buildingCoreData,
+      "connectionType"
+    );
+
+    // Total connection accessibility numbers
+    const totalConnectionAccessibilityScore = calculateTotalScores(
+      buildingCoreData,
+      "connectionAccessibility"
+    );
+
+    const totalIndependencyScore = calculateTotalScores(
+      buildingCoreData,
+      "independency"
+    );
+
+    const totalGpeScore = calculateTotalScores(buildingCoreData, "gpe");
+
+    const connectionNumbers = calculateTotalScores(
+      buildingCoreData,
+      "connectionNumber"
+    );
+
+    const totalBarriersScore = calculateTotalScores(
+      buildingCoreData,
+      "barriers"
+    );
+
     setTotalValue({
       ...totalValue,
-      totalCoreConnections: connectionNumbers || 0,
+      totalConnectionTypesScore:
+        Math.round(totalConnectionTypeScore * 100) / 100,
+      connectionAccessibilityScore:
+        Math.round(totalConnectionAccessibilityScore * 100) / 100,
+      totalGpeScore: Math.round(totalGpeScore * 100) / 100,
+      totalIndependencyScore: Math.round(totalIndependencyScore * 100) / 100,
+      totalConnectionNumberScore: connectionNumbers || 0,
+      totalBarriersScore: Math.round(totalBarriersScore * 100) / 100,
       totalDPCOfBuildingCore: totalDPCOfBuildingCore || 0,
     });
   }, [buildingCoreData]);
-
-  console.log(columnAndBeamDPC);
 
   return (
     <div className="w-full px-10">
@@ -814,7 +851,7 @@ export default function BuildingCore() {
           <div className="flex-1">
             <div className="flex flex-col gap-4">
               <SelectDropdown
-                contents={connectionAccessibility}
+                contents={connectionAccessibilityOptions}
                 handleSetData={handleSetData}
                 attributesValue={{
                   connectionName: "columnAndBeam",
@@ -822,7 +859,7 @@ export default function BuildingCore() {
                 }}
               />
               <SelectDropdown
-                contents={connectionAccessibility}
+                contents={connectionAccessibilityOptions}
                 handleSetData={handleSetData}
                 attributesValue={{
                   connectionName: "columnAndBearingWall",
@@ -830,7 +867,7 @@ export default function BuildingCore() {
                 }}
               />
               <SelectDropdown
-                contents={connectionAccessibility}
+                contents={connectionAccessibilityOptions}
                 handleSetData={handleSetData}
                 attributesValue={{
                   connectionName: "columnAndFoundation",
@@ -838,7 +875,7 @@ export default function BuildingCore() {
                 }}
               />
               <SelectDropdown
-                contents={connectionAccessibility}
+                contents={connectionAccessibilityOptions}
                 handleSetData={handleSetData}
                 attributesValue={{
                   connectionName: "columnAndSlab",
@@ -846,7 +883,7 @@ export default function BuildingCore() {
                 }}
               />
               <SelectDropdown
-                contents={connectionAccessibility}
+                contents={connectionAccessibilityOptions}
                 handleSetData={handleSetData}
                 attributesValue={{
                   connectionName: "slabAndBearingWall",
@@ -1137,23 +1174,23 @@ export default function BuildingCore() {
             data={[
               {
                 x: "Connection type",
-                y: 1292,
+                y: parseFloat(totalConnectionTypesScore)?.toFixed(2) || 0,
               },
               {
                 x: "Connection accessibility",
-                y: 4432,
+                y: parseFloat(connectionAccessibilityScore)?.toFixed(2) || 0,
               },
               {
                 x: "Independency",
-                y: 5423,
+                y: parseFloat(totalIndependencyScore)?.toFixed(2) || 0,
               },
               {
                 x: "Geometry of product edge",
-                y: 6653,
+                y: parseFloat(totalGpeScore)?.toFixed(2) || 0,
               },
               {
                 x: "Barriers",
-                y: 8133,
+                y: parseFloat(totalBarriersScore)?.toFixed(2) || 0,
               },
             ]}
           />
@@ -1161,7 +1198,7 @@ export default function BuildingCore() {
             <div className="flex flex-col gap-4">
               <ProgressBar progress={60} />
               <Button
-                btnTitle={`Total core connections: ${totalValue?.totalCoreConnections}`}
+                btnTitle={`Total core connections: ${totalConnectionNumberScore}`}
                 className="!text-left text-base !px-2 !bg-[#D5DBE5]"
               />
               <Button
