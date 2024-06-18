@@ -6,7 +6,7 @@ export default function Input(props) {
 
   const onChangeHandler = (event) => {
     const controlValue = event.target.value;
-    setValue(Number(controlValue));
+    setValue(controlValue);
     handleSetData({
       connectionName: attributesValue?.connectionName,
       attributeKey: attributesValue?.attributeKey,
