@@ -1,10 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function SelectDropdown(props) {
   const { contents, attributesValue, handleSetData, defaultValue } = props;
   const [value, setValue] = useState("");
   const [expandOptions, setExpandOptions] = useState(false);
   const [hoveredOption, setHoveredOption] = useState(null);
+  // image
+  const [expandOptionsImg, setExpandOptionsImg] = useState(false);
+  const [hoveredOptionImg, setHoveredOptionImg] = useState(null);
+
   const dropdownRef = useRef(null);
 
   function expandDropdown() {
@@ -15,6 +19,9 @@ export default function SelectDropdown(props) {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setExpandOptions(false);
       setHoveredOption(null);
+      // image
+      setExpandOptionsImg(false);
+      setHoveredOptionImg(null);
     }
   };
 
@@ -73,15 +80,46 @@ export default function SelectDropdown(props) {
                   </span>
                   {hoveredOption === index && content?.options && (
                     <div className="absolute top-0 left-full right-[-15px] w-full z-[200] h-auto rounded bg-[#fff] flex flex-col gap-[2px]">
-                      {content.options.map((option, subIndex) => (
-                        <span
-                          key={subIndex}
-                          className="block py-1 px-2 bg-[#E8EBF5]"
-                          onClick={() => handleSetValue(option)}
-                        >
-                          {option?.label}
-                        </span>
-                      ))}
+                      {content.options.map((option, subIndex) => {
+                        console.log({ hoveredOptionImg });
+
+                        return (
+                          <div
+                            key={subIndex}
+                            className="py-1 px-2 bg-[#E8EBF5] flex items-center justify-between group relative"
+                            onClick={() => handleSetValue(option)}
+                          >
+                            <span className="w-full">{option?.label}</span>
+
+                            {
+                              // image
+                              option?.image && (
+                                <div
+                                  className="flex items-center justify-center min-w-max"
+                                  onMouseEnter={() =>
+                                    setHoveredOptionImg(subIndex)
+                                  }
+                                  onMouseLeave={() => setHoveredOptionImg(null)}
+                                >
+                                  <span className="text-2xl font-bold">?</span>
+                                  {
+                                    // image
+                                    hoveredOptionImg === subIndex && (
+                                      <figure className="absolute top-0 left-[105%] w-64 z-[200] h-auto rounded bg-[#fff] flex flex-col border-2 border-black">
+                                        <img
+                                          src={option?.image}
+                                          alt="option"
+                                          className="w-full h-auto"
+                                        />
+                                      </figure>
+                                    )
+                                  }
+                                </div>
+                              )
+                            }
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
