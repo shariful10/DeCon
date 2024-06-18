@@ -20,7 +20,7 @@ const ProgressIndicator = () => {
     { label: "Result & Report", completed: false, path: "/result-and-report" },
   ]);
 
-  // console.log("location ", location);
+  console.log("location ", location);
 
   useEffect(() => {
     const updatedSteps = steps.map((step) => {
@@ -49,7 +49,11 @@ const ProgressIndicator = () => {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center ${
                   step.completed
-                    ? "bg-[#A9CD98] border-2 border-[#6fac47]"
+                    ? `bg-[#A9CD98] border-2 ${
+                        step.path === location?.pathname
+                          ? "border-[#0e2c1b]"
+                          : "border-[#6fac47]"
+                      }`
                     : "bg-white border-2 border-gray-400"
                 }`}
               >
