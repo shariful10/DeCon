@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import {
+	addBuildingShell,
+	addBuildingShellInfo,
+	addBuildingShellTotalValue,
+} from "../redux/features/buildingShellSlice";
 import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/utils/Button";
 import ProgressBar from "../components/utils/ProgressBar";
 import SelectDropdown from "../components/Select/SelectDropdown";
-import {
-	addBuildingShell,
-	addBuildingShellInfo,
-	addBuildingShellTotalValue,
-} from "../redux/features/buildingShellSlice";
-import { useSelector } from "react-redux";
 
 export default function BuildingCore() {
 	const dispatch = useDispatch();
@@ -23,7 +23,6 @@ export default function BuildingCore() {
 	const buildingShellTotalValue = useSelector(
 		(state) => state.buildingShellTotalValue
 	);
-	console.log(buildingShell?.columnAndShellElementDPC);
 
 	const [buildingCoreData, setBuildingCoreData] = useState({
 		columnAndShellElement: {},

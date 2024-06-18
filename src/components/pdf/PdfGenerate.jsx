@@ -12,7 +12,6 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 	const { buildingShellTotalValue } = useSelector(
 		(state) => state.buildingShell
 	);
-	console.log(buildingShellTotalValue.totalDPCOfBuildingCore);
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>

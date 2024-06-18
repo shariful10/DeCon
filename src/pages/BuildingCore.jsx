@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import SelectDropdown from "../components/Select/SelectDropdown";
-import Button from "../components/utils/Button";
-import Input from "../components/Input/Input";
-import Charts from "../components/Chart/Chart";
 import { Link } from "react-router-dom";
-import ProgressBar from "../components/utils/ProgressBar";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
 	addBuildingCore,
 	addBuildingCoreInfo,
 	addBuildingCoreTotalValue,
 } from "../redux/features/buildingCoreSlice";
-import { useSelector } from "react-redux";
+import Input from "../components/Input/Input";
+import Charts from "../components/Chart/Chart";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/utils/Button";
+import React, { useEffect, useState } from "react";
+import ProgressBar from "../components/utils/ProgressBar";
+import SelectDropdown from "../components/Select/SelectDropdown";
 
 export default function BuildingCore() {
 	const dispatch = useDispatch();
@@ -1308,8 +1308,6 @@ export default function BuildingCore() {
 							<Link to={"/constructions-type"}>
 								<Button btnTitle="Previous" />
 							</Link>
-							{/* <Link to="/building-shell">
-							</Link> */}
 							<Button btnTitle="Next" />
 						</div>
 					</div>
