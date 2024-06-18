@@ -486,6 +486,7 @@ export default function BuildingCore() {
     let columnAndFoundationDPC = "";
     let columnAndSlabDPC = "";
     let slabAndBearingWallDPC = "";
+
     // Column and beam calculation
     if (buildingCoreData["columnAndBeam"]) {
       // EQ One
@@ -529,7 +530,7 @@ export default function BuildingCore() {
         });
       }
     }
-
+    // Column and bearing calculation
     if (buildingCoreData["columnAndBearingWall"]) {
       // EQ One
       const CTn =
@@ -576,7 +577,7 @@ export default function BuildingCore() {
         });
       }
     }
-
+    // Column and foundation calculation
     if (buildingCoreData["columnAndFoundation"]) {
       // EQ One
       const CTn =
@@ -604,7 +605,7 @@ export default function BuildingCore() {
       const DividedCAn = 1 / CAn;
       const DividedIDn = 1 / IDn;
       const DividedGPEn = 1 / GPEn;
-      const DBn = barriersScore / barriersNumber;
+      const DBn = barriersScore * barriersNumber;
 
       const DPcn = 2 / (DividedCTn + DividedCAn);
       const DPcen = 2 / (DividedIDn + DividedGPEn);
@@ -621,7 +622,7 @@ export default function BuildingCore() {
         });
       }
     }
-
+    // Column and slab calculation
     if (buildingCoreData["columnAndSlab"]) {
       // EQ One
       const CTn =
@@ -645,7 +646,7 @@ export default function BuildingCore() {
       const DividedCAn = 1 / CAn;
       const DividedIDn = 1 / IDn;
       const DividedGPEn = 1 / GPEn;
-      const DBn = barriersScore / barriersNumber;
+      const DBn = barriersScore * barriersNumber;
 
       const DPcn = 2 / (DividedCTn + DividedCAn);
       const DPcen = 2 / (DividedIDn + DividedGPEn);
@@ -661,7 +662,7 @@ export default function BuildingCore() {
         });
       }
     }
-
+    // Slab and bearing calculation
     if (buildingCoreData["slabAndBearingWall"]) {
       // EQ One
       const CTn =
@@ -688,7 +689,7 @@ export default function BuildingCore() {
       const DividedCAn = 1 / CAn;
       const DividedIDn = 1 / IDn;
       const DividedGPEn = 1 / GPEn;
-      const DBn = barriersScore / barriersNumber;
+      const DBn = barriersScore * barriersNumber;
 
       const DPcn = 2 / (DividedCTn + DividedCAn);
       const DPcen = 2 / (DividedIDn + DividedGPEn);
@@ -713,25 +714,27 @@ export default function BuildingCore() {
       dpc?.columnAndSlabDPC +
       dpc?.slabAndBearingWallDPC;
 
-    // Total connection types numbers
+    // Total connection types numbers score
     const totalConnectionTypeScore = calculateTotalScores(
       buildingCoreData,
       "connectionType"
     );
 
-    // Total connection accessibility numbers
+    // Total connection accessibility numbers score
     const totalConnectionAccessibilityScore = calculateTotalScores(
       buildingCoreData,
       "connectionAccessibility"
     );
 
+    // Total independency numbers score
     const totalIndependencyScore = calculateTotalScores(
       buildingCoreData,
       "independency"
     );
 
+    // Total Gpe numbers score
     const totalGpeScore = calculateTotalScores(buildingCoreData, "gpe");
-
+    // Total connection numbers score
     const connectionNumbers = calculateTotalScores(
       buildingCoreData,
       "connectionNumber"
@@ -742,6 +745,7 @@ export default function BuildingCore() {
       "barriers"
     );
 
+    // setting total scores
     setTotalValue({
       ...totalValue,
       totalConnectionTypesScore:
