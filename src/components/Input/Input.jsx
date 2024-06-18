@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Input(props) {
-  const { type, label, className, handleSetData, attributesValue } = props;
+  const {
+    type,
+    label,
+    className,
+    handleSetData,
+    attributesValue,
+    defaultValue,
+  } = props;
   const [value, setValue] = useState("");
 
   const onChangeHandler = (event) => {
     const controlValue = event.target.value;
-    setValue(Number(controlValue));
+    setValue(controlValue);
     handleSetData({
       connectionName: attributesValue?.connectionName,
       attributeKey: attributesValue?.attributeKey,
       controlValue: { score: Number(controlValue) },
     });
   };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(value || defaultValue?.score);
+    }
+  }, [defaultValue]);
 
   return (
     <input

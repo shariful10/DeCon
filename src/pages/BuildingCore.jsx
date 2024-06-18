@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import {
 	addBuildingCore,
 	addBuildingCoreInfo,
+	addBuildingCoreTotalValue,
 } from "../redux/features/buildingCoreSlice";
 import { useSelector } from "react-redux";
 
@@ -18,8 +19,9 @@ export default function BuildingCore() {
 	const navigate = useNavigate();
 	const { buildingCore } = useSelector((state) => state.buildingCore);
 	const { buildingCoreInfo } = useSelector((state) => state.buildingCore);
-	console.log(buildingCore);
-	console.log(buildingCoreInfo.columnAndBeam.connectionType.label);
+	const buildingCoreTotalValue = useSelector(
+		(state) => state.buildingCoreTotalValue
+	);
 
 	const [buildingCoreData, setBuildingCoreData] = useState({
 		columnAndBeam: {},
@@ -572,11 +574,12 @@ export default function BuildingCore() {
 
 		// const totalCoreConnections =
 		const totalDPCOfBuildingCore =
-			dpc?.columnAndBeamDPC +
-			dpc?.columnAndBearingWallDPC +
-			dpc?.columnAndFoundationDPC +
-			dpc?.beamAndSlabDPC +
-			dpc?.slabAndBearingWallDPC;
+			dpc?.columnAndBeamDPC ||
+			buildingCore[columnAndBeamDPC] + dpc?.columnAndBearingWallDPC ||
+			buildingCore[columnAndBearingWallDPC] + dpc?.columnAndFoundationDPC ||
+			buildingCore[columnAndFoundationDPC] + dpc?.beamAndSlabDPC ||
+			buildingCore[beamAndSlabDPC] + dpc?.slabAndBearingWallDPC ||
+			buildingCore[slabAndBearingWallDPC];
 
 		// Total connection types numbers score
 		const totalConnectionTypeScore = calculateTotalScores(
@@ -632,23 +635,24 @@ export default function BuildingCore() {
 	}, [buildingCoreData]);
 
 	useEffect(() => {
-		if (dpc) {
-			setDPC(dpc);
+		if (buildingCore) {
+			setDPC(buildingCore);
 		}
-	}, [dpc]);
-
-	useEffect(() => {
-		if (buildingCoreData) {
-			setBuildingCoreData(buildingCoreData);
+		if (buildingCoreInfo) {
+			setBuildingCoreData(buildingCoreInfo);
 		}
-	}, [buildingCoreData]);
+		// setting total scores
+		if (buildingCoreTotalValue) {
+			setTotalValue(buildingCoreTotalValue);
+		}
+	}, [buildingCore, buildingCoreInfo]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("buildingCoreData =>", buildingCoreData);
 		dispatch(addBuildingCore(dpc));
 		dispatch(addBuildingCoreInfo(buildingCoreData));
-		// navigate("/building-shell");
+		dispatch(addBuildingCoreTotalValue(totalValue));
+		navigate("/building-shell");
 	};
 
 	return (
@@ -706,6 +710,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "connectionType",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBeam"]?.["connectionType"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionType}
@@ -714,6 +721,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "connectionType",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndSlab"]?.["connectionType"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionType}
@@ -722,6 +732,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "connectionType",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBearingWall"]?.["connectionType"]
+								}
 							/>
 
 							<SelectDropdown
@@ -731,6 +744,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "connectionType",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndFoundation"]?.["connectionType"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionType}
@@ -739,6 +755,9 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "connectionType",
 								}}
+								defaultValue={
+									buildingCoreInfo["beamAndSlab"]?.["connectionType"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionType}
@@ -747,6 +766,9 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "connectionType",
 								}}
+								defaultValue={
+									buildingCoreInfo["slabAndBearingWall"]?.["connectionType"]
+								}
 							/>
 						</div>
 					</div>
@@ -761,6 +783,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "connectionAccessibility",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBeam"]?.["connectionAccessibility"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionAccessibilityOptions}
@@ -769,6 +794,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "connectionAccessibility",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndSlab"]?.["connectionAccessibility"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionAccessibilityOptions}
@@ -777,6 +805,11 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "connectionAccessibility",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBearingWall"]?.[
+										"connectionAccessibility"
+									]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionAccessibilityOptions}
@@ -785,6 +818,11 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "connectionAccessibility",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndFoundation"]?.[
+										"connectionAccessibility"
+									]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionAccessibilityOptions}
@@ -793,6 +831,9 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "connectionAccessibility",
 								}}
+								defaultValue={
+									buildingCoreInfo["beamAndSlab"]?.["connectionAccessibility"]
+								}
 							/>
 							<SelectDropdown
 								contents={connectionAccessibilityOptions}
@@ -801,6 +842,11 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "connectionAccessibility",
 								}}
+								defaultValue={
+									buildingCoreInfo["slabAndBearingWall"]?.[
+										"connectionAccessibility"
+									]
+								}
 							/>
 						</div>
 					</div>
@@ -815,6 +861,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "independency",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBeam"]?.["independency"]
+								}
 							/>
 							<SelectDropdown
 								contents={independency}
@@ -823,6 +872,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "independency",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndSlab"]?.["independency"]
+								}
 							/>
 							<SelectDropdown
 								contents={independency}
@@ -831,6 +883,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "independency",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBearingWall"]?.["independency"]
+								}
 							/>
 							<SelectDropdown
 								contents={independency}
@@ -839,6 +894,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "independency",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndFoundation"]?.["independency"]
+								}
 							/>
 							<SelectDropdown
 								contents={independency}
@@ -847,6 +905,7 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "independency",
 								}}
+								defaultValue={buildingCoreInfo["beamAndSlab"]?.["independency"]}
 							/>
 							<SelectDropdown
 								contents={independency}
@@ -855,6 +914,9 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "independency",
 								}}
+								defaultValue={
+									buildingCoreInfo["slabAndBearingWall"]?.["independency"]
+								}
 							/>
 						</div>
 					</div>
@@ -869,6 +931,7 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "gpe",
 								}}
+								defaultValue={buildingCoreInfo["columnAndBeam"]?.["gpe"]}
 							/>
 							<SelectDropdown
 								contents={GeometryOfProductEdge}
@@ -877,6 +940,7 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "gpe",
 								}}
+								defaultValue={buildingCoreInfo["columnAndSlab"]?.["gpe"]}
 							/>
 							<SelectDropdown
 								contents={GeometryOfProductEdge}
@@ -885,6 +949,7 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "gpe",
 								}}
+								defaultValue={buildingCoreInfo["columnAndBearingWall"]?.["gpe"]}
 							/>
 							<SelectDropdown
 								contents={GeometryOfProductEdge}
@@ -893,6 +958,7 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "gpe",
 								}}
+								defaultValue={buildingCoreInfo["columnAndFoundation"]?.["gpe"]}
 							/>
 							<SelectDropdown
 								contents={GeometryOfProductEdge}
@@ -901,6 +967,7 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "gpe",
 								}}
+								defaultValue={buildingCoreInfo["beamAndSlab"]?.["gpe"]}
 							/>
 							<SelectDropdown
 								contents={GeometryOfProductEdge}
@@ -909,6 +976,7 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "gpe",
 								}}
+								defaultValue={buildingCoreInfo["slabAndBearingWall"]?.["gpe"]}
 							/>
 						</div>
 					</div>
@@ -922,6 +990,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "connectionNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBeam"]?.["connectionNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -929,6 +1000,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "connectionNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndSlab"]?.["connectionNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -936,6 +1010,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "connectionNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBearingWall"]?.["connectionNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -943,6 +1020,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "connectionNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndFoundation"]?.["connectionNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -950,6 +1030,9 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "connectionNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["beamAndSlab"]?.["connectionNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -957,6 +1040,9 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "connectionNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["slabAndBearingWall"]?.["connectionNumber"]
+								}
 							/>
 						</div>
 					</div>
@@ -971,6 +1057,7 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "barriers",
 								}}
+								defaultValue={buildingCoreInfo["columnAndBeam"]?.["barriers"]}
 							/>
 							<SelectDropdown
 								contents={barriers}
@@ -979,6 +1066,7 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "barriers",
 								}}
+								defaultValue={buildingCoreInfo["columnAndSlab"]?.["barriers"]}
 							/>
 							<SelectDropdown
 								contents={barriers}
@@ -987,6 +1075,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "barriers",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBearingWall"]?.["barriers"]
+								}
 							/>
 							<SelectDropdown
 								contents={barriers}
@@ -995,6 +1086,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "barriers",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndFoundation"]?.["barriers"]
+								}
 							/>
 							<SelectDropdown
 								contents={barriers}
@@ -1003,6 +1097,7 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "barriers",
 								}}
+								defaultValue={buildingCoreInfo["beamAndSlab"]?.["barriers"]}
 							/>
 							<SelectDropdown
 								contents={barriers}
@@ -1011,6 +1106,9 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "barriers",
 								}}
+								defaultValue={
+									buildingCoreInfo["slabAndBearingWall"]?.["barriers"]
+								}
 							/>
 						</div>
 					</div>
@@ -1024,6 +1122,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBeam",
 									attributeKey: "barriersNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBeam"]?.["barriersNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -1031,6 +1132,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndSlab",
 									attributeKey: "barriersNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndSlab"]?.["barriersNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -1038,6 +1142,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndBearingWall",
 									attributeKey: "barriersNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndBearingWall"]?.["barriersNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -1045,6 +1152,9 @@ export default function BuildingCore() {
 									connectionName: "columnAndFoundation",
 									attributeKey: "barriersNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["columnAndFoundation"]?.["barriersNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -1052,6 +1162,9 @@ export default function BuildingCore() {
 									connectionName: "beamAndSlab",
 									attributeKey: "barriersNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["beamAndSlab"]?.["barriersNumber"]
+								}
 							/>
 							<Input
 								handleSetData={handleSetData}
@@ -1059,6 +1172,9 @@ export default function BuildingCore() {
 									connectionName: "slabAndBearingWall",
 									attributeKey: "barriersNumber",
 								}}
+								defaultValue={
+									buildingCoreInfo["slabAndBearingWall"]?.["barriersNumber"]
+								}
 							/>
 						</div>
 					</div>
@@ -1066,31 +1182,52 @@ export default function BuildingCore() {
 					{/* Disassembly Potential of the Connection DPC */}
 					<div className="flex-1 flex flex-col gap-5 justify-between">
 						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-							<span>{parseFloat(columnAndBeamDPC)?.toFixed(2) || ""}</span>
-						</div>
-
-						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-							<span>{parseFloat(columnAndSlabDPC)?.toFixed(2) || ""}</span>
-						</div>
-
-						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
 							<span>
-								{parseFloat(columnAndBearingWallDPC)?.toFixed(2) || ""}
+								{!columnAndBeamDPC
+									? buildingCore[columnAndBeamDPC] || ""
+									: parseFloat(columnAndBeamDPC)?.toFixed(2) || ""}
 							</span>
 						</div>
 
 						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
 							<span>
-								{parseFloat(columnAndFoundationDPC)?.toFixed(2) || ""}
+								{parseFloat(
+									columnAndSlabDPC || buildingCore[columnAndSlabDPC]
+								)?.toFixed(2) || ""}
 							</span>
 						</div>
 
 						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-							<span>{parseFloat(beamAndSlabDPC)?.toFixed(2) || ""}</span>
+							<span>
+								{parseFloat(
+									columnAndBearingWallDPC ||
+										buildingCore[columnAndBearingWallDPC]
+								)?.toFixed(2) || ""}
+							</span>
 						</div>
 
 						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-							<span>{parseFloat(slabAndBearingWallDPC)?.toFixed(2) || ""}</span>
+							<span>
+								{parseFloat(
+									columnAndFoundationDPC || buildingCore[columnAndFoundationDPC]
+								)?.toFixed(2) || ""}
+							</span>
+						</div>
+
+						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+							<span>
+								{parseFloat(
+									beamAndSlabDPC || buildingCore[beamAndSlabDPC]
+								)?.toFixed(2) || ""}
+							</span>
+						</div>
+
+						<div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+							<span>
+								{parseFloat(
+									slabAndBearingWallDPC || buildingCore[slabAndBearingWallDPC]
+								)?.toFixed(2) || ""}
+							</span>
 						</div>
 					</div>
 				</div>
