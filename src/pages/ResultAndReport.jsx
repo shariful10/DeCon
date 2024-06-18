@@ -26,11 +26,16 @@ export default function ResultAndReport() {
 							title="Disassembly potential of the core connections DPC"
 						/>
 					</div>
-					<div className="w-1/2 flex flex-col items-center justify-center gap-7">
+					<div className="w-1/2 flex flex-col items-center justify-center">
 						<Gauge value={55} widthOne={300} widthTwo={362} />
 						<p> Total disassembly potential </p>
-						<div onClick={() => navigate("/report")}>
-							<Button btnTitle="Download report" />
+						<div className="flex items-center gap-2 mt-5 -mr-5">
+							<div onClick={() => navigate("/building-shell")}>
+								<Button btnTitle="Previous" />
+							</div>
+							<div onClick={() => navigate("/report")}>
+								<Button btnTitle="Download report" />
+							</div>
 						</div>
 					</div>
 				</div>
