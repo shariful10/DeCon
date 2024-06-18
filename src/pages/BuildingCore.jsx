@@ -5,6 +5,8 @@ import Input from "../components/Input/Input";
 import Charts from "../components/Chart/Chart";
 import { Link } from "react-router-dom";
 import ProgressBar from "../components/utils/ProgressBar";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function BuildingCore() {
   const [buildingCoreData, setBuildingCoreData] = useState({
@@ -616,11 +618,13 @@ export default function BuildingCore() {
     });
   }, [buildingCoreData]);
 
-  console.log(buildingCoreData);
+  const handleSubmit = () => {
+    console.log("hello");
+  };
 
   return (
     <div className="w-full px-10">
-      <div className="flex flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-col">
         <div className="flex gap-5 justify-between">
           <div className="flex-1 box-border text-center">Connection</div>
           <div className="flex-1 box-border text-center">Connection type</div>
@@ -1143,7 +1147,7 @@ export default function BuildingCore() {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

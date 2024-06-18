@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	buildingInfo: JSON.parse(localStorage.getItem("buildingInfo")) || [],
+	buildingInfo: JSON.parse(localStorage.getItem("buildingInfo")) || {},
 };
 
 export const buildingInfoSlice = createSlice({
