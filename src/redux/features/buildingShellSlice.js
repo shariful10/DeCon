@@ -2,6 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	buildingShell: JSON.parse(localStorage.getItem("buildingShell")) || {},
+	buildingShellInfo:
+		JSON.parse(localStorage.getItem("buildingShellInfo")) || {},
+	buildingShellTotalValue:
+		JSON.parse(localStorage.getItem("buildingShellTotalValue")) || {},
 };
 
 export const buildingShellSlice = createSlice({
@@ -15,8 +19,26 @@ export const buildingShellSlice = createSlice({
 				JSON.stringify(state.buildingShell)
 			);
 		},
+		addBuildingShellInfo: (state, action) => {
+			state.buildingShellInfo = action.payload;
+			localStorage.setItem(
+				"buildingShellInfo",
+				JSON.stringify(state.buildingShellInfo)
+			);
+		},
+		addBuildingShellTotalValue: (state, action) => {
+			state.buildingShellTotalValue = action.payload;
+			localStorage.setItem(
+				"buildingShellTotalValue",
+				JSON.stringify(state.buildingShellTotalValue)
+			);
+		},
 	},
 });
 
-export const { addBuildingShell } = buildingShellSlice.actions;
+export const {
+	addBuildingShell,
+	addBuildingShellInfo,
+	addBuildingShellTotalValue,
+} = buildingShellSlice.actions;
 export default buildingShellSlice.reducer;
