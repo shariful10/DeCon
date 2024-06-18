@@ -5,11 +5,9 @@ import ChartTwo from "../Chart/ChartTwo";
 import { useSelector } from "react-redux";
 import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
-import building from "../../assets/images/building.jpg";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
 	const { buildingInfo } = useSelector((state) => state.buildingInfo);
-	console.log(buildingInfo);
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
