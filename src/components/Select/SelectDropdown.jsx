@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function SelectDropdown({ contents }) {
+export default function SelectDropdown(props) {
+  const { contents, attributesValue, handleSetData } = props;
   const [value, setValue] = useState("");
   const [expandOptions, setExpandOptions] = useState(false);
   const [hoveredOption, setHoveredOption] = useState(null);
@@ -19,6 +20,11 @@ export default function SelectDropdown({ contents }) {
 
   const handleSetValue = (optionValue) => {
     setExpandOptions(false);
+    handleSetData({
+      connectionName: attributesValue?.connectionName,
+      attributeKey: attributesValue?.attributeKey,
+      controlValue: optionValue,
+    });
     setValue(optionValue?.label);
   };
 
@@ -37,7 +43,13 @@ export default function SelectDropdown({ contents }) {
         ref={dropdownRef}
       >
         <div className="appearance-none w-full py-3 pl-3 pr-10 text-base leading-6 text-black bg-peach-200 border-[2px] border-black focus:outline-none focus:shadow-outline-blue focus:border-blue-300 bg-[#FBE4D4]">
-          <h3>{value ? value : "Select"}</h3>
+          <h3>
+            {value
+              ? value?.length > 20
+                ? value?.substring(0, 10) + "..."
+                : value
+              : "Select"}
+          </h3>
           {expandOptions && (
             <div
               className="absolute top-0 left-full right-0 w-full z-[200] h-auto rounded bg-white flex flex-col gap-[2px] m-0 p-0"
@@ -61,7 +73,7 @@ export default function SelectDropdown({ contents }) {
                           className="block py-1 px-2 bg-[#E8EBF5]"
                           onClick={() => handleSetValue(option)}
                         >
-                          {option.label}
+                          {option?.label}
                         </span>
                       ))}
                     </div>
