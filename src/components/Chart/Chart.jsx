@@ -23,6 +23,14 @@ export default function Charts({ title, color, data }) {
     dataLabels: {
       enabled: false,
     },
+    // xaxis: {
+    //   labels: {
+    //     width: "100%",
+    //     margin: 0,
+    //   },
+    //   categories: [title],
+    //   tickPlacement: "off",
+    // },
     legend: {
       show: true,
       showForSingleSeries: true,

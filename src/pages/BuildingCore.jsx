@@ -485,22 +485,21 @@ export default function BuildingCore() {
         buildingCoreData["columnAndBeam"]?.["barriersNumber"] || 0;
 
       // Total calculation
-      const DividedCTn = CTn / 1;
-      const DividedCAn = CAn / 1;
-      const DividedIDn = IDn / 1;
-      const DividedGPEn = GPEn / 1;
-      const DBn = barriersScore / barriersNumber || 0;
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore * barriersNumber || 0;
 
       const DPcnTotalValue = DividedCTn + DividedCAn;
       const DPcenTotalValue = DividedIDn + DividedGPEn;
 
       const DPcn = 2 / DPcnTotalValue;
       const DPcen = 2 / DPcenTotalValue;
-      const DPCSliceOne = DPcn / 1;
-      const DPCSliceTwo = DPcen / 1;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
       const DPCSlice = DPCSliceOne + DPCSliceTwo;
       const DPCSliceResult = 2 / DPCSlice;
-      // console.log(barriersScore / barriersNumber);
       columnAndBeamDPC = DPCSliceResult - DBn;
       if (columnAndBeamDPC) {
         setDPC({
@@ -533,15 +532,20 @@ export default function BuildingCore() {
         buildingCoreData["columnAndBearingWall"]?.["barriersNumber"] || 0;
 
       // Total calculation
-      const DividedCTn = CTn / 1;
-      const DividedCAn = CAn / 1;
-      const DividedIDn = IDn / 1;
-      const DividedGPEn = GPEn / 1;
-      const DBn = barriersScore / barriersNumber;
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
+      const DBn = barriersScore * barriersNumber;
 
-      const DPcn = 2 / (DividedCTn + DividedCAn);
-      const DPcen = 2 / (DividedIDn + DividedGPEn);
-      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPcnTotalValue = DividedCTn + DividedCAn;
+      const DPcenTotalValue = DividedIDn + DividedGPEn;
+
+      const DPcn = 2 / DPcnTotalValue;
+      const DPcen = 2 / DPcenTotalValue;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
       const DPCSliceResult = 2 / DPCSlice;
       columnAndBearingWallDPC = DPCSliceResult - DBn;
       if (columnAndBearingWallDPC) {
@@ -575,15 +579,18 @@ export default function BuildingCore() {
         buildingCoreData["columnAndFoundation"]?.["barriersNumber"] || 0;
 
       // Total calculation
-      const DividedCTn = CTn / 1;
-      const DividedCAn = CAn / 1;
-      const DividedIDn = IDn / 1;
-      const DividedGPEn = GPEn / 1;
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
       const DBn = barriersScore / barriersNumber;
 
       const DPcn = 2 / (DividedCTn + DividedCAn);
       const DPcen = 2 / (DividedIDn + DividedGPEn);
-      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
       const DPCSliceResult = 2 / DPCSlice;
       columnAndFoundationDPC = DPCSliceResult - DBn;
       if (columnAndFoundationDPC) {
@@ -613,15 +620,17 @@ export default function BuildingCore() {
         buildingCoreData["columnAndSlab"]?.["barriersNumber"] || 0;
 
       // Total calculation
-      const DividedCTn = CTn / 1;
-      const DividedCAn = CAn / 1;
-      const DividedIDn = IDn / 1;
-      const DividedGPEn = GPEn / 1;
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
       const DBn = barriersScore / barriersNumber;
 
       const DPcn = 2 / (DividedCTn + DividedCAn);
       const DPcen = 2 / (DividedIDn + DividedGPEn);
-      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
       const DPCSliceResult = 2 / DPCSlice;
       columnAndSlabDPC = DPCSliceResult - DBn;
       if (columnAndSlabDPC) {
@@ -654,15 +663,17 @@ export default function BuildingCore() {
         buildingCoreData["slabAndBearingWall"]?.["barriersNumber"] || 0;
 
       // Total calculation
-      const DividedCTn = CTn / 1;
-      const DividedCAn = CAn / 1;
-      const DividedIDn = IDn / 1;
-      const DividedGPEn = GPEn / 1;
+      const DividedCTn = 1 / CTn;
+      const DividedCAn = 1 / CAn;
+      const DividedIDn = 1 / IDn;
+      const DividedGPEn = 1 / GPEn;
       const DBn = barriersScore / barriersNumber;
 
       const DPcn = 2 / (DividedCTn + DividedCAn);
       const DPcen = 2 / (DividedIDn + DividedGPEn);
-      const DPCSlice = DPcn / 1 + DPcen / 1;
+      const DPCSliceOne = 1 / DPcn;
+      const DPCSliceTwo = 1 / DPcen;
+      const DPCSlice = DPCSliceOne + DPCSliceTwo;
       const DPCSliceResult = 2 / DPCSlice;
       slabAndBearingWallDPC = DPCSliceResult - DBn;
       if (slabAndBearingWallDPC) {
@@ -706,6 +717,8 @@ export default function BuildingCore() {
     });
   }, [buildingCoreData]);
 
+  console.log(columnAndBeamDPC);
+
   return (
     <div className="w-full px-10">
       <div className="flex flex-col">
@@ -732,27 +745,21 @@ export default function BuildingCore() {
         </div>
 
         <div className="flex gap-5 justify-between mb-20">
-          <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Connection</h3> */}
-            <div className="flex flex-col gap-4">
-              <Button
-                btnTitle="Column & Beam"
-                className="!bg-[#F4B081] !px-3"
-              />
-              <Button
-                btnTitle="Column & Bearing wall"
-                className="!bg-[#F4B081] !px-3"
-              />
-              <Button
-                btnTitle="Column & Foundation"
-                className="!bg-[#F4B081] !px-3"
-              />
-              <Button btnTitle="Beam & Slab" className="!bg-[#F4B081] !px-2" />
-              <Button
-                btnTitle="Slab & Bearing wall"
-                className="!bg-[#F4B081] !px-3"
-              />
-            </div>
+          <div className="flex-1 flex flex-col justify-between gap-4">
+            <Button btnTitle="Column & Beam" className="!bg-[#F4B081] !px-3" />
+            <Button
+              btnTitle="Column & Bearing wall"
+              className="!bg-[#F4B081] !px-3"
+            />
+            <Button
+              btnTitle="Column & Foundation"
+              className="!bg-[#F4B081] !px-3"
+            />
+            <Button btnTitle="Beam & Slab" className="!bg-[#F4B081] !px-2" />
+            <Button
+              btnTitle="Slab & Bearing wall"
+              className="!bg-[#F4B081] !px-3"
+            />
           </div>
 
           {/* Connection Type  */}
@@ -1070,28 +1077,25 @@ export default function BuildingCore() {
           </div>
 
           {/* Disassembly Potential of the Connection DPC */}
-          <div className="flex-1">
-            <div className="flex flex-col gap-4 items-stretch">
-              <Button
-                btnTitle={dpc?.columnAndBeamDPC || " "}
-                className="!bg-[#E1EFD8] !px-3"
-              />
-              <Button
-                btnTitle={dpc?.columnAndBearingWallDPC || ""}
-                className="!bg-[#E1EFD8] !px-3"
-              />
-              <Button
-                btnTitle={dpc?.columnAndFoundationDPC || ""}
-                className="!bg-[#E1EFD8] !px-3"
-              />
-              <Button
-                btnTitle={dpc?.columnAndSlabDPC || ""}
-                className="!bg-[#E1EFD8] !px-3"
-              />
-              <Button
-                btnTitle={dpc?.slabAndBearingWallDPC || ""}
-                className="!bg-[#E1EFD8] !px-3"
-              />
+          <div className="flex-1 flex flex-col gap-5 justify-between">
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndBeamDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndBearingWallDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndFoundationDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.columnAndSlabDPC || ""}</span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+              <span>{dpc?.slabAndBearingWallDPC || ""}</span>
             </div>
           </div>
         </div>
