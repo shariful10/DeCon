@@ -129,16 +129,12 @@ export default function ResultAndReport() {
 	const totalConnections =
 		buildingShellTotalValue.totalConnectionNumberScore +
 		buildingCoreTotalValue.totalConnectionNumberScore;
+
 	const totalDPC =
 		buildingCoreTotalValue.totalDPCOfBuildingCore +
 		buildingShellTotalValue.totalDPCOfBuildingCore;
-	const DPBCS = totalDPC / totalConnections;
-	console.log(DPBCS);
 
-	console.log(
-		buildingCoreTotalValue.totalDPCOfBuildingCore,
-		buildingShellTotalValue.totalDPCOfBuildingCore
-	);
+	const DPBCS = totalDPC / totalConnections;
 
 	return (
 		<Container>

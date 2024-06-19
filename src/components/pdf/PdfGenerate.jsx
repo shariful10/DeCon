@@ -125,6 +125,16 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 		]);
 	}, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
+	const totalConnections =
+		buildingShellTotalValue.totalConnectionNumberScore +
+		buildingCoreTotalValue.totalConnectionNumberScore;
+
+	const totalDPC =
+		buildingCoreTotalValue.totalDPCOfBuildingCore +
+		buildingShellTotalValue.totalDPCOfBuildingCore;
+
+	const DPBCS = totalDPC / totalConnections;
+
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
 			<div className="flex justify-between gap-6 items-center mb-5">
@@ -391,7 +401,10 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingCoreTotalValue?.totalConnectionNumberScore +
+												buildingShellTotalValue?.totalConnectionNumberScore
+										).toFixed(2)}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
@@ -404,7 +417,10 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingCoreTotalValue?.totalBarriersScore +
+												buildingShellTotalValue?.totalBarriersScore
+										).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -419,7 +435,10 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
 										readOnly
-										value={80}
+										value={Number(
+											buildingCoreTotalValue?.totalDPCOfBuildingCore +
+												buildingShellTotalValue?.totalDPCOfBuildingCore
+										).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -443,7 +462,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 
 								<div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
 									<Gauge
-										value={55}
+										value={Number(DPBCS).toFixed(2)}
 										widthOne={200}
 										widthTwo={262}
 										className="mr-[50px]"
