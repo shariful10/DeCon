@@ -81,15 +81,15 @@ export default function SelectDropdown(props) {
                   {hoveredOption === index && content?.options && (
                     <div className="absolute top-0 left-full right-[-15px] w-full z-[200] h-auto rounded bg-[#fff] flex flex-col gap-[2px]">
                       {content.options.map((option, subIndex) => {
-                        console.log({ hoveredOptionImg });
-
                         return (
                           <div
                             key={subIndex}
-                            className="py-1 px-2 bg-[#E8EBF5] flex items-center justify-between group relative"
+                            className={`py-1 px-2 bg-[#E8EBF5] flex items-center justify-between group relative ${
+                              option?.label === value ? "bg-[#b8bdc4]" : ""
+                            }`}
                             onClick={() => handleSetValue(option)}
                           >
-                            <span className="w-full">{option?.label}</span>
+                            <span className={`w-full`}>{option?.label}</span>
 
                             {
                               // image

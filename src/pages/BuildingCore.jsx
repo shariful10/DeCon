@@ -1220,42 +1220,41 @@ export default function BuildingCore() {
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {parseFloat(
-                  columnAndSlabDPC || buildingCore[columnAndSlabDPC]
-                )?.toFixed(2) || ""}
+                {!columnAndSlabDPC
+                  ? buildingCore[columnAndSlabDPC] || ""
+                  : parseFloat(columnAndSlabDPC)?.toFixed(2) || ""}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {parseFloat(
-                  columnAndBearingWallDPC ||
-                    buildingCore[columnAndBearingWallDPC]
-                )?.toFixed(2) || ""}
+                {!columnAndBearingWallDPC
+                  ? buildingCore[columnAndBearingWallDPC] || ""
+                  : parseFloat(columnAndBearingWallDPC)?.toFixed(2) || ""}
+              </span>
+            </div>
+
+            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3">
+              <span>
+                {!columnAndFoundationDPC
+                  ? buildingCore[columnAndFoundationDPC] || ""
+                  : parseFloat(columnAndFoundationDPC)?.toFixed(2) || ""}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {parseFloat(
-                  columnAndFoundationDPC || buildingCore[columnAndFoundationDPC]
-                )?.toFixed(2) || ""}
+                {!beamAndSlabDPC
+                  ? buildingCore[beamAndSlabDPC] || ""
+                  : parseFloat(beamAndSlabDPC)?.toFixed(2) || ""}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {parseFloat(
-                  beamAndSlabDPC || buildingCore[beamAndSlabDPC]
-                )?.toFixed(2) || ""}
-              </span>
-            </div>
-
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-              <span>
-                {parseFloat(
-                  slabAndBearingWallDPC || buildingCore[slabAndBearingWallDPC]
-                )?.toFixed(2) || ""}
+                {!slabAndBearingWallDPC
+                  ? buildingCore[slabAndBearingWallDPC] || ""
+                  : parseFloat(slabAndBearingWallDPC)?.toFixed(2) || ""}
               </span>
             </div>
           </div>
