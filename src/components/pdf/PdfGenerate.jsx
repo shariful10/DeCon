@@ -5,13 +5,125 @@ import ChartTwo from "../Chart/ChartTwo";
 import { useSelector } from "react-redux";
 import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
+	const [data, setData] = useState([]);
 	const { buildingInfo } = useSelector((state) => state.buildingInfo);
 	const { buildingCoreTotalValue } = useSelector((state) => state.buildingCore);
-	const { buildingShellTotalValue } = useSelector(
+	const { buildingShell, buildingShellTotalValue } = useSelector(
 		(state) => state.buildingShell
 	);
+
+	const CharOptionsOne = {
+		series: [
+			{
+				name: "Core",
+				data: [
+					buildingCoreTotalValue["totalConnectionTypesScore"],
+					buildingCoreTotalValue["connectionAccessibilityScore"],
+					buildingCoreTotalValue["totalIndependencyScore"],
+					buildingCoreTotalValue["totalGpeScore"],
+					buildingCoreTotalValue["totalBarriersScore"],
+				],
+				color: "#4472C4",
+			},
+			{
+				name: "Shell",
+				data: [
+					buildingShellTotalValue["totalConnectionTypesScore"],
+					buildingShellTotalValue["connectionAccessibilityScore"],
+					buildingShellTotalValue["totalIndependencyScore"],
+					buildingShellTotalValue["totalGpeScore"],
+					buildingShellTotalValue["totalBarriersScore"],
+				],
+				color: "#ED7D31",
+			},
+		],
+		chart: {
+			type: "bar",
+			height: 350,
+		},
+		plotOptions: {
+			bar: {
+				horizontal: false,
+				columnWidth: "55%",
+				endingShape: "rounded",
+			},
+		},
+		dataLabels: {
+			enabled: false,
+		},
+		stroke: {
+			show: true,
+			width: 2,
+			colors: ["transparent"],
+		},
+		xaxis: {
+			categories: [
+				"Connection type",
+				"Connection Accessibility",
+				"Independency",
+				"Geometry of product edge",
+				"Barriers",
+			],
+		},
+
+		fill: {
+			opacity: 1,
+		},
+	};
+
+	useEffect(() => {
+		const { buildingCore } = buildingCoreTotalValue;
+
+		setData([
+			{
+				x: "Column and beam",
+				y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Column and slab",
+				y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Column and bearing wall",
+				y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Column and foundation",
+				y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Beam and slab",
+				y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Beam and bearing wall",
+				y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Column & Shell element",
+				y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Beam & Shell element",
+				y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Slab & Shell element",
+				y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(2) || 0,
+			},
+			{
+				x: "Bearing wall & Shell element",
+				y:
+					parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
+						2
+					) || 0,
+			},
+		]);
+	}, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
@@ -38,7 +150,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-full pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.buildingType}
+										value={buildingInfo?.buildingType}
 									/>
 								</div>
 							</div>
@@ -49,7 +161,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.country}
+										value={buildingInfo?.country}
 									/>
 									<div className="flex items-end gap-2">
 										<h2 className="whitespace-nowrap text-sm">Post Code:</h2>
@@ -57,7 +169,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 											readOnly
-											value={buildingInfo.postCode}
+											value={buildingInfo?.postCode}
 										/>
 									</div>
 								</div>
@@ -69,7 +181,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[87px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.city}
+										value={buildingInfo?.city}
 									/>
 									<div className="flex items-end gap-2">
 										<h2 className="whitespace-nowrap text-sm">Street:</h2>
@@ -77,7 +189,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[87px] px-2 py-0.5 focus:outline-none text-sm"
 											readOnly
-											value={buildingInfo.street}
+											value={buildingInfo?.street}
 										/>
 									</div>
 									<div className="flex items-end gap-2">
@@ -86,7 +198,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[34px] pl-2 py-0.5 focus:outline-none text-sm"
 											readOnly
-											value={buildingInfo.no}
+											value={buildingInfo?.no}
 										/>
 									</div>
 								</div>
@@ -98,7 +210,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] px-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.area}
+										value={buildingInfo?.area}
 									/>
 								</div>
 							</div>
@@ -109,7 +221,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.constructionDate}
+										value={buildingInfo?.constructionDate}
 									/>
 								</div>
 							</div>
@@ -120,7 +232,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.calculationDate}
+										value={buildingInfo?.calculationDate}
 									/>
 								</div>
 							</div>
@@ -131,7 +243,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.softwareVersion}
+										value={buildingInfo?.softwareVersion}
 									/>
 								</div>
 							</div>
@@ -150,7 +262,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 							</div>
 						</div>
 						<div className="">
-							<img src={buildingInfo.image} alt="building" />
+							<img src={buildingInfo?.image} alt="building" />
 						</div>
 					</div>
 				</div>
@@ -168,7 +280,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingCoreTotalValue.totalConnectionNumberScore
+											buildingCoreTotalValue?.totalConnectionNumberScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -181,7 +293,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingCoreTotalValue.totalBarriersScore
+											buildingCoreTotalValue?.totalBarriersScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -196,7 +308,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingCoreTotalValue.totalDPCOfBuildingCore
+											buildingCoreTotalValue?.totalDPCOfBuildingCore
 										).toFixed(2)}
 									/>
 								</div>
@@ -223,7 +335,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingShellTotalValue.totalConnectionNumberScore
+											buildingShellTotalValue?.totalConnectionNumberScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -236,7 +348,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingShellTotalValue.totalBarriersScore
+											buildingShellTotalValue?.totalBarriersScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -251,7 +363,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingShellTotalValue.totalDPCOfBuildingCore
+											buildingShellTotalValue?.totalDPCOfBuildingCore
 										).toFixed(2)}
 									/>
 								</div>
@@ -316,14 +428,16 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					<div className="border-2 border-[#c4c4c4da] p-10">
 						<div>
 							<div className="flex items-center justify-between gap-4">
-								<div className="w-[40%] flex flex-col items-start justify-between gap-7">
+								<div className="w-1/2 flex flex-col items-start justify-between gap-7">
 									<ChartTwo
 										color="#F4B081"
 										title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
+										options={CharOptionsOne}
 									/>
 									<Charts
 										color="#4472C4"
 										title="Disassembly potential of the core connections DPC"
+										data={data}
 									/>
 								</div>
 
