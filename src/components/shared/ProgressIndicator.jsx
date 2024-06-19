@@ -20,8 +20,6 @@ const ProgressIndicator = () => {
     { label: "Result & Report", completed: false, path: "/result-and-report" },
   ]);
 
-  console.log("location ", location);
-
   useEffect(() => {
     const updatedSteps = steps.map((step) => {
       if (location.pathname === step.path) {

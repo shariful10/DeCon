@@ -175,8 +175,8 @@ export default function BuildingCore() {
           score: 0.1,
         },
         {
-          label: "Cementitious connection",
-          value: "cementitious_connection",
+          label: "Cementites connection",
+          value: "cementites_connection",
           score: 0.1,
         },
         {
@@ -521,6 +521,7 @@ export default function BuildingCore() {
     let beamAndShellElementDPC;
     let slabAndShellElementDPC;
     let bearingWallAndShellElementDPC;
+    let totalDPC = 0;
 
     // Column and beam calculation
     if (buildingCoreData["columnAndShellElement"]) {
@@ -557,12 +558,28 @@ export default function BuildingCore() {
       bearingWallAndShellElementDPC,
     });
 
-    // const totalCoreConnections =
-    const totalDPCOfBuildingCore =
-      dpc?.columnAndShellElementDPC +
-      dpc?.beamAndShellElementDPC +
-      dpc?.slabAndShellElementDPC +
-      dpc?.bearingWallAndShellElementDPC;
+    let columnAndShellElementDPCTotal =
+      columnAndShellElementDPC || buildingShell["columnAndShellElementDPC"];
+    let beamAndShellElementDPCTotal =
+      beamAndShellElementDPC || buildingShell["beamAndShellElementDPC"];
+    let slabAndShellElementDPCTotal =
+      slabAndShellElementDPC || buildingShell["slabAndShellElementDPC"];
+    let bearingWallAndShellElementDPCTotal =
+      bearingWallAndShellElementDPC ||
+      buildingShell["bearingWallAndShellElementDPC"];
+
+    if (columnAndShellElementDPCTotal) {
+      totalDPC += columnAndShellElementDPCTotal;
+    }
+    if (beamAndShellElementDPCTotal) {
+      totalDPC += beamAndShellElementDPCTotal;
+    }
+    if (slabAndShellElementDPCTotal) {
+      totalDPC += slabAndShellElementDPCTotal;
+    }
+    if (bearingWallAndShellElementDPCTotal) {
+      totalDPC += bearingWallAndShellElementDPCTotal;
+    }
 
     // Total connection types numbers score
     const totalConnectionTypeScore = calculateTotalScores(
@@ -613,7 +630,7 @@ export default function BuildingCore() {
       totalIndependencyScore: Math.round(totalIndependencyScore * 100) / 100,
       totalConnectionNumberScore: connectionNumbers || 0,
       totalBarriersScore: Math.round(totalBarriersScore * 100) / 100,
-      totalDPCOfBuildingCore: totalDPCOfBuildingCore || 0,
+      totalDPCOfBuildingCore: totalDPC || 0,
     });
   }, [buildingCoreData]);
 

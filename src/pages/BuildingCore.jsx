@@ -209,8 +209,8 @@ export default function BuildingCore() {
           score: 0.1,
         },
         {
-          label: "Cementitious connection",
-          value: "cementitious_connection",
+          label: "Cementites connection",
+          value: "cementites_connection",
           score: 0.1,
         },
         {
@@ -557,19 +557,18 @@ export default function BuildingCore() {
     let columnAndFoundationDPC;
     let beamAndSlabDPC;
     let slabAndBearingWallDPC;
+    let totalDPC = 0;
 
     // Column and beam calculation
     if (buildingCoreData["columnAndBeam"]) {
       const totalValue = calculateDPC(buildingCoreData["columnAndBeam"]);
       columnAndBeamDPC = totalValue;
     }
-
     // Column and slab calculation
     if (buildingCoreData["columnAndSlab"]) {
       const totalValue = calculateDPC(buildingCoreData["columnAndSlab"]);
       columnAndSlabDPC = totalValue;
     }
-
     // Column and bearing calculation
     if (buildingCoreData["columnAndBearingWall"]) {
       const totalValue = calculateDPC(buildingCoreData["columnAndBearingWall"]);
@@ -601,14 +600,37 @@ export default function BuildingCore() {
       slabAndBearingWallDPC,
     });
 
-    // const totalCoreConnections =
-    const totalDPCOfBuildingCore =
-      dpc?.columnAndBeamDPC ||
-      buildingCore[columnAndBeamDPC] + dpc?.columnAndBearingWallDPC ||
-      buildingCore[columnAndBearingWallDPC] + dpc?.columnAndFoundationDPC ||
-      buildingCore[columnAndFoundationDPC] + dpc?.beamAndSlabDPC ||
-      buildingCore[beamAndSlabDPC] + dpc?.slabAndBearingWallDPC ||
-      buildingCore[slabAndBearingWallDPC];
+    // totalCoreConnections
+    let columnAndBeamDPCTotal =
+      columnAndBeamDPC || buildingCore["columnAndBeamDPC"];
+    let columnAndSlabDPCTotal =
+      columnAndSlabDPC || buildingCore["columnAndSlabDPC"];
+    let columnAndBearingWallDPCTotal =
+      columnAndBearingWallDPC || buildingCore["columnAndBearingWallDPC"];
+    let columnAndFoundationDPCTotal =
+      columnAndFoundationDPC || buildingCore["columnAndFoundationDPC"];
+    let beamAndSlabDPCTotal = beamAndSlabDPC || buildingCore["beamAndSlabDPC"];
+    let slabAndBearingWallDPCTotal =
+      slabAndBearingWallDPC || buildingCore["slabAndBearingWallDPC"];
+
+    if (columnAndBeamDPCTotal) {
+      totalDPC += columnAndBeamDPCTotal;
+    }
+    if (columnAndSlabDPCTotal) {
+      totalDPC += columnAndSlabDPCTotal;
+    }
+    if (columnAndBearingWallDPCTotal) {
+      totalDPC += columnAndBearingWallDPCTotal;
+    }
+    if (columnAndFoundationDPCTotal) {
+      totalDPC += columnAndFoundationDPCTotal;
+    }
+    if (beamAndSlabDPCTotal) {
+      totalDPC += beamAndSlabDPCTotal;
+    }
+    if (slabAndBearingWallDPCTotal) {
+      totalDPC += slabAndBearingWallDPCTotal;
+    }
 
     // Total connection types numbers score
     const totalConnectionTypeScore = calculateTotalScores(
@@ -659,7 +681,7 @@ export default function BuildingCore() {
       totalIndependencyScore: Math.round(totalIndependencyScore * 100) / 100,
       totalConnectionNumberScore: connectionNumbers || 0,
       totalBarriersScore: Math.round(totalBarriersScore * 100) / 100,
-      totalDPCOfBuildingCore: totalDPCOfBuildingCore || 0,
+      totalDPCOfBuildingCore: totalDPC || 0,
     });
   }, [buildingCoreData]);
 
