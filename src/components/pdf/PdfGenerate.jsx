@@ -38,7 +38,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-full pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.buildingType}
+										value={buildingInfo?.buildingType}
 									/>
 								</div>
 							</div>
@@ -49,7 +49,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.country}
+										value={buildingInfo?.country}
 									/>
 									<div className="flex items-end gap-2">
 										<h2 className="whitespace-nowrap text-sm">Post Code:</h2>
@@ -57,7 +57,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 											readOnly
-											value={buildingInfo.postCode}
+											value={buildingInfo?.postCode}
 										/>
 									</div>
 								</div>
@@ -69,7 +69,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[87px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.city}
+										value={buildingInfo?.city}
 									/>
 									<div className="flex items-end gap-2">
 										<h2 className="whitespace-nowrap text-sm">Street:</h2>
@@ -77,7 +77,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[87px] px-2 py-0.5 focus:outline-none text-sm"
 											readOnly
-											value={buildingInfo.street}
+											value={buildingInfo?.street}
 										/>
 									</div>
 									<div className="flex items-end gap-2">
@@ -86,7 +86,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 											type="text"
 											className="w-[34px] pl-2 py-0.5 focus:outline-none text-sm"
 											readOnly
-											value={buildingInfo.no}
+											value={buildingInfo?.no}
 										/>
 									</div>
 								</div>
@@ -98,7 +98,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] px-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.area}
+										value={buildingInfo?.area}
 									/>
 								</div>
 							</div>
@@ -109,7 +109,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.constructionDate}
+										value={buildingInfo?.constructionDate}
 									/>
 								</div>
 							</div>
@@ -120,7 +120,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.calculationDate}
+										value={buildingInfo?.calculationDate}
 									/>
 								</div>
 							</div>
@@ -131,7 +131,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={buildingInfo.softwareVersion}
+										value={buildingInfo?.softwareVersion}
 									/>
 								</div>
 							</div>
@@ -150,7 +150,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 							</div>
 						</div>
 						<div className="">
-							<img src={buildingInfo.image} alt="building" />
+							<img src={buildingInfo?.image} alt="building" />
 						</div>
 					</div>
 				</div>
@@ -168,7 +168,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingCoreTotalValue.totalConnectionNumberScore
+											buildingCoreTotalValue?.totalConnectionNumberScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -181,7 +181,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingCoreTotalValue.totalBarriersScore
+											buildingCoreTotalValue?.totalBarriersScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -196,7 +196,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingCoreTotalValue.totalDPCOfBuildingCore
+											buildingCoreTotalValue?.totalDPCOfBuildingCore
 										).toFixed(2)}
 									/>
 								</div>
@@ -223,7 +223,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingShellTotalValue.totalConnectionNumberScore
+											buildingShellTotalValue?.totalConnectionNumberScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -236,7 +236,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingShellTotalValue.totalBarriersScore
+											buildingShellTotalValue?.totalBarriersScore
 										).toFixed(2)}
 									/>
 								</div>
@@ -251,7 +251,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
 										value={Number(
-											buildingShellTotalValue.totalDPCOfBuildingCore
+											buildingShellTotalValue?.totalDPCOfBuildingCore
 										).toFixed(2)}
 									/>
 								</div>
