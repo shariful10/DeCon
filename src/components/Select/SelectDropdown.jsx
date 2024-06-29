@@ -25,14 +25,19 @@ export default function SelectDropdown(props) {
     }
   };
 
-  const handleSetValue = (optionValue) => {
+  const handleSetValue = (optionValue, shadow) => {
+    const newValue = {
+      label: optionValue?.label,
+      value: optionValue?.value,
+      score: optionValue?.score,
+    };
     setExpandOptions(false);
     handleSetData({
       connectionName: attributesValue?.connectionName,
       attributeKey: attributesValue?.attributeKey,
-      controlValue: optionValue,
+      controlValue: newValue,
     });
-    setValue(optionValue?.label);
+    setValue(newValue?.label);
   };
 
   useEffect(() => {
@@ -71,6 +76,10 @@ export default function SelectDropdown(props) {
               {contents?.map((content, index) => (
                 <div
                   key={index}
+                  onClick={(e) => {
+                    handleSetValue(content);
+                    e.stopPropagation();
+                  }}
                   onMouseEnter={() => setHoveredOption(index)}
                   onMouseLeave={() => setHoveredOption(null)}
                   className="relative"
@@ -87,7 +96,10 @@ export default function SelectDropdown(props) {
                             className={`py-1 px-2 bg-[#E8EBF5] flex items-center justify-between group relative ${
                               option?.label === value ? "bg-[#b8bdc4]" : ""
                             }`}
-                            onClick={() => handleSetValue(option)}
+                            onClick={(e) => {
+                              handleSetValue(option);
+                              e.stopPropagation();
+                            }}
                           >
                             <span className={`w-full`}>{option?.label}</span>
 

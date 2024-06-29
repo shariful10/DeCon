@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-export default function Charts({ title, color, data }) {
+export default function Charts({ title, color, data, max }) {
   const series = [
     {
       name: "Actual",
@@ -10,6 +10,9 @@ export default function Charts({ title, color, data }) {
   ];
 
   const options = {
+    yaxis: {
+      max: max || 100,
+    },
     chart: {
       height: 350,
       type: "bar",
