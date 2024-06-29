@@ -1399,9 +1399,10 @@ export default function BuildingCore() {
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
               <ProgressBar
-                progress={parseFloat(
-                  (totalDPCOfBuildingCore / 6) * 100
-                )?.toFixed(2)}
+                progress={
+                  parseFloat((totalDPCOfBuildingCore / 6) * 100)?.toFixed(2) ||
+                  0
+                }
               />
               <Button
                 btnTitle={`Total core connections: ${totalConnectionNumberScore}`}

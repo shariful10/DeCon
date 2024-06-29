@@ -473,6 +473,11 @@ export default function BuildingCore() {
         },
       ],
     },
+    {
+      label: "No Barriers",
+      value: "no_barriers",
+      score: 0,
+    },
   ];
 
   const handleSetData = (props) => {
@@ -515,6 +520,34 @@ export default function BuildingCore() {
 
     return 2 / DPCSlice - DBn;
   };
+
+  const totalColumnAndShellElementDPC =
+    isNaN(columnAndShellElementDPC) ||
+    columnAndShellElementDPC == null ||
+    columnAndShellElementDPC === ""
+      ? (buildingShell[columnAndShellElementDPC] * 100).toFixed(0) || ""
+      : (parseFloat(columnAndShellElementDPC) * 100).toFixed(2) || "";
+
+  const totalBeamAndShellElementDPC =
+    isNaN(beamAndShellElementDPC) ||
+    beamAndShellElementDPC == null ||
+    beamAndShellElementDPC === ""
+      ? (buildingShell[beamAndShellElementDPC] * 100).toFixed(0) || ""
+      : (parseFloat(beamAndShellElementDPC) * 100).toFixed(2) || "";
+
+  const totalSlabAndShellElementDPC =
+    isNaN(slabAndShellElementDPC) ||
+    slabAndShellElementDPC == null ||
+    slabAndShellElementDPC === ""
+      ? (buildingShell[slabAndShellElementDPC] * 100).toFixed(0) || ""
+      : (parseFloat(slabAndShellElementDPC) * 100).toFixed(2) || "";
+
+  const totalBearingWallAndShellElementDPC =
+    isNaN(bearingWallAndShellElementDPC) ||
+    bearingWallAndShellElementDPC == null ||
+    bearingWallAndShellElementDPC === ""
+      ? (buildingShell[bearingWallAndShellElementDPC] * 100).toFixed(0) || ""
+      : (parseFloat(bearingWallAndShellElementDPC) * 100).toFixed(2) || "";
 
   useEffect(() => {
     let columnAndShellElementDPC;
@@ -1062,45 +1095,33 @@ export default function BuildingCore() {
           <div className="flex-1 flex flex-col gap-5 justify-between">
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {/* {parseFloat(columnAndShellElementDPC)?.toFixed(2) || ""} */}
-                {!columnAndShellElementDPC
-                  ? buildingShell[columnAndShellElementDPC] || ""
-                  : Number(columnAndShellElementDPC)?.toFixed(2) || ""}
+                {isNaN(totalColumnAndShellElementDPC)
+                  ? ""
+                  : Number(totalColumnAndShellElementDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-              {/* <span>
-                {parseFloat(beamAndShellElementDPC)?.toFixed(2) || ""}
-              </span> */}
               <span>
-                {!beamAndShellElementDPC
-                  ? buildingShell[beamAndShellElementDPC] || ""
-                  : parseFloat(beamAndShellElementDPC)?.toFixed(2) || ""}
+                {isNaN(totalBeamAndShellElementDPC)
+                  ? ""
+                  : Number(totalBeamAndShellElementDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-              {/* <span>
-                {parseFloat(slabAndShellElementDPC)?.toFixed(2) || ""}
-              </span> */}
-
               <span>
-                {!slabAndShellElementDPC
-                  ? buildingShell[slabAndShellElementDPC] || ""
-                  : parseFloat(slabAndShellElementDPC)?.toFixed(2) || ""}
+                {isNaN(totalSlabAndShellElementDPC)
+                  ? ""
+                  : Number(totalSlabAndShellElementDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
-              {/* <span>
-                {parseFloat(bearingWallAndShellElementDPC)?.toFixed(2) || ""}
-              </span> */}
-
               <span>
-                {!bearingWallAndShellElementDPC
-                  ? buildingShell[bearingWallAndShellElementDPC] || ""
-                  : parseFloat(bearingWallAndShellElementDPC)?.toFixed(2) || ""}
+                {isNaN(totalBearingWallAndShellElementDPC)
+                  ? ""
+                  : Number(totalBearingWallAndShellElementDPC)?.toFixed(0)}
               </span>
             </div>
           </div>
@@ -1113,21 +1134,30 @@ export default function BuildingCore() {
             data={[
               {
                 x: "Column & Shell element",
-                y: parseFloat(columnAndShellElementDPC)?.toFixed(2) || 0,
+                y: isNaN(totalColumnAndShellElementDPC)
+                  ? 0
+                  : Number(totalColumnAndShellElementDPC)?.toFixed(0),
               },
               {
                 x: "Beam & Shell element",
-                y: parseFloat(beamAndShellElementDPC)?.toFixed(2) || 0,
+                y: isNaN(totalBeamAndShellElementDPC)
+                  ? 0
+                  : Number(totalBeamAndShellElementDPC)?.toFixed(0),
               },
               {
                 x: "Slab & Shell element",
-                y: parseFloat(slabAndShellElementDPC)?.toFixed(2) || 0,
+                y: isNaN(totalSlabAndShellElementDPC)
+                  ? 0
+                  : Number(totalSlabAndShellElementDPC)?.toFixed(0),
               },
               {
                 x: "Bearing wall & Shell element",
-                y: parseFloat(bearingWallAndShellElementDPC)?.toFixed(2) || 0,
+                y: isNaN(totalBearingWallAndShellElementDPC)
+                  ? 0
+                  : Number(totalBearingWallAndShellElementDPC)?.toFixed(0),
               },
             ]}
+            max={100}
           />
           <Charts
             color="#F4B081"
@@ -1154,17 +1184,23 @@ export default function BuildingCore() {
                 y: parseFloat(totalBarriersScore)?.toFixed(2) || 0,
               },
             ]}
+            max={100}
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
-              <ProgressBar progress={60} />
+              <ProgressBar
+                progress={
+                  parseFloat((totalDPCOfBuildingCore / 4) * 100)?.toFixed(2) ||
+                  0
+                }
+              />
               <Button
                 btnTitle={`Total shell connections: ${totalConnectionNumberScore}`}
                 className="!text-left text-base !px-2 !bg-[#D5DBE5]"
               />
               <Button
                 btnTitle={`Total DPC of the building’s shell: ${parseFloat(
-                  totalDPCOfBuildingCore
+                  totalDPCOfBuildingCore / 4
                 )?.toFixed(2)}`}
                 className="!text-left text-base !px-2"
               />
