@@ -1367,6 +1367,7 @@ export default function BuildingCore() {
                   : Number(totalSlabAndBearingWallDPC)?.toFixed(0),
               },
             ]}
+            max={100}
           />
           <Charts
             color="#F4B081"
@@ -1393,17 +1394,22 @@ export default function BuildingCore() {
                 y: parseFloat(totalBarriersScore)?.toFixed(2) || 0,
               },
             ]}
+            max={100}
           />
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
-              <ProgressBar progress={60} />
+              <ProgressBar
+                progress={parseFloat(
+                  (totalDPCOfBuildingCore / 6) * 100
+                )?.toFixed(2)}
+              />
               <Button
                 btnTitle={`Total core connections: ${totalConnectionNumberScore}`}
                 className="!text-left text-base !px-2 !bg-[#D5DBE5]"
               />
               <Button
                 btnTitle={`Total DPC of the building’s core: ${parseFloat(
-                  totalDPCOfBuildingCore
+                  totalDPCOfBuildingCore / 6
                 )?.toFixed(2)}`}
                 className="!text-left text-base !px-2"
               />
