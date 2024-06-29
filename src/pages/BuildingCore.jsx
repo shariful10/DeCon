@@ -507,6 +507,11 @@ export default function BuildingCore() {
         },
       ],
     },
+    {
+      label: "No Barriers",
+      value: "no_barriers",
+      score: 0,
+    },
   ];
 
   const handleSetData = (props) => {
@@ -549,6 +554,46 @@ export default function BuildingCore() {
 
     return 2 / DPCSlice - DBn;
   };
+
+  const totalColumnAndBeamDPC =
+    isNaN(columnAndBeamDPC) ||
+    columnAndBeamDPC == null ||
+    columnAndBeamDPC === ""
+      ? (buildingCore[columnAndBeamDPC] * 100).toFixed(0) || ""
+      : (parseFloat(columnAndBeamDPC) * 100).toFixed(2) || "";
+
+  const totalColumnAndSlabDPC =
+    isNaN(columnAndSlabDPC) ||
+    columnAndSlabDPC == null ||
+    columnAndSlabDPC === ""
+      ? (buildingCore[columnAndSlabDPC] * 100).toFixed(0) || ""
+      : (parseFloat(columnAndSlabDPC) * 100).toFixed(2) || "";
+
+  const totalColumnAndBearingWallDPC =
+    isNaN(columnAndBearingWallDPC) ||
+    columnAndBearingWallDPC == null ||
+    columnAndBearingWallDPC === ""
+      ? (buildingCore[columnAndBearingWallDPC] * 100).toFixed(0) || ""
+      : (parseFloat(columnAndBearingWallDPC) * 100).toFixed(2) || "";
+
+  const totalColumnAndFoundationDPC =
+    isNaN(columnAndFoundationDPC) ||
+    columnAndFoundationDPC == null ||
+    columnAndFoundationDPC === ""
+      ? (buildingCore[columnAndFoundationDPC] * 100).toFixed(0) || ""
+      : (parseFloat(columnAndFoundationDPC) * 100).toFixed(2) || "";
+
+  const totalBeamAndSlabDPC =
+    isNaN(beamAndSlabDPC) || beamAndSlabDPC == null || beamAndSlabDPC === ""
+      ? (buildingCore[beamAndSlabDPC] * 100).toFixed(0) || ""
+      : (parseFloat(beamAndSlabDPC) * 100).toFixed(2) || "";
+
+  const totalSlabAndBearingWallDPC =
+    isNaN(slabAndBearingWallDPC) ||
+    slabAndBearingWallDPC == null ||
+    slabAndBearingWallDPC === ""
+      ? (buildingCore[slabAndBearingWallDPC] * 100).toFixed(0) || ""
+      : (parseFloat(slabAndBearingWallDPC) * 100).toFixed(2) || "";
 
   useEffect(() => {
     let columnAndBeamDPC;
@@ -1234,49 +1279,49 @@ export default function BuildingCore() {
           <div className="flex-1 flex flex-col gap-5 justify-between">
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {!columnAndBeamDPC
-                  ? buildingCore[columnAndBeamDPC] || ""
-                  : parseFloat(columnAndBeamDPC)?.toFixed(2) || ""}
+                {isNaN(totalColumnAndBeamDPC)
+                  ? ""
+                  : Number(totalColumnAndBeamDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {!columnAndSlabDPC
-                  ? buildingCore[columnAndSlabDPC] || ""
-                  : parseFloat(columnAndSlabDPC)?.toFixed(2) || ""}
+                {isNaN(totalColumnAndSlabDPC)
+                  ? ""
+                  : Number(totalColumnAndSlabDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {!columnAndBearingWallDPC
-                  ? buildingCore[columnAndBearingWallDPC] || ""
-                  : parseFloat(columnAndBearingWallDPC)?.toFixed(2) || ""}
+                {isNaN(totalColumnAndBearingWallDPC)
+                  ? ""
+                  : Number(totalColumnAndBearingWallDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3">
               <span>
-                {!columnAndFoundationDPC
-                  ? buildingCore[columnAndFoundationDPC] || ""
-                  : parseFloat(columnAndFoundationDPC)?.toFixed(2) || ""}
+                {isNaN(totalColumnAndFoundationDPC)
+                  ? ""
+                  : Number(totalColumnAndFoundationDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {!beamAndSlabDPC
-                  ? buildingCore[beamAndSlabDPC] || ""
-                  : parseFloat(beamAndSlabDPC)?.toFixed(2) || ""}
+                {isNaN(totalBeamAndSlabDPC)
+                  ? ""
+                  : Number(totalBeamAndSlabDPC)?.toFixed(0)}
               </span>
             </div>
 
             <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
               <span>
-                {!slabAndBearingWallDPC
-                  ? buildingCore[slabAndBearingWallDPC] || ""
-                  : parseFloat(slabAndBearingWallDPC)?.toFixed(2) || ""}
+                {isNaN(totalSlabAndBearingWallDPC)
+                  ? ""
+                  : Number(totalSlabAndBearingWallDPC)?.toFixed(0)}
               </span>
             </div>
           </div>
@@ -1289,27 +1334,37 @@ export default function BuildingCore() {
             data={[
               {
                 x: "Column and beam",
-                y: parseFloat(columnAndBeamDPC)?.toFixed(2) || 0,
+                y: isNaN(totalColumnAndBeamDPC)
+                  ? 0
+                  : Number(totalColumnAndBeamDPC)?.toFixed(0),
               },
               {
                 x: "Column and slab",
-                y: parseFloat(columnAndSlabDPC)?.toFixed(2) || 0,
+                y: isNaN(totalColumnAndSlabDPC)
+                  ? 0
+                  : Number(totalColumnAndSlabDPC)?.toFixed(0),
               },
               {
                 x: "Column and bearing wall",
-                y: parseFloat(columnAndFoundationDPC)?.toFixed(2) || 0,
+                y: totalColumnAndBearingWallDPC || 0,
+              },
+              {
+                x: "Column and foundation",
+                y: isNaN(totalColumnAndFoundationDPC)
+                  ? 0
+                  : Number(totalColumnAndFoundationDPC)?.toFixed(0),
               },
               {
                 x: "Beam and slab",
-                y: parseFloat(beamAndSlabDPC)?.toFixed(2) || 0,
-              },
-              {
-                x: "Beam and bearing wall",
-                y: parseFloat(slabAndBearingWallDPC)?.toFixed(2) || 0,
+                y: isNaN(totalBeamAndSlabDPC)
+                  ? 0
+                  : Number(totalBeamAndSlabDPC)?.toFixed(0),
               },
               {
                 x: "Slab and bearing wall",
-                y: parseFloat(columnAndBearingWallDPC)?.toFixed(2) || 0,
+                y: isNaN(totalSlabAndBearingWallDPC)
+                  ? 0
+                  : Number(totalSlabAndBearingWallDPC)?.toFixed(0),
               },
             ]}
           />
