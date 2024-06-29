@@ -135,6 +135,11 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 
 	const DPBCS = totalDPC / totalConnections;
 
+	const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
+	const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
+
+	const gaugeValue = Number(DPBCS).toFixed(2) * 100;
+
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
 			<div className="flex justify-between gap-6 items-center mb-5">
@@ -143,7 +148,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 				</div>
 				<div className="">
 					<h1 className="text-lg font-bold text-center">
-						Disassembly Potential of Connection <br /> DPC Report
+						Disassembly Potential of the Building’s core <br /> and shell Report
 					</h1>
 				</div>
 				<div />
@@ -317,9 +322,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={Number(
-											buildingCoreTotalValue?.totalDPCOfBuildingCore
-										).toFixed(2)}
+										value={coreDPC.toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -327,7 +330,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					</div>
 					<div className="border-2 border-[#c4c4c4da] pt-14 pb-10">
 						<div className="w-1/2 mx-auto">
-							<ProgressBar progress={80} />
+							<ProgressBar progress={(coreDPC * 100).toFixed(2)} />
 						</div>
 					</div>
 				</div>
@@ -372,9 +375,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={Number(
-											buildingShellTotalValue?.totalDPCOfBuildingCore
-										).toFixed(2)}
+										value={shellDPC.toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -382,7 +383,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					</div>
 					<div className="border-2 border-[#c4c4c4da] pt-14 pb-10">
 						<div className="w-1/2 mx-auto">
-							<ProgressBar progress={80} />
+							<ProgressBar progress={(shellDPC * 100).toFixed(2)} />
 						</div>
 					</div>
 				</div>
@@ -435,10 +436,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
 										readOnly
-										value={Number(
-											buildingCoreTotalValue?.totalDPCOfBuildingCore +
-												buildingShellTotalValue?.totalDPCOfBuildingCore
-										).toFixed(2)}
+										value={(coreDPC + shellDPC).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -462,7 +460,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 
 								<div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
 									<Gauge
-										value={Number(DPBCS).toFixed(2)}
+										value={gaugeValue}
 										widthOne={200}
 										widthTwo={262}
 										className="mr-[50px]"
