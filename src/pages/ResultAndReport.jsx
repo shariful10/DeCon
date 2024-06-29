@@ -136,6 +136,8 @@ export default function ResultAndReport() {
 
 	const DPBCS = totalDPC / totalConnections;
 
+	const gaugeValue = Number(DPBCS).toFixed(2) * 100;
+
 	return (
 		<Container>
 			<div>
@@ -156,11 +158,7 @@ export default function ResultAndReport() {
 						/>
 					</div>
 					<div className="w-1/2 flex flex-col items-center justify-center">
-						<Gauge
-							value={Number(DPBCS).toFixed(2)}
-							widthOne={300}
-							widthTwo={362}
-						/>
+						<Gauge value={gaugeValue} widthOne={300} widthTwo={362} />
 						<p> Total disassembly potential </p>
 						<div className="flex items-center gap-4 mt-5 -mr-5">
 							<div onClick={() => navigate("/building-shell")}>
