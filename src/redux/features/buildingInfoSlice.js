@@ -19,5 +19,5 @@ export const buildingInfoSlice = createSlice({
   },
 });
 
-export const { addBuildingInfo } = buildingInfoSlice.actions;
+export const { addBuildingInfo, resetBuildingInfo } = buildingInfoSlice.actions;
 export default buildingInfoSlice.reducer;

@@ -56,12 +56,9 @@ export const progressIndicatorSlice = createSlice({
         );
       }
     },
-    resetIndicator: (state, action) => {
+    resetIndicator: (state) => {
       state.progressIndicator = indicator;
-      localStorage.setItem(
-        "progressIndicator",
-        JSON.stringify(state.progressIndicator)
-      );
+      localStorage.setItem("progressIndicator", JSON.stringify(indicator));
     },
   },
 });
