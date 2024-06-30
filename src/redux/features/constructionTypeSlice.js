@@ -17,8 +17,13 @@ export const constructionTypeSlice = createSlice({
         JSON.stringify(state.construction_type)
       );
     },
+    resetConstructionType: (state) => {
+      state.construction_type = "";
+      localStorage.removeItem("construction_type");
+    },
   },
 });
 
-export const { addConstructionType } = constructionTypeSlice.actions;
+export const { addConstructionType, resetConstructionType } =
+  constructionTypeSlice.actions;
 export default constructionTypeSlice.reducer;
