@@ -3,10 +3,9 @@ import Gauge from "../Gauge/Gauge";
 import Charts from "../Chart/Chart";
 import ChartTwo from "../Chart/ChartTwo";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
 	const [data, setData] = useState([]);
@@ -139,6 +138,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 	const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
 
 	const gaugeValue = Number(DPBCS).toFixed(2) * 100;
+	const coreAndShellDPC = coreDPC + shellDPC;
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
@@ -322,7 +322,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={coreDPC.toFixed(2)}
+										value={(coreDPC * 100).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -334,7 +334,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 				</div>
-				<div>
+				<div className="pb-16">
 					<h1 className="font-medium mt-5">Building's shell:</h1>
 					<div className="mt-3 p-5 bg-[#c4c4c4da]">
 						<div className="flex justify-between">
@@ -375,7 +375,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={shellDPC.toFixed(2)}
+										value={(shellDPC * 100).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -387,7 +387,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 				</div>
-				<div>
+				<div className="pt-5">
 					<h1 className="font-medium mt-5 pb-2">Building's core and shell:</h1>
 					<div className="mt-3 p-5 bg-[#c4c4c4da]">
 						<div className="flex justify-between">
@@ -436,7 +436,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
 										readOnly
-										value={(coreDPC + shellDPC).toFixed(2)}
+										value={(coreAndShellDPC * 100).toFixed(2)}
 									/>
 								</div>
 							</div>
