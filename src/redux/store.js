@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import buildingInfoReducer from "./features/buildingInfoSlice";
 import buildingCoreReducer from "./features/buildingCoreSlice";
 import buildingShellReducer from "./features/buildingShellSlice";
+import progressIndicatorReducer from "./features/ProgressIndicator";
 import constructionTypeReducer from "./features/constructionTypeSlice";
 import buildingCoreTotalValueReducer from "./features/buildingCoreSlice";
-import progressIndicatorReducer from "./features/ProgressIndicator";
 
 export const store = configureStore({
 	reducer: {
