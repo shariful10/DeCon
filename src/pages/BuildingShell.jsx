@@ -717,19 +717,19 @@ export default function BuildingCore() {
           <div className="flex-1 flex flex-col justify-between gap-4">
             <Button
               btnTitle="Column & Shell element"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
             <Button
               btnTitle="Beam & Shell element"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
             <Button
               btnTitle="Slab & Shell element"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
             <Button
               btnTitle="Bearing wall & Shell element"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
           </div>
 

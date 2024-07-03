@@ -778,501 +778,493 @@ export default function BuildingCore() {
 
         <div className="flex gap-5 justify-between mb-20">
           <div className="flex-1 flex flex-col justify-between gap-4">
-            <Button btnTitle="Column & Beam" className="!bg-[#F4B081] !px-3" />
-            <Button btnTitle="Column & Slab" className="!bg-[#F4B081] !px-3" />
+            <Button
+              btnTitle="Column & Beam"
+              className="!bg-[#F4B081] !px-3 grow"
+            />
+            <Button
+              btnTitle="Column & Slab"
+              className="!bg-[#F4B081] !px-3 grow"
+            />
             <Button
               btnTitle="Column & Bearing wall"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
             <Button
               btnTitle="Column & Foundation"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
-            <Button btnTitle="Beam & Slab" className="!bg-[#F4B081] !px-2" />
+            <Button
+              btnTitle="Beam & Slab"
+              className="!bg-[#F4B081] !px-2 grow"
+            />
             <Button
               btnTitle="Slab & Bearing wall"
-              className="!bg-[#F4B081] !px-3"
+              className="!bg-[#F4B081] !px-3 grow"
             />
           </div>
 
           {/* Connection Type  */}
-          <div className="flex-1">
-            {/* <h3 className="text-center mb-3">Connection type</h3> */}
-            <div className="flex flex-col gap-4">
-              <SelectDropdown
-                contents={connectionType}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "connectionType",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBeam"]?.["connectionType"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionType}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "connectionType",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndSlab"]?.["connectionType"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionType}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "connectionType",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBearingWall"]?.["connectionType"]
-                }
-              />
+          <div className="flex-1 flex flex-col gap-4 justify-between">
+            <SelectDropdown
+              contents={connectionType}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "connectionType",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBeam"]?.["connectionType"]
+              }
+              className="grow"
+            />
+            <SelectDropdown
+              contents={connectionType}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "connectionType",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndSlab"]?.["connectionType"]
+              }
+              className="grow"
+            />
+            <SelectDropdown
+              contents={connectionType}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "connectionType",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBearingWall"]?.["connectionType"]
+              }
+              className="grow"
+            />
 
-              <SelectDropdown
-                contents={connectionType}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "connectionType",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndFoundation"]?.["connectionType"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionType}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "connectionType",
-                }}
-                defaultValue={
-                  buildingCoreInfo["beamAndSlab"]?.["connectionType"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionType}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "connectionType",
-                }}
-                defaultValue={
-                  buildingCoreInfo["slabAndBearingWall"]?.["connectionType"]
-                }
-              />
-            </div>
+            <SelectDropdown
+              contents={connectionType}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "connectionType",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndFoundation"]?.["connectionType"]
+              }
+              className="grow"
+            />
+            <SelectDropdown
+              contents={connectionType}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "connectionType",
+              }}
+              defaultValue={buildingCoreInfo["beamAndSlab"]?.["connectionType"]}
+              className="grow"
+            />
+            <SelectDropdown
+              contents={connectionType}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "connectionType",
+              }}
+              defaultValue={
+                buildingCoreInfo["slabAndBearingWall"]?.["connectionType"]
+              }
+              className="grow"
+            />
           </div>
 
           {/* Connection Accessibility */}
-          <div className="flex-1">
-            <div className="flex flex-col gap-4">
-              <SelectDropdown
-                contents={connectionAccessibilityOptions}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "connectionAccessibility",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBeam"]?.["connectionAccessibility"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionAccessibilityOptions}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "connectionAccessibility",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndSlab"]?.["connectionAccessibility"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionAccessibilityOptions}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "connectionAccessibility",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBearingWall"]?.[
-                    "connectionAccessibility"
-                  ]
-                }
-              />
-              <SelectDropdown
-                contents={connectionAccessibilityOptions}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "connectionAccessibility",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndFoundation"]?.[
-                    "connectionAccessibility"
-                  ]
-                }
-              />
-              <SelectDropdown
-                contents={connectionAccessibilityOptions}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "connectionAccessibility",
-                }}
-                defaultValue={
-                  buildingCoreInfo["beamAndSlab"]?.["connectionAccessibility"]
-                }
-              />
-              <SelectDropdown
-                contents={connectionAccessibilityOptions}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "connectionAccessibility",
-                }}
-                defaultValue={
-                  buildingCoreInfo["slabAndBearingWall"]?.[
-                    "connectionAccessibility"
-                  ]
-                }
-              />
-            </div>
+          <div className="flex-1 flex flex-col gap-4 justify-between">
+            <SelectDropdown
+              contents={connectionAccessibilityOptions}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "connectionAccessibility",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBeam"]?.["connectionAccessibility"]
+              }
+            />
+            <SelectDropdown
+              contents={connectionAccessibilityOptions}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "connectionAccessibility",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndSlab"]?.["connectionAccessibility"]
+              }
+            />
+            <SelectDropdown
+              contents={connectionAccessibilityOptions}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "connectionAccessibility",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBearingWall"]?.[
+                  "connectionAccessibility"
+                ]
+              }
+            />
+            <SelectDropdown
+              contents={connectionAccessibilityOptions}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "connectionAccessibility",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndFoundation"]?.[
+                  "connectionAccessibility"
+                ]
+              }
+            />
+            <SelectDropdown
+              contents={connectionAccessibilityOptions}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "connectionAccessibility",
+              }}
+              defaultValue={
+                buildingCoreInfo["beamAndSlab"]?.["connectionAccessibility"]
+              }
+            />
+            <SelectDropdown
+              contents={connectionAccessibilityOptions}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "connectionAccessibility",
+              }}
+              defaultValue={
+                buildingCoreInfo["slabAndBearingWall"]?.[
+                  "connectionAccessibility"
+                ]
+              }
+            />
           </div>
 
           {/* Independency */}
-          <div className="flex-1">
-            <div className="flex flex-col gap-4">
-              <SelectDropdown
-                contents={independency}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "independency",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBeam"]?.["independency"]
-                }
-              />
-              <SelectDropdown
-                contents={independency}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "independency",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndSlab"]?.["independency"]
-                }
-              />
-              <SelectDropdown
-                contents={independency}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "independency",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBearingWall"]?.["independency"]
-                }
-              />
-              <SelectDropdown
-                contents={independency}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "independency",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndFoundation"]?.["independency"]
-                }
-              />
-              <SelectDropdown
-                contents={independency}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "independency",
-                }}
-                defaultValue={buildingCoreInfo["beamAndSlab"]?.["independency"]}
-              />
-              <SelectDropdown
-                contents={independency}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "independency",
-                }}
-                defaultValue={
-                  buildingCoreInfo["slabAndBearingWall"]?.["independency"]
-                }
-              />
-            </div>
+          <div className="flex-1 flex flex-col gap-4 justify-between">
+            <SelectDropdown
+              contents={independency}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "independency",
+              }}
+              defaultValue={buildingCoreInfo["columnAndBeam"]?.["independency"]}
+            />
+            <SelectDropdown
+              contents={independency}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "independency",
+              }}
+              defaultValue={buildingCoreInfo["columnAndSlab"]?.["independency"]}
+            />
+            <SelectDropdown
+              contents={independency}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "independency",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBearingWall"]?.["independency"]
+              }
+            />
+            <SelectDropdown
+              contents={independency}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "independency",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndFoundation"]?.["independency"]
+              }
+            />
+            <SelectDropdown
+              contents={independency}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "independency",
+              }}
+              defaultValue={buildingCoreInfo["beamAndSlab"]?.["independency"]}
+            />
+            <SelectDropdown
+              contents={independency}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "independency",
+              }}
+              defaultValue={
+                buildingCoreInfo["slabAndBearingWall"]?.["independency"]
+              }
+            />
           </div>
 
           {/* Geometry of product edge of Element */}
-          <div className="flex-1">
-            <div className="flex flex-col gap-4">
-              <SelectDropdown
-                contents={GeometryOfProductEdge}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "gpe",
-                }}
-                defaultValue={buildingCoreInfo["columnAndBeam"]?.["gpe"]}
-              />
-              <SelectDropdown
-                contents={GeometryOfProductEdge}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "gpe",
-                }}
-                defaultValue={buildingCoreInfo["columnAndSlab"]?.["gpe"]}
-              />
-              <SelectDropdown
-                contents={GeometryOfProductEdge}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "gpe",
-                }}
-                defaultValue={buildingCoreInfo["columnAndBearingWall"]?.["gpe"]}
-              />
-              <SelectDropdown
-                contents={GeometryOfProductEdge}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "gpe",
-                }}
-                defaultValue={buildingCoreInfo["columnAndFoundation"]?.["gpe"]}
-              />
-              <SelectDropdown
-                contents={GeometryOfProductEdge}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "gpe",
-                }}
-                defaultValue={buildingCoreInfo["beamAndSlab"]?.["gpe"]}
-              />
-              <SelectDropdown
-                contents={GeometryOfProductEdge}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "gpe",
-                }}
-                defaultValue={buildingCoreInfo["slabAndBearingWall"]?.["gpe"]}
-              />
-            </div>
+          <div className="flex-1 flex flex-col gap-4 justify-between">
+            <SelectDropdown
+              contents={GeometryOfProductEdge}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "gpe",
+              }}
+              defaultValue={buildingCoreInfo["columnAndBeam"]?.["gpe"]}
+            />
+            <SelectDropdown
+              contents={GeometryOfProductEdge}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "gpe",
+              }}
+              defaultValue={buildingCoreInfo["columnAndSlab"]?.["gpe"]}
+            />
+            <SelectDropdown
+              contents={GeometryOfProductEdge}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "gpe",
+              }}
+              defaultValue={buildingCoreInfo["columnAndBearingWall"]?.["gpe"]}
+            />
+            <SelectDropdown
+              contents={GeometryOfProductEdge}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "gpe",
+              }}
+              defaultValue={buildingCoreInfo["columnAndFoundation"]?.["gpe"]}
+            />
+            <SelectDropdown
+              contents={GeometryOfProductEdge}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "gpe",
+              }}
+              defaultValue={buildingCoreInfo["beamAndSlab"]?.["gpe"]}
+            />
+            <SelectDropdown
+              contents={GeometryOfProductEdge}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "gpe",
+              }}
+              defaultValue={buildingCoreInfo["slabAndBearingWall"]?.["gpe"]}
+            />
           </div>
 
           {/* Connection number */}
-          <div className="w-[100px]">
-            <div className="flex flex-col gap-4">
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "connectionNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBeam"]?.["connectionNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "connectionNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndSlab"]?.["connectionNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "connectionNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBearingWall"]?.["connectionNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "connectionNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndFoundation"]?.["connectionNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "connectionNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["beamAndSlab"]?.["connectionNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "connectionNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["slabAndBearingWall"]?.["connectionNumber"]
-                }
-              />
-            </div>
+          <div className="w-[100px] flex flex-col gap-4 justify-between">
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "connectionNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBeam"]?.["connectionNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "connectionNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndSlab"]?.["connectionNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "connectionNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBearingWall"]?.["connectionNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "connectionNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndFoundation"]?.["connectionNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "connectionNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["beamAndSlab"]?.["connectionNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "connectionNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["slabAndBearingWall"]?.["connectionNumber"]
+              }
+            />
           </div>
 
           {/* Barriers */}
-          <div className="flex-1">
-            <div className="flex flex-col gap-4">
-              <SelectDropdown
-                contents={barriers}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "barriers",
-                }}
-                defaultValue={buildingCoreInfo["columnAndBeam"]?.["barriers"]}
-              />
-              <SelectDropdown
-                contents={barriers}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "barriers",
-                }}
-                defaultValue={buildingCoreInfo["columnAndSlab"]?.["barriers"]}
-              />
-              <SelectDropdown
-                contents={barriers}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "barriers",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBearingWall"]?.["barriers"]
-                }
-              />
-              <SelectDropdown
-                contents={barriers}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "barriers",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndFoundation"]?.["barriers"]
-                }
-              />
-              <SelectDropdown
-                contents={barriers}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "barriers",
-                }}
-                defaultValue={buildingCoreInfo["beamAndSlab"]?.["barriers"]}
-              />
-              <SelectDropdown
-                contents={barriers}
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "barriers",
-                }}
-                defaultValue={
-                  buildingCoreInfo["slabAndBearingWall"]?.["barriers"]
-                }
-              />
-            </div>
+          <div className="flex-1 flex flex-col gap-4 justify-between">
+            <SelectDropdown
+              contents={barriers}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "barriers",
+              }}
+              defaultValue={buildingCoreInfo["columnAndBeam"]?.["barriers"]}
+            />
+            <SelectDropdown
+              contents={barriers}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "barriers",
+              }}
+              defaultValue={buildingCoreInfo["columnAndSlab"]?.["barriers"]}
+            />
+            <SelectDropdown
+              contents={barriers}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "barriers",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBearingWall"]?.["barriers"]
+              }
+            />
+            <SelectDropdown
+              contents={barriers}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "barriers",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndFoundation"]?.["barriers"]
+              }
+            />
+            <SelectDropdown
+              contents={barriers}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "barriers",
+              }}
+              defaultValue={buildingCoreInfo["beamAndSlab"]?.["barriers"]}
+            />
+            <SelectDropdown
+              contents={barriers}
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "barriers",
+              }}
+              defaultValue={
+                buildingCoreInfo["slabAndBearingWall"]?.["barriers"]
+              }
+            />
           </div>
 
           {/* Barriers number */}
-          <div className="w-[100px]">
-            <div className="flex flex-col gap-4">
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBeam",
-                  attributeKey: "barriersNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBeam"]?.["barriersNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndSlab",
-                  attributeKey: "barriersNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndSlab"]?.["barriersNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndBearingWall",
-                  attributeKey: "barriersNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndBearingWall"]?.["barriersNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "columnAndFoundation",
-                  attributeKey: "barriersNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["columnAndFoundation"]?.["barriersNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "beamAndSlab",
-                  attributeKey: "barriersNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["beamAndSlab"]?.["barriersNumber"]
-                }
-              />
-              <Input
-                handleSetData={handleSetData}
-                attributesValue={{
-                  connectionName: "slabAndBearingWall",
-                  attributeKey: "barriersNumber",
-                }}
-                defaultValue={
-                  buildingCoreInfo["slabAndBearingWall"]?.["barriersNumber"]
-                }
-              />
-            </div>
+          <div className="w-[100px] flex flex-col gap-4 justify-between">
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBeam",
+                attributeKey: "barriersNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBeam"]?.["barriersNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndSlab",
+                attributeKey: "barriersNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndSlab"]?.["barriersNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndBearingWall",
+                attributeKey: "barriersNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndBearingWall"]?.["barriersNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "columnAndFoundation",
+                attributeKey: "barriersNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["columnAndFoundation"]?.["barriersNumber"]
+              }
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "beamAndSlab",
+                attributeKey: "barriersNumber",
+              }}
+              defaultValue={buildingCoreInfo["beamAndSlab"]?.["barriersNumber"]}
+            />
+            <Input
+              handleSetData={handleSetData}
+              attributesValue={{
+                connectionName: "slabAndBearingWall",
+                attributeKey: "barriersNumber",
+              }}
+              defaultValue={
+                buildingCoreInfo["slabAndBearingWall"]?.["barriersNumber"]
+              }
+            />
           </div>
 
           {/* Disassembly Potential of the Connection DPC */}
