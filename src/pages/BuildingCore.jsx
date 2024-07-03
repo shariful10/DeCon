@@ -1268,8 +1268,8 @@ export default function BuildingCore() {
           </div>
 
           {/* Disassembly Potential of the Connection DPC */}
-          <div className="flex-1 flex flex-col gap-5 justify-between">
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+          <div className="flex-1 flex flex-col gap-4 justify-between">
+            <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalColumnAndBeamDPC)
                   ? ""
@@ -1277,7 +1277,7 @@ export default function BuildingCore() {
               </span>
             </div>
 
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+            <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalColumnAndSlabDPC)
                   ? ""
@@ -1285,7 +1285,7 @@ export default function BuildingCore() {
               </span>
             </div>
 
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+            <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalColumnAndBearingWallDPC)
                   ? ""
@@ -1293,7 +1293,7 @@ export default function BuildingCore() {
               </span>
             </div>
 
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3">
+            <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalColumnAndFoundationDPC)
                   ? ""
@@ -1301,7 +1301,7 @@ export default function BuildingCore() {
               </span>
             </div>
 
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+            <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalBeamAndSlabDPC)
                   ? ""
@@ -1309,7 +1309,7 @@ export default function BuildingCore() {
               </span>
             </div>
 
-            <div className="min-h-[45px] font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 ">
+            <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalSlabAndBearingWallDPC)
                   ? ""
@@ -1402,7 +1402,7 @@ export default function BuildingCore() {
               />
               <Button
                 btnTitle={`Total DPC of the building’s core: ${parseFloat(
-                  totalDPCOfBuildingCore / 6
+                  (totalDPCOfBuildingCore / 6) * 100
                 )?.toFixed(2)}`}
                 className="!text-left text-base !px-2"
               />
