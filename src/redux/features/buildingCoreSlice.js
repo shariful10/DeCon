@@ -29,6 +29,14 @@ export const buildingCoreSlice = createSlice({
         JSON.stringify(state.buildingCoreTotalValue)
       );
     },
+    resetBuildingCore: (state) => {
+      state.buildingCore = {};
+      state.buildingCoreInfo = {};
+      state.buildingCoreTotalValue = {};
+      localStorage.removeItem("buildingCore");
+      localStorage.removeItem("buildingCoreInfo");
+      localStorage.removeItem("buildingCoreTotalValue");
+    },
   },
 });
 
@@ -36,5 +44,6 @@ export const {
   addBuildingCore,
   addBuildingCoreInfo,
   addBuildingCoreTotalValue,
+  resetBuildingCore,
 } = buildingCoreSlice.actions;
 export default buildingCoreSlice.reducer;
