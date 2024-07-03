@@ -12,44 +12,39 @@ import Button from "../utils/Button";
 import PdfGenerate from "./PdfGenerate";
 
 const PdfReport = () => {
-  const reportRef = useRef();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+	const reportRef = useRef();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-  const handlePrint = useReactToPrint({
-    content: () => reportRef.current,
-    documentTitle: "Report",
-    onAfterPrint: () => {
-      //  reset the store
-      dispatch(resetConstructionType());
-      dispatch(resetBuildingShell());
-      dispatch(resetBuildingInfo());
-      dispatch(resetBuildingCore());
-      dispatch(resetIndicator());
+	const handlePrint = useReactToPrint({
+		content: () => reportRef.current,
+		documentTitle: "Report",
+		onAfterPrint: () => {
+			dispatch(resetConstructionType());
+			dispatch(resetBuildingShell());
+			dispatch(resetBuildingInfo());
+			dispatch(resetBuildingCore());
+			dispatch(resetIndicator());
+			toast.success("Report downloaded successfully!");
+			navigate("/");
+		},
+	});
 
-      // show success message
-      toast.success("Report downloaded successfully!");
-
-      // navigate to home page
-      navigate("/");
-    },
-  });
-
-  return (
-    <div className="p-6 w-[834px] mx-auto">
-      <div className="flex items-center gap-2 mb-5">
-        <div onClick={() => navigate("/result-and-report")}>
-          <Button btnTitle="Previous" />
-        </div>
-        <div onClick={handlePrint}>
-          <Button btnTitle="Download report" />
-        </div>
-      </div>
-      <div className="border-2 border-[#c4c4c4da] w-[834px]">
-        <PdfGenerate ref={reportRef} />
-      </div>
-    </div>
-  );
+	return (
+		<div className="p-6 w-[834px] mx-auto">
+			<div className="flex items-center gap-2 mb-5">
+				<div onClick={() => navigate("/result-and-report")}>
+					<Button btnTitle="Previous" />
+				</div>
+				<div onClick={handlePrint}>
+					<Button btnTitle="Download report" />
+				</div>
+			</div>
+			<div className="border-2 border-[#c4c4c4da] w-[834px]">
+				<PdfGenerate ref={reportRef} />
+			</div>
+		</div>
+	);
 };
 
 export default PdfReport;
