@@ -1073,7 +1073,7 @@ export default function BuildingCore() {
           </div>
 
           {/* Disassembly Potential of the Connection DPC */}
-          <div className="flex-1 flex flex-col gap-5 justify-between">
+          <div className="flex-1 flex flex-col gap-4 justify-between">
             <div className="h-full font-semibold py-[7px] border-2 border-black bg-[#E1EFD8] !px-3 grow">
               <span>
                 {isNaN(totalColumnAndShellElementDPC)
