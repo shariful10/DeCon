@@ -15,6 +15,8 @@ export default function ResultAndReport() {
 		(state) => state.buildingShell
 	);
 
+	console.log("buildingShell =>", buildingShellTotalValue);
+
 	const CharOptionsOne = {
 		series: [
 			{
@@ -155,10 +157,15 @@ export default function ResultAndReport() {
 							data={data}
 						/>
 					</div>
-					<div className="w-1/2 flex flex-col items-center justify-center">
-						<Gauge value={gaugeValue} widthOne={300} widthTwo={362} />
-						<p> Total disassembly potential </p>
-						<div className="flex items-center gap-4 mt-5 -mr-5">
+					<div className="w-1/2 flex flex-col items-center justify-center pl-10">
+						<Gauge
+							className="-ml-9"
+							value={gaugeValue || 0}
+							widthOne={300}
+							widthTwo={362}
+						/>
+						<p className="text-center"> Total disassembly potential </p>
+						<div className="flex items-center justify-center gap-4 mt-5">
 							<div onClick={() => navigate("/building-shell")}>
 								<Button btnTitle="Previous" />
 							</div>
