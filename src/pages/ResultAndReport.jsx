@@ -15,8 +15,6 @@ export default function ResultAndReport() {
 		(state) => state.buildingShell
 	);
 
-	console.log("buildingShell =>", buildingShellTotalValue);
-
 	const CharOptionsOne = {
 		series: [
 			{

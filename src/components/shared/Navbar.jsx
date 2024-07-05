@@ -7,8 +7,6 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = () => {
 	const location = useLocation();
 
-	// console.log("location", location);
-
 	return (
 		<Container>
 			<div className="py-5 flex items-center justify-between">
