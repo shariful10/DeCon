@@ -272,7 +272,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-2xl"
 										readOnly
-										value={`${gaugeValue}%`}
+										value={`${coreAndShellDPC.toFixed(2)}%`}
 									/>
 								</div>
 							</div>
@@ -461,7 +461,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 
 								<div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
 									<Gauge
-										value={gaugeValue}
+										value={coreAndShellDPC.toFixed(2)}
 										widthOne={200}
 										widthTwo={262}
 										className="mr-[50px]"
