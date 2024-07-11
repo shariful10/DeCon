@@ -3,10 +3,9 @@ import Gauge from "../Gauge/Gauge";
 import Charts from "../Chart/Chart";
 import ChartTwo from "../Chart/ChartTwo";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
 	const [data, setData] = useState([]);
@@ -125,20 +124,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 		]);
 	}, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
-	const totalConnections =
-		buildingShellTotalValue.totalConnectionNumberScore +
-		buildingCoreTotalValue.totalConnectionNumberScore;
-
-	const totalDPC =
-		buildingCoreTotalValue.totalDPCOfBuildingCore +
-		buildingShellTotalValue.totalDPCOfBuildingCore;
-
-	const DPBCS = totalDPC / totalConnections;
-
 	const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
 	const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
-
-	const gaugeValue = Number(DPBCS).toFixed(2) * 100;
+	const coreAndShellDPC = ((coreDPC + shellDPC) * 100) / 2;
 
 	return (
 		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
@@ -147,8 +135,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					<img src={logo} className="w-[100px]" alt="logo" />
 				</div>
 				<div className="">
-					<h1 className="text-lg font-bold text-center">
-						Disassembly Potential of the Building’s core <br /> and shell Report
+					<h1 className="text-xl font-bold text-center">
+						Disassembly Potential of the Building’s core and <br /> shell{" "}
+						<span className="text-3xl">Report</span>
 					</h1>
 				</div>
 				<div />
@@ -264,14 +253,14 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 							</div>
 							<div className="grid grid-cols-3 mb-3">
 								<h2 className="font-medium text-sm">
-									Total <br /> building DPC:
+									Total <br /> building DPB:
 								</h2>
 								<div className="col-span-2 flex space-x-4">
 									<input
 										type="text"
 										className="w-[114px] pl-2 py-0.5 focus:outline-none text-2xl"
 										readOnly
-										value={`${84}%`}
+										value={`${coreAndShellDPC.toFixed(2)}%`}
 									/>
 								</div>
 							</div>
@@ -296,7 +285,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										readOnly
 										value={Number(
 											buildingCoreTotalValue?.totalConnectionNumberScore
-										).toFixed(2)}
+										)}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
@@ -322,7 +311,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={coreDPC.toFixed(2)}
+										value={(coreDPC * 100).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -334,7 +323,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 				</div>
-				<div>
+				<div className="pb-16">
 					<h1 className="font-medium mt-5">Building's shell:</h1>
 					<div className="mt-3 p-5 bg-[#c4c4c4da]">
 						<div className="flex justify-between">
@@ -349,7 +338,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										readOnly
 										value={Number(
 											buildingShellTotalValue?.totalConnectionNumberScore
-										).toFixed(2)}
+										)}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
@@ -375,7 +364,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
 										readOnly
-										value={shellDPC.toFixed(2)}
+										value={(shellDPC * 100).toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -387,7 +376,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 				</div>
-				<div>
+				<div className="pt-5">
 					<h1 className="font-medium mt-5 pb-2">Building's core and shell:</h1>
 					<div className="mt-3 p-5 bg-[#c4c4c4da]">
 						<div className="flex justify-between">
@@ -405,7 +394,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										value={Number(
 											buildingCoreTotalValue?.totalConnectionNumberScore +
 												buildingShellTotalValue?.totalConnectionNumberScore
-										).toFixed(2)}
+										)}
 									/>
 								</div>
 								<div className="grid grid-cols-2 gap-10">
@@ -436,7 +425,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										type="text"
 										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
 										readOnly
-										value={(coreDPC + shellDPC).toFixed(2)}
+										value={coreAndShellDPC.toFixed(2)}
 									/>
 								</div>
 							</div>
@@ -460,7 +449,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 
 								<div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
 									<Gauge
-										value={gaugeValue}
+										value={coreAndShellDPC.toFixed(2)}
 										widthOne={200}
 										widthTwo={262}
 										className="mr-[50px]"
