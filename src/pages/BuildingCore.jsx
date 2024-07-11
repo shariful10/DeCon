@@ -1375,27 +1375,29 @@ export default function BuildingCore() {
             data={[
               {
                 x: "Connection type",
-                y: parseFloat(totalConnectionTypesScore)?.toFixed(2) || 0,
+                y: parseFloat(totalConnectionTypesScore) || 0,
               },
               {
                 x: "Connection accessibility",
-                y: parseFloat(connectionAccessibilityScore)?.toFixed(2) || 0,
+                y: parseFloat(connectionAccessibilityScore) || 0,
               },
               {
                 x: "Independency",
-                y: parseFloat(totalIndependencyScore)?.toFixed(2) || 0,
+                y: parseFloat(totalIndependencyScore) || 0,
               },
               {
                 x: "Geometry of product edge",
-                y: parseFloat(totalGpeScore)?.toFixed(2) || 0,
+                y: parseFloat(totalGpeScore) || 0,
               },
               {
                 x: "Barriers",
-                y: parseFloat(totalBarriersScore)?.toFixed(2) || 0,
+                y: parseFloat(totalBarriersScore) || 0,
               },
             ]}
             max={100}
           />
+
+          {/* progress bar & buttons */}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
               <ProgressBar

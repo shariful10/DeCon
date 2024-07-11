@@ -15,29 +15,35 @@ export default function ResultAndReport() {
     (state) => state.buildingShell
   );
 
-  console.log("buildingShell =>", buildingShellTotalValue);
+  // console.log("buildingShell =>", buildingShellTotalValue);
+  console.log(
+    "buildingShellTotalValue[totalConnectionTypesScore] ",
+    buildingShellTotalValue["totalConnectionTypesScore"]
+  );
 
   const CharOptionsOne = {
     series: [
       {
         name: "Core",
         data: [
-          buildingCoreTotalValue["totalConnectionTypesScore"],
-          buildingCoreTotalValue["connectionAccessibilityScore"],
-          buildingCoreTotalValue["totalIndependencyScore"],
-          buildingCoreTotalValue["totalGpeScore"],
-          buildingCoreTotalValue["totalBarriersScore"],
+          buildingCoreTotalValue["totalConnectionTypesScore"].toFixed(0) || 0,
+          buildingCoreTotalValue["connectionAccessibilityScore"].toFixed(0) ||
+            0,
+          buildingCoreTotalValue["totalIndependencyScore"].toFixed(0) || 0,
+          buildingCoreTotalValue["totalGpeScore"].toFixed(0) || 0,
+          buildingCoreTotalValue["totalBarriersScore"].toFixed(0) || 0,
         ],
         color: "#4472C4",
       },
       {
         name: "Shell",
         data: [
-          buildingShellTotalValue["totalConnectionTypesScore"],
-          buildingShellTotalValue["connectionAccessibilityScore"],
-          buildingShellTotalValue["totalIndependencyScore"],
-          buildingShellTotalValue["totalGpeScore"],
-          buildingShellTotalValue["totalBarriersScore"],
+          buildingShellTotalValue["totalConnectionTypesScore"].toFixed(0) || 0,
+          buildingShellTotalValue["connectionAccessibilityScore"].toFixed(0) ||
+            0,
+          buildingShellTotalValue["totalIndependencyScore"].toFixed(0) || 0,
+          buildingShellTotalValue["totalGpeScore"].toFixed(0) || 0,
+          buildingShellTotalValue["totalBarriersScore"].toFixed(0) || 0,
         ],
         color: "#ED7D31",
       },
@@ -82,45 +88,45 @@ export default function ResultAndReport() {
     setData([
       {
         x: "Column and beam",
-        y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(0) || 0,
       },
       {
         x: "Column and slab",
-        y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(0) || 0,
       },
       {
         x: "Column and bearing wall",
-        y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(0) || 0,
       },
       {
         x: "Column and foundation",
-        y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(0) || 0,
       },
       {
         x: "Beam and slab",
-        y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(0) || 0,
       },
       {
         x: "Beam and bearing wall",
-        y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(0) || 0,
       },
       {
         x: "Column & Shell element",
-        y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(0) || 0,
       },
       {
         x: "Beam & Shell element",
-        y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(0) || 0,
       },
       {
         x: "Slab & Shell element",
-        y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(2) || 0,
+        y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(0) || 0,
       },
       {
         x: "Bearing wall & Shell element",
         y:
           parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
-            2
+            0
           ) || 0,
       },
     ]);
@@ -136,7 +142,7 @@ export default function ResultAndReport() {
 
   const DPBCS = totalDPC / totalConnections;
 
-  const gaugeValue = Number(DPBCS).toFixed(2) * 100;
+  const gaugeValue = Number(DPBCS) * 100;
 
   return (
     <Container>
@@ -157,10 +163,12 @@ export default function ResultAndReport() {
               data={data}
             />
           </div>
+
+          {/* Gauge and button */}
           <div className="w-1/2 flex flex-col items-center justify-center pl-10">
             <Gauge
               className="-ml-9"
-              value={gaugeValue || 0}
+              value={gaugeValue.toFixed(0) || 0}
               widthOne={300}
               widthTwo={362}
             />
