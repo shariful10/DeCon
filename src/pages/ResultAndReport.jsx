@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Gauge from "../components/Gauge/Gauge";
 import { useNavigate } from "react-router-dom";
 import Charts from "../components/Chart/Chart";
-import Button from "../components/utils/Button";
 import ChartTwo from "../components/Chart/ChartTwo";
 import Container from "../components/container/Container";
+import Gauge from "../components/Gauge/Gauge";
+import Button from "../components/utils/Button";
 
 export default function ResultAndReport() {
   const [data, setData] = useState([]);
@@ -32,7 +32,12 @@ export default function ResultAndReport() {
           buildingCoreTotalValue["totalIndependencyScore"].toFixed(0) || 0,
           buildingCoreTotalValue["totalGpeScore"].toFixed(0) || 0,
           buildingCoreTotalValue["totalBarriersScore"].toFixed(0) || 0,
+          10,
         ],
+        dataLabels: {
+          min: 0,
+          max: 10,
+        },
         color: "#4472C4",
       },
       {
@@ -44,6 +49,7 @@ export default function ResultAndReport() {
           buildingShellTotalValue["totalIndependencyScore"].toFixed(0) || 0,
           buildingShellTotalValue["totalGpeScore"].toFixed(0) || 0,
           buildingShellTotalValue["totalBarriersScore"].toFixed(0) || 0,
+          10,
         ],
         color: "#ED7D31",
       },
@@ -68,6 +74,7 @@ export default function ResultAndReport() {
       colors: ["transparent"],
     },
     xaxis: {
+      // categories
       categories: [
         "Connection type",
         "Connection Accessibility",
@@ -76,7 +83,12 @@ export default function ResultAndReport() {
         "Barriers",
       ],
     },
-
+    yaxis: {
+      labels: {
+        max: 10,
+        min: 0,
+      },
+    },
     fill: {
       opacity: 1,
     },
