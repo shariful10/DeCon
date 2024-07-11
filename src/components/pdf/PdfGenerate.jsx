@@ -124,20 +124,8 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 		]);
 	}, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
-	const totalConnections =
-		buildingShellTotalValue.totalConnectionNumberScore +
-		buildingCoreTotalValue.totalConnectionNumberScore;
-
-	const totalDPC =
-		buildingCoreTotalValue.totalDPCOfBuildingCore +
-		buildingShellTotalValue.totalDPCOfBuildingCore;
-
-	const DPBCS = totalDPC / totalConnections;
-
 	const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
 	const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
-
-	const gaugeValue = Number(DPBCS).toFixed(2) * 100;
 	const coreAndShellDPC = ((coreDPC + shellDPC) * 100) / 2;
 
 	return (
