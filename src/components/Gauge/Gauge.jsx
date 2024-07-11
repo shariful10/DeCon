@@ -1,7 +1,7 @@
 import React from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
-export const Gauge = ({ value, className = "", widthOne, widthTwo }) => {
+const Gauge = ({ value, className = "", widthOne, widthTwo }) => {
 	return (
 		<div className={`relative ${className ? className : ""}`}>
 			<div className="mt-8 ml-8">
@@ -62,3 +62,5 @@ export const Gauge = ({ value, className = "", widthOne, widthTwo }) => {
 		</div>
 	);
 };
+
+export default Gauge;
