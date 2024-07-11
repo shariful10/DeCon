@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import Gauge from "../components/Gauge/Gauge";
 import { useNavigate } from "react-router-dom";
 import Charts from "../components/Chart/Chart";
 import Button from "../components/utils/Button";
-import { Gauge } from "../components/Gauge/Gauge";
 import ChartTwo from "../components/Chart/ChartTwo";
 import Container from "../components/container/Container";
 
