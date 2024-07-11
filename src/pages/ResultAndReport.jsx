@@ -80,61 +80,54 @@ export default function ResultAndReport() {
 		setData([
 			{
 				x: "Column and beam",
-				y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column and slab",
-				y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column and bearing wall",
-				y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column and foundation",
-				y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Beam and slab",
-				y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Beam and bearing wall",
-				y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column & Shell element",
-				y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Beam & Shell element",
-				y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Slab & Shell element",
-				y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Bearing wall & Shell element",
 				y:
 					parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
-						2
+						0
 					) || 0,
 			},
 		]);
 	}, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
-	const totalConnections =
-		buildingShellTotalValue.totalConnectionNumberScore +
-		buildingCoreTotalValue.totalConnectionNumberScore;
+	const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
+	const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
 
-	const totalDPC =
-		buildingCoreTotalValue.totalDPCOfBuildingCore +
-		buildingShellTotalValue.totalDPCOfBuildingCore;
-
-	const DPBCS = totalDPC / totalConnections;
-
-	const gaugeValue = Number(DPBCS).toFixed(2) * 100;
+	const coreAndShellDPC = ((coreDPC + shellDPC) * 100) / 2;
 
 	return (
 		<Container>
@@ -158,7 +151,7 @@ export default function ResultAndReport() {
 					<div className="w-1/2 flex flex-col items-center justify-center pl-10">
 						<Gauge
 							className="-ml-9"
-							value={gaugeValue || 0}
+							value={coreAndShellDPC.toFixed(2) || 0}
 							widthOne={300}
 							widthTwo={362}
 						/>
