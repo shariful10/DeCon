@@ -71,7 +71,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
       ],
     },
     yaxis: {
-      max: 10,
+      max: 100,
     },
     fill: {
       opacity: 1,
