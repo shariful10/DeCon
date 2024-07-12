@@ -1338,7 +1338,7 @@ export default function BuildingCore() {
               },
               {
                 x: "Column and bearing wall",
-                y: totalColumnAndBearingWallDPC || 0,
+                y: Number(totalColumnAndBearingWallDPC) || 0,
               },
               {
                 x: "Column and foundation",
@@ -1367,23 +1367,23 @@ export default function BuildingCore() {
             data={[
               {
                 x: "Connection type",
-                y: parseFloat(totalConnectionTypesScore) || 0,
+                y: parseFloat(totalConnectionTypesScore)?.toFixed(0) || 0,
               },
               {
                 x: "Connection accessibility",
-                y: parseFloat(connectionAccessibilityScore) || 0,
+                y: parseFloat(connectionAccessibilityScore)?.toFixed(0) || 0,
               },
               {
                 x: "Independency",
-                y: parseFloat(totalIndependencyScore) || 0,
+                y: parseFloat(totalIndependencyScore)?.toFixed(0) || 0,
               },
               {
                 x: "Geometry of product edge",
-                y: parseFloat(totalGpeScore) || 0,
+                y: parseFloat(totalGpeScore)?.toFixed(0) || 0,
               },
               {
                 x: "Barriers",
-                y: parseFloat(totalBarriersScore) || 0,
+                y: parseFloat(totalBarriersScore)?.toFixed(0) || 0,
               },
             ]}
             max={100}

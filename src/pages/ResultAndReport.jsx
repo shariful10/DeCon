@@ -32,12 +32,7 @@ export default function ResultAndReport() {
           buildingCoreTotalValue["totalIndependencyScore"].toFixed(0) || 0,
           buildingCoreTotalValue["totalGpeScore"].toFixed(0) || 0,
           buildingCoreTotalValue["totalBarriersScore"].toFixed(0) || 0,
-          10,
         ],
-        dataLabels: {
-          min: 0,
-          max: 10,
-        },
         color: "#4472C4",
       },
       {
@@ -49,7 +44,6 @@ export default function ResultAndReport() {
           buildingShellTotalValue["totalIndependencyScore"].toFixed(0) || 0,
           buildingShellTotalValue["totalGpeScore"].toFixed(0) || 0,
           buildingShellTotalValue["totalBarriersScore"].toFixed(0) || 0,
-          10,
         ],
         color: "#ED7D31",
       },
@@ -84,10 +78,7 @@ export default function ResultAndReport() {
       ],
     },
     yaxis: {
-      labels: {
-        max: 10,
-        min: 0,
-      },
+      max: 10,
     },
     fill: {
       opacity: 1,
