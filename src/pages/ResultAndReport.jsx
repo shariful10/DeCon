@@ -78,7 +78,7 @@ export default function ResultAndReport() {
       ],
     },
     yaxis: {
-      max: 10,
+      max: 100,
     },
     fill: {
       opacity: 1,
