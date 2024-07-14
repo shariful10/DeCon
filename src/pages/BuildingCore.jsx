@@ -73,6 +73,7 @@ export default function BuildingCore() {
     totalIndependencyScore: "",
     totalConnectionNumberScore: "",
     totalBarriersScore: "",
+    totalBarriersNumbers: "",
     totalDPCOfBuildingCore: "",
   });
 
@@ -542,58 +543,65 @@ export default function BuildingCore() {
     const CAn = data?.connectionAccessibility?.score || 0;
     const IDn = data?.independency?.score || 0;
     const GPEn = data?.gpe?.score || 0;
-    const barriersScore = data?.barriers?.score || 0;
+    const connectionNumber = data?.connectionNumber?.score || 0;
+    // const barriersScore = data?.barriers?.score || 0;
     const barriersNumber = data?.barriersNumber?.score || 0;
-    const DBn = barriersScore * barriersNumber;
 
     const DPcnTotalValue = 1 / CTn + 1 / CAn;
     const DPcenTotalValue = 1 / IDn + 1 / GPEn;
     const DPcn = 2 / DPcnTotalValue;
     const DPcen = 2 / DPcenTotalValue;
     const DPCSlice = 1 / DPcn + 1 / DPcen;
+    let totalDPC = (2 / DPCSlice) * 100;
 
-    return 2 / DPCSlice - DBn;
+    if (connectionNumber === 1 && barriersNumber > 0) {
+      totalDPC = totalDPC - 10;
+    } else {
+      totalDPC = totalDPC - barriersNumber;
+    }
+
+    return totalDPC;
   };
 
   const totalColumnAndBeamDPC =
     isNaN(columnAndBeamDPC) ||
     columnAndBeamDPC == null ||
     columnAndBeamDPC === ""
-      ? (buildingCore[columnAndBeamDPC] * 100).toFixed(0) || ""
-      : (parseFloat(columnAndBeamDPC) * 100).toFixed(0) || "";
+      ? buildingCore[columnAndBeamDPC]?.toFixed(0) || ""
+      : parseFloat(columnAndBeamDPC)?.toFixed(0) || "";
 
   const totalColumnAndSlabDPC =
     isNaN(columnAndSlabDPC) ||
     columnAndSlabDPC == null ||
     columnAndSlabDPC === ""
-      ? (buildingCore[columnAndSlabDPC] * 100).toFixed(0) || ""
-      : (parseFloat(columnAndSlabDPC) * 100).toFixed(0) || "";
+      ? buildingCore[columnAndSlabDPC]?.toFixed(0) || ""
+      : parseFloat(columnAndSlabDPC)?.toFixed(0) || "";
 
   const totalColumnAndBearingWallDPC =
     isNaN(columnAndBearingWallDPC) ||
     columnAndBearingWallDPC == null ||
     columnAndBearingWallDPC === ""
-      ? (buildingCore[columnAndBearingWallDPC] * 100).toFixed(0) || ""
-      : (parseFloat(columnAndBearingWallDPC) * 100).toFixed(0) || "";
+      ? buildingCore[columnAndBearingWallDPC]?.toFixed(0) || ""
+      : parseFloat(columnAndBearingWallDPC)?.toFixed(0) || "";
 
   const totalColumnAndFoundationDPC =
     isNaN(columnAndFoundationDPC) ||
     columnAndFoundationDPC == null ||
     columnAndFoundationDPC === ""
-      ? (buildingCore[columnAndFoundationDPC] * 100).toFixed(0) || ""
-      : (parseFloat(columnAndFoundationDPC) * 100).toFixed(0) || "";
+      ? buildingCore[columnAndFoundationDPC]?.toFixed(0) || ""
+      : parseFloat(columnAndFoundationDPC)?.toFixed(0) || "";
 
   const totalBeamAndSlabDPC =
     isNaN(beamAndSlabDPC) || beamAndSlabDPC == null || beamAndSlabDPC === ""
-      ? (buildingCore[beamAndSlabDPC] * 100).toFixed(0) || ""
-      : (parseFloat(beamAndSlabDPC) * 100).toFixed(0) || "";
+      ? buildingCore[beamAndSlabDPC]?.toFixed(0) || ""
+      : parseFloat(beamAndSlabDPC)?.toFixed(0) || "";
 
   const totalSlabAndBearingWallDPC =
     isNaN(slabAndBearingWallDPC) ||
     slabAndBearingWallDPC == null ||
     slabAndBearingWallDPC === ""
-      ? (buildingCore[slabAndBearingWallDPC] * 100).toFixed(0) || ""
-      : (parseFloat(slabAndBearingWallDPC) * 100).toFixed(0) || "";
+      ? buildingCore[slabAndBearingWallDPC]?.toFixed(0) || ""
+      : parseFloat(slabAndBearingWallDPC)?.toFixed(0) || "";
 
   useEffect(() => {
     let columnAndBeamDPC;
@@ -714,6 +722,11 @@ export default function BuildingCore() {
       "barriers"
     );
 
+    const totalBarriersNumbers = calculateTotalScores(
+      buildingCoreData,
+      "barriersNumber"
+    );
+
     // setting total scores
     setTotalValue({
       ...totalValue,
@@ -726,6 +739,7 @@ export default function BuildingCore() {
       totalIndependencyScore: Math.round(totalIndependencyScore * 100) / 100,
       totalConnectionNumberScore: connectionNumbers || 0,
       totalBarriersScore: Math.round(totalBarriersScore * 100) / 100,
+      totalBarriersNumbers: totalBarriersNumbers,
       totalDPCOfBuildingCore: totalDPC || 0,
     });
   }, [buildingCoreData]);
@@ -1338,7 +1352,7 @@ export default function BuildingCore() {
               },
               {
                 x: "Column and bearing wall",
-                y: Number(totalColumnAndBearingWallDPC) || 0,
+                y: totalColumnAndBearingWallDPC || 0,
               },
               {
                 x: "Column and foundation",
@@ -1388,14 +1402,11 @@ export default function BuildingCore() {
             ]}
             max={100}
           />
-
-          {/* progress bar & buttons */}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-4">
               <ProgressBar
                 progress={
-                  parseFloat((totalDPCOfBuildingCore / 6) * 100)?.toFixed(2) ||
-                  0
+                  parseFloat(totalDPCOfBuildingCore / 6)?.toFixed(2) || 0
                 }
               />
               <Button

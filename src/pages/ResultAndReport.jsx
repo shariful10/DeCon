@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import Gauge from "../components/Gauge/Gauge";
 import { useNavigate } from "react-router-dom";
 import Charts from "../components/Chart/Chart";
+import Button from "../components/utils/Button";
 import ChartTwo from "../components/Chart/ChartTwo";
 import Container from "../components/container/Container";
-import Gauge from "../components/Gauge/Gauge";
-import Button from "../components/utils/Button";
 
 export default function ResultAndReport() {
   const [data, setData] = useState([]);
@@ -15,35 +15,27 @@ export default function ResultAndReport() {
     (state) => state.buildingShell
   );
 
-  // console.log("buildingShell =>", buildingShellTotalValue);
-  console.log(
-    "buildingShellTotalValue[totalConnectionTypesScore] ",
-    buildingShellTotalValue["totalConnectionTypesScore"]
-  );
-
   const CharOptionsOne = {
     series: [
       {
         name: "Core",
         data: [
-          buildingCoreTotalValue["totalConnectionTypesScore"].toFixed(0) || 0,
-          buildingCoreTotalValue["connectionAccessibilityScore"].toFixed(0) ||
-            0,
-          buildingCoreTotalValue["totalIndependencyScore"].toFixed(0) || 0,
-          buildingCoreTotalValue["totalGpeScore"].toFixed(0) || 0,
-          buildingCoreTotalValue["totalBarriersScore"].toFixed(0) || 0,
+          buildingCoreTotalValue["totalConnectionTypesScore"],
+          buildingCoreTotalValue["connectionAccessibilityScore"],
+          buildingCoreTotalValue["totalIndependencyScore"],
+          buildingCoreTotalValue["totalGpeScore"],
+          buildingCoreTotalValue["totalBarriersScore"],
         ],
         color: "#4472C4",
       },
       {
         name: "Shell",
         data: [
-          buildingShellTotalValue["totalConnectionTypesScore"].toFixed(0) || 0,
-          buildingShellTotalValue["connectionAccessibilityScore"].toFixed(0) ||
-            0,
-          buildingShellTotalValue["totalIndependencyScore"].toFixed(0) || 0,
-          buildingShellTotalValue["totalGpeScore"].toFixed(0) || 0,
-          buildingShellTotalValue["totalBarriersScore"].toFixed(0) || 0,
+          buildingShellTotalValue["totalConnectionTypesScore"],
+          buildingShellTotalValue["connectionAccessibilityScore"],
+          buildingShellTotalValue["totalIndependencyScore"],
+          buildingShellTotalValue["totalGpeScore"],
+          buildingShellTotalValue["totalBarriersScore"],
         ],
         color: "#ED7D31",
       },
@@ -68,7 +60,6 @@ export default function ResultAndReport() {
       colors: ["transparent"],
     },
     xaxis: {
-      // categories
       categories: [
         "Connection type",
         "Connection Accessibility",
@@ -77,9 +68,7 @@ export default function ResultAndReport() {
         "Barriers",
       ],
     },
-    yaxis: {
-      max: 100,
-    },
+
     fill: {
       opacity: 1,
     },
@@ -135,17 +124,10 @@ export default function ResultAndReport() {
     ]);
   }, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
-  const totalConnections =
-    buildingShellTotalValue.totalConnectionNumberScore +
-    buildingCoreTotalValue.totalConnectionNumberScore;
+  const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
+  const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
 
-  const totalDPC =
-    buildingCoreTotalValue.totalDPCOfBuildingCore +
-    buildingShellTotalValue.totalDPCOfBuildingCore;
-
-  const DPBCS = totalDPC / totalConnections;
-
-  const gaugeValue = Number(DPBCS) * 100;
+  const coreAndShellDPC = (coreDPC + shellDPC) / 2;
 
   return (
     <Container>
@@ -166,12 +148,10 @@ export default function ResultAndReport() {
               data={data}
             />
           </div>
-
-          {/* Gauge and button */}
           <div className="w-1/2 flex flex-col items-center justify-center pl-10">
             <Gauge
               className="-ml-9"
-              value={gaugeValue.toFixed(0) || 0}
+              value={coreAndShellDPC.toFixed(2) || 0}
               widthOne={300}
               widthTwo={362}
             />
