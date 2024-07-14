@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import Gauge from "../components/Gauge/Gauge";
 import { useNavigate } from "react-router-dom";
 import Charts from "../components/Chart/Chart";
-import Button from "../components/utils/Button";
 import ChartTwo from "../components/Chart/ChartTwo";
 import Container from "../components/container/Container";
+import Gauge from "../components/Gauge/Gauge";
+import Button from "../components/utils/Button";
 
 export default function ResultAndReport() {
   const [data, setData] = useState([]);
@@ -76,7 +76,57 @@ export default function ResultAndReport() {
 
   useEffect(() => {
     const { buildingCore } = buildingCoreTotalValue;
+    useEffect(() => {
+      const { buildingCore } = buildingCoreTotalValue;
 
+      setData([
+        {
+          x: "Column and beam",
+          y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Column and slab",
+          y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Column and bearing wall",
+          y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Column and foundation",
+          y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Beam and slab",
+          y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Beam and bearing wall",
+          y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Column & Shell element",
+          y:
+            parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(0) ||
+            0,
+        },
+        {
+          x: "Beam & Shell element",
+          y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Slab & Shell element",
+          y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(0) || 0,
+        },
+        {
+          x: "Bearing wall & Shell element",
+          y:
+            parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
+              0
+            ) || 0,
+        },
+      ]);
+    }, [buildingCoreTotalValue?.buildingCore, buildingShell]);
     setData([
       {
         x: "Column and beam",
