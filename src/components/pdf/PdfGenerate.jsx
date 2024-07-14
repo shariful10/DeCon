@@ -8,460 +8,458 @@ import ProgressBar from "../utils/ProgressBar";
 import logo from "../../assets/images/logo.jpeg";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
-	const [data, setData] = useState([]);
-	const { buildingInfo } = useSelector((state) => state.buildingInfo);
-	const { buildingCoreTotalValue } = useSelector((state) => state.buildingCore);
-	const { buildingShell, buildingShellTotalValue } = useSelector(
-		(state) => state.buildingShell
-	);
+  const [data, setData] = useState([]);
+  const { buildingInfo } = useSelector((state) => state.buildingInfo);
+  const { buildingCoreTotalValue } = useSelector((state) => state.buildingCore);
+  const { buildingShell, buildingShellTotalValue } = useSelector(
+    (state) => state.buildingShell
+  );
 
-	const CharOptionsOne = {
-		series: [
-			{
-				name: "Core",
-				data: [
-					buildingCoreTotalValue["totalConnectionTypesScore"],
-					buildingCoreTotalValue["connectionAccessibilityScore"],
-					buildingCoreTotalValue["totalIndependencyScore"],
-					buildingCoreTotalValue["totalGpeScore"],
-					buildingCoreTotalValue["totalBarriersScore"],
-				],
-				color: "#4472C4",
-			},
-			{
-				name: "Shell",
-				data: [
-					buildingShellTotalValue["totalConnectionTypesScore"],
-					buildingShellTotalValue["connectionAccessibilityScore"],
-					buildingShellTotalValue["totalIndependencyScore"],
-					buildingShellTotalValue["totalGpeScore"],
-					buildingShellTotalValue["totalBarriersScore"],
-				],
-				color: "#ED7D31",
-			},
-		],
-		chart: {
-			type: "bar",
-			height: 350,
-		},
-		plotOptions: {
-			bar: {
-				horizontal: false,
-				columnWidth: "55%",
-				endingShape: "rounded",
-			},
-		},
-		dataLabels: {
-			enabled: false,
-		},
-		stroke: {
-			show: true,
-			width: 2,
-			colors: ["transparent"],
-		},
-		xaxis: {
-			categories: [
-				"Connection type",
-				"Connection Accessibility",
-				"Independency",
-				"Geometry of product edge",
-				"Barriers",
-			],
-		},
+  const CharOptionsOne = {
+    series: [
+      {
+        name: "Core",
+        data: [
+          buildingCoreTotalValue["totalConnectionTypesScore"],
+          buildingCoreTotalValue["connectionAccessibilityScore"],
+          buildingCoreTotalValue["totalIndependencyScore"],
+          buildingCoreTotalValue["totalGpeScore"],
+          buildingCoreTotalValue["totalBarriersScore"],
+        ],
+        color: "#4472C4",
+      },
+      {
+        name: "Shell",
+        data: [
+          buildingShellTotalValue["totalConnectionTypesScore"],
+          buildingShellTotalValue["connectionAccessibilityScore"],
+          buildingShellTotalValue["totalIndependencyScore"],
+          buildingShellTotalValue["totalGpeScore"],
+          buildingShellTotalValue["totalBarriersScore"],
+        ],
+        color: "#ED7D31",
+      },
+    ],
+    chart: {
+      type: "bar",
+      height: 350,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: "55%",
+        endingShape: "rounded",
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ["transparent"],
+    },
+    xaxis: {
+      categories: [
+        "Connection type",
+        "Connection Accessibility",
+        "Independency",
+        "Geometry of product edge",
+        "Barriers",
+      ],
+    },
 
-		fill: {
-			opacity: 1,
-		},
-	};
+    fill: {
+      opacity: 1,
+    },
+  };
 
-	useEffect(() => {
-		const { buildingCore } = buildingCoreTotalValue;
+  useEffect(() => {
+    const { buildingCore } = buildingCoreTotalValue;
 
-		setData([
-			{
-				x: "Column and beam",
-				y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Column and slab",
-				y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Column and bearing wall",
-				y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Column and foundation",
-				y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Beam and slab",
-				y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Beam and bearing wall",
-				y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Column & Shell element",
-				y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Beam & Shell element",
-				y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Slab & Shell element",
-				y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(2) || 0,
-			},
-			{
-				x: "Bearing wall & Shell element",
-				y:
-					parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
-						2
-					) || 0,
-			},
-		]);
-	}, [buildingCoreTotalValue?.buildingCore, buildingShell]);
+    setData([
+      {
+        x: "Column and beam",
+        y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Column and slab",
+        y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Column and bearing wall",
+        y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Column and foundation",
+        y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Beam and slab",
+        y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Beam and bearing wall",
+        y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Column & Shell element",
+        y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Beam & Shell element",
+        y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Slab & Shell element",
+        y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(2) || 0,
+      },
+      {
+        x: "Bearing wall & Shell element",
+        y:
+          parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
+            2
+          ) || 0,
+      },
+    ]);
+  }, [buildingCoreTotalValue?.buildingCore, buildingShell]);
 
-	const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
-	const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
-	const coreAndShellDPC = ((coreDPC + shellDPC) * 100) / 2;
+  const coreDPC = Number(buildingCoreTotalValue?.totalDPCOfBuildingCore) / 6;
+  const shellDPC = Number(buildingShellTotalValue?.totalDPCOfBuildingCore) / 4;
+  const coreAndShellDPC = (coreDPC + shellDPC) / 2;
 
-	return (
-		<div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
-			<div className="flex justify-between gap-6 items-center mb-5">
-				<div className="">
-					<img src={logo} className="w-[100px]" alt="logo" />
-				</div>
-				<div className="">
-					<h1 className="text-xl font-bold text-center">
-						Disassembly Potential of the Building’s core and <br /> shell{" "}
-						<span className="text-3xl">Report</span>
-					</h1>
-				</div>
-				<div />
-			</div>
-			<div className="pt-2">
-				<h1 className="font-medium">Building information:</h1>
-				<div className="mt-3 p-5 bg-[#c4c4c4da]">
-					<div className="grid grid-cols-3 gap-6">
-						<div className="col-span-2">
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">Building type:</h2>
-								<div className="col-span-2">
-									<input
-										type="text"
-										className="w-full pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.buildingType}
-									/>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">Country:</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.country}
-									/>
-									<div className="flex items-end gap-2">
-										<h2 className="whitespace-nowrap text-sm">Post Code:</h2>
-										<input
-											type="text"
-											className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
-											readOnly
-											value={buildingInfo?.postCode}
-										/>
-									</div>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">City:</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[87px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.city}
-									/>
-									<div className="flex items-end gap-2">
-										<h2 className="whitespace-nowrap text-sm">Street:</h2>
-										<input
-											type="text"
-											className="w-[87px] px-2 py-0.5 focus:outline-none text-sm"
-											readOnly
-											value={buildingInfo?.street}
-										/>
-									</div>
-									<div className="flex items-end gap-2">
-										<h2 className="text-sm">No:</h2>
-										<input
-											type="text"
-											className="w-[34px] pl-2 py-0.5 focus:outline-none text-sm"
-											readOnly
-											value={buildingInfo?.no}
-										/>
-									</div>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">Area:</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[114px] px-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.area}
-									/>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">Construction date:</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.constructionDate}
-									/>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">Calculation date:</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.calculationDate}
-									/>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="text-sm">Software version:</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={buildingInfo?.softwareVersion}
-									/>
-								</div>
-							</div>
-							<div className="grid grid-cols-3 mb-3">
-								<h2 className="font-medium text-sm">
-									Total <br /> building DPB:
-								</h2>
-								<div className="col-span-2 flex space-x-4">
-									<input
-										type="text"
-										className="w-[114px] pl-2 py-0.5 focus:outline-none text-2xl"
-										readOnly
-										value={`${coreAndShellDPC.toFixed(2)}%`}
-									/>
-								</div>
-							</div>
-						</div>
-						<div className="">
-							<img src={buildingInfo?.image} alt="building" />
-						</div>
-					</div>
-				</div>
-				<div>
-					<h1 className="font-medium mt-5">Building's core:</h1>
-					<div className="mt-3 p-5 bg-[#c4c4c4da]">
-						<div className="flex justify-between">
-							<div className="">
-								<div className="grid grid-cols-2 gap-10 mb-3">
-									<div>
-										<h1 className="text-sm">Number of connection:</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={Number(
-											buildingCoreTotalValue?.totalConnectionNumberScore
-										)}
-									/>
-								</div>
-								<div className="grid grid-cols-2 gap-10">
-									<div>
-										<h1 className="text-sm">Number of barriers:</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={Number(
-											buildingCoreTotalValue?.totalBarriersScore
-										).toFixed(2)}
-									/>
-								</div>
-							</div>
-							<div className="">
-								<div className="grid grid-cols-2 gap-10">
-									<div>
-										<h1 className="text-sm">Total DPC of the core:</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={(coreDPC * 100).toFixed(2)}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="border-2 border-[#c4c4c4da] pt-14 pb-10">
-						<div className="w-1/2 mx-auto">
-							<ProgressBar progress={(coreDPC * 100).toFixed(2)} />
-						</div>
-					</div>
-				</div>
-				<div className="pb-16">
-					<h1 className="font-medium mt-5">Building's shell:</h1>
-					<div className="mt-3 p-5 bg-[#c4c4c4da]">
-						<div className="flex justify-between">
-							<div>
-								<div className="grid grid-cols-2 gap-10 mb-3">
-									<div>
-										<h1 className="text-sm">Number of connection:</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={Number(
-											buildingShellTotalValue?.totalConnectionNumberScore
-										)}
-									/>
-								</div>
-								<div className="grid grid-cols-2 gap-10">
-									<div>
-										<h1 className="text-sm">Number of barriers:</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={Number(
-											buildingShellTotalValue?.totalBarriersScore
-										).toFixed(2)}
-									/>
-								</div>
-							</div>
-							<div>
-								<div className="grid grid-cols-2 gap-10">
-									<div>
-										<h1 className="text-sm">Total DPC of the shell:</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={(shellDPC * 100).toFixed(2)}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="border-2 border-[#c4c4c4da] pt-14 pb-10">
-						<div className="w-1/2 mx-auto">
-							<ProgressBar progress={(shellDPC * 100).toFixed(2)} />
-						</div>
-					</div>
-				</div>
-				<div className="pt-5">
-					<h1 className="font-medium mt-5 pb-2">Building's core and shell:</h1>
-					<div className="mt-3 p-5 bg-[#c4c4c4da]">
-						<div className="flex justify-between">
-							<div className="">
-								<div className="grid grid-cols-2 gap-10 mb-3">
-									<div>
-										<h1 className="whitespace-nowrap text-sm">
-											Number of connection:
-										</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={Number(
-											buildingCoreTotalValue?.totalConnectionNumberScore +
-												buildingShellTotalValue?.totalConnectionNumberScore
-										)}
-									/>
-								</div>
-								<div className="grid grid-cols-2 gap-10">
-									<div>
-										<h1 className="whitespace-nowrap text-sm">
-											Number of barriers:
-										</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
-										readOnly
-										value={Number(
-											buildingCoreTotalValue?.totalBarriersScore +
-												buildingShellTotalValue?.totalBarriersScore
-										).toFixed(2)}
-									/>
-								</div>
-							</div>
-							<div className="">
-								<div className="grid grid-cols-2 gap-10">
-									<div>
-										<h1 className="text-sm">
-											Total DPC of the <br /> building's core and shell:
-										</h1>
-									</div>
-									<input
-										type="text"
-										className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
-										readOnly
-										value={coreAndShellDPC.toFixed(2)}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="border-2 border-[#c4c4c4da] p-10">
-						<div>
-							<div className="flex items-center justify-between gap-4">
-								<div className="w-1/2 flex flex-col items-start justify-between gap-7">
-									<ChartTwo
-										color="#F4B081"
-										title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
-										options={CharOptionsOne}
-									/>
-									<Charts
-										color="#4472C4"
-										title="Disassembly potential of the core connections DPC"
-										data={data}
-									/>
-								</div>
+  return (
+    <div className="p-5 bg-white w-[830px] mx-auto" ref={ref}>
+      <div className="flex justify-between gap-6 items-center mb-5">
+        <div className="">
+          <img src={logo} className="w-[100px]" alt="logo" />
+        </div>
+        <div className="">
+          <h1 className="text-xl font-bold text-center">
+            Disassembly Potential of the Building’s core and <br /> shell{" "}
+            <span className="text-3xl">Report</span>
+          </h1>
+        </div>
+        <div />
+      </div>
+      <div className="pt-2">
+        <h1 className="font-medium">Building information:</h1>
+        <div className="mt-3 p-5 bg-[#c4c4c4da]">
+          <div className="grid grid-cols-3 gap-6">
+            <div className="col-span-2">
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">Building type:</h2>
+                <div className="col-span-2">
+                  <input
+                    type="text"
+                    className="w-full pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.buildingType}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">Country:</h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.country}
+                  />
+                  <div className="flex items-end gap-2">
+                    <h2 className="whitespace-nowrap text-sm">Post Code:</h2>
+                    <input
+                      type="text"
+                      className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
+                      readOnly
+                      value={buildingInfo?.postCode}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">City:</h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[87px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.city}
+                  />
+                  <div className="flex items-end gap-2">
+                    <h2 className="whitespace-nowrap text-sm">Street:</h2>
+                    <input
+                      type="text"
+                      className="w-[87px] px-2 py-0.5 focus:outline-none text-sm"
+                      readOnly
+                      value={buildingInfo?.street}
+                    />
+                  </div>
+                  <div className="flex items-end gap-2">
+                    <h2 className="text-sm">No:</h2>
+                    <input
+                      type="text"
+                      className="w-[34px] pl-2 py-0.5 focus:outline-none text-sm"
+                      readOnly
+                      value={buildingInfo?.no}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">Area:</h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[114px] px-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.area}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">Construction date:</h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.constructionDate}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">Calculation date:</h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.calculationDate}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="text-sm">Software version:</h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[114px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={buildingInfo?.softwareVersion}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mb-3">
+                <h2 className="font-medium text-sm">
+                  Total <br /> building DPB:
+                </h2>
+                <div className="col-span-2 flex space-x-4">
+                  <input
+                    type="text"
+                    className="w-[114px] pl-2 py-0.5 focus:outline-none text-2xl"
+                    readOnly
+                    value={`${coreAndShellDPC.toFixed(2)}%`}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="">
+              <img src={buildingInfo?.image} alt="building" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <h1 className="font-medium mt-5">Building's core:</h1>
+          <div className="mt-3 p-5 bg-[#c4c4c4da]">
+            <div className="flex justify-between">
+              <div className="">
+                <div className="grid grid-cols-2 gap-10 mb-3">
+                  <div>
+                    <h1 className="text-sm">Number of connection:</h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={Number(
+                      buildingCoreTotalValue?.totalConnectionNumberScore
+                    )}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <h1 className="text-sm">Number of barriers:</h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={Number(buildingCoreTotalValue?.totalBarriersNumbers)}
+                  />
+                </div>
+              </div>
+              <div className="">
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <h1 className="text-sm">Total DPC of the core:</h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={coreDPC.toFixed(2)}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-2 border-[#c4c4c4da] pt-14 pb-10">
+            <div className="w-1/2 mx-auto">
+              <ProgressBar progress={coreDPC.toFixed(2)} />
+            </div>
+          </div>
+        </div>
+        <div className="pb-16">
+          <h1 className="font-medium mt-5">Building's shell:</h1>
+          <div className="mt-3 p-5 bg-[#c4c4c4da]">
+            <div className="flex justify-between">
+              <div>
+                <div className="grid grid-cols-2 gap-10 mb-3">
+                  <div>
+                    <h1 className="text-sm">Number of connection:</h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={Number(
+                      buildingShellTotalValue?.totalConnectionNumberScore
+                    )}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <h1 className="text-sm">Number of barriers:</h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={Number(
+                      buildingShellTotalValue?.totalBarriersNumbers
+                    )}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <h1 className="text-sm">Total DPC of the shell:</h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={shellDPC.toFixed(2)}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-2 border-[#c4c4c4da] pt-14 pb-10">
+            <div className="w-1/2 mx-auto">
+              <ProgressBar progress={shellDPC.toFixed(2)} />
+            </div>
+          </div>
+        </div>
+        <div className="pt-5">
+          <h1 className="font-medium mt-5 pb-2">Building's core and shell:</h1>
+          <div className="mt-3 p-5 bg-[#c4c4c4da]">
+            <div className="flex justify-between">
+              <div className="">
+                <div className="grid grid-cols-2 gap-10 mb-3">
+                  <div>
+                    <h1 className="whitespace-nowrap text-sm">
+                      Number of connection:
+                    </h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={Number(
+                      buildingCoreTotalValue?.totalConnectionNumberScore +
+                        buildingShellTotalValue?.totalConnectionNumberScore
+                    )}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <h1 className="whitespace-nowrap text-sm">
+                      Number of barriers:
+                    </h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 focus:outline-none text-sm"
+                    readOnly
+                    value={Number(
+                      buildingCoreTotalValue?.totalBarriersScore +
+                        buildingShellTotalValue?.totalBarriersScore
+                    ).toFixed(2)}
+                  />
+                </div>
+              </div>
+              <div className="">
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <h1 className="text-sm">
+                      Total DPC of the <br /> building's core and shell:
+                    </h1>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[120px] pl-2 py-0.5 h-7 focus:outline-none text-sm"
+                    readOnly
+                    value={coreAndShellDPC.toFixed(2)}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-2 border-[#c4c4c4da] p-10">
+            <div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="w-1/2 flex flex-col items-start justify-between gap-7">
+                  <ChartTwo
+                    color="#F4B081"
+                    title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
+                    options={CharOptionsOne}
+                  />
+                  <Charts
+                    color="#4472C4"
+                    title="Disassembly potential of the core connections DPC"
+                    data={data}
+                  />
+                </div>
 
-								<div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
-									<Gauge
-										value={coreAndShellDPC.toFixed(2)}
-										widthOne={200}
-										widthTwo={262}
-										className="mr-[50px]"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+                <div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
+                  <Gauge
+                    value={coreAndShellDPC.toFixed(2)}
+                    widthOne={200}
+                    widthTwo={262}
+                    className="mr-[50px]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 });
 
 export default PdfGenerate;
