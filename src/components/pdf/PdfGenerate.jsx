@@ -136,7 +136,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
         </div>
         <div className="">
           <h1 className="text-xl font-bold text-center">
-            Disassembly Potential of the Building’s core and <br /> shell{" "}
+            Disassembly Potential of the Building’s core and shell <br />
             <span className="text-3xl">Report</span>
           </h1>
         </div>
