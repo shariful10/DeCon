@@ -20,22 +20,24 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 			{
 				name: "Core",
 				data: [
-					buildingCoreTotalValue["totalConnectionTypesScore"],
-					buildingCoreTotalValue["connectionAccessibilityScore"],
-					buildingCoreTotalValue["totalIndependencyScore"],
-					buildingCoreTotalValue["totalGpeScore"],
-					buildingCoreTotalValue["totalBarriersScore"],
+					buildingCoreTotalValue["totalConnectionTypesScore"]?.toFixed(0) || 0,
+					buildingCoreTotalValue["connectionAccessibilityScore"]?.toFixed(0) ||
+						0,
+					buildingCoreTotalValue["totalIndependencyScore"]?.toFixed(0) || 0,
+					buildingCoreTotalValue["totalGpeScore"]?.toFixed(0) || 0,
+					buildingCoreTotalValue["totalBarriersScore"]?.toFixed(0) || 0,
 				],
 				color: "#4472C4",
 			},
 			{
 				name: "Shell",
 				data: [
-					buildingShellTotalValue["totalConnectionTypesScore"],
-					buildingShellTotalValue["connectionAccessibilityScore"],
-					buildingShellTotalValue["totalIndependencyScore"],
-					buildingShellTotalValue["totalGpeScore"],
-					buildingShellTotalValue["totalBarriersScore"],
+					buildingShellTotalValue["totalConnectionTypesScore"]?.toFixed(0) || 0,
+					buildingShellTotalValue["connectionAccessibilityScore"]?.toFixed(0) ||
+						0,
+					buildingShellTotalValue["totalIndependencyScore"]?.toFixed(0) || 0,
+					buildingShellTotalValue["totalGpeScore"]?.toFixed(0) || 0,
+					buildingShellTotalValue["totalBarriersScore"]?.toFixed(0) || 0,
 				],
 				color: "#ED7D31",
 			},
@@ -67,6 +69,9 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 				"Geometry of product edge",
 				"Barriers",
 			],
+		},
+		yaxis: {
+			max: 100,
 		},
 
 		fill: {
