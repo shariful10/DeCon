@@ -80,45 +80,45 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 		setData([
 			{
 				x: "Column and beam",
-				y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndBeamDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column and slab",
-				y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndSlabDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column and bearing wall",
-				y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndBearingWallDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column and foundation",
-				y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.columnAndFoundationDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Beam and slab",
-				y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.beamAndSlabDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Beam and bearing wall",
-				y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingCore?.slabAndBearingWallDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Column & Shell element",
-				y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingShell?.columnAndShellElementDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Beam & Shell element",
-				y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingShell?.beamAndShellElementDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Slab & Shell element",
-				y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(2) || 0,
+				y: parseFloat(buildingShell?.slabAndShellElementDPC)?.toFixed(0) || 0,
 			},
 			{
 				x: "Bearing wall & Shell element",
 				y:
 					parseFloat(buildingShell?.bearingWallAndShellElementDPC)?.toFixed(
-						2
+						0
 					) || 0,
 			},
 		]);
