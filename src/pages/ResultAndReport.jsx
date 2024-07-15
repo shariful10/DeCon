@@ -20,22 +20,24 @@ export default function ResultAndReport() {
       {
         name: "Core",
         data: [
-          buildingCoreTotalValue["totalConnectionTypesScore"],
-          buildingCoreTotalValue["connectionAccessibilityScore"],
-          buildingCoreTotalValue["totalIndependencyScore"],
-          buildingCoreTotalValue["totalGpeScore"],
-          buildingCoreTotalValue["totalBarriersScore"],
+          buildingCoreTotalValue["totalConnectionTypesScore"]?.toFixed(0) || 0,
+          buildingCoreTotalValue["connectionAccessibilityScore"]?.toFixed(0) ||
+            0,
+          buildingCoreTotalValue["totalIndependencyScore"]?.toFixed(0) || 0,
+          buildingCoreTotalValue["totalGpeScore"]?.toFixed(0) || 0,
+          buildingCoreTotalValue["totalBarriersScore"]?.toFixed(0) || 0,
         ],
         color: "#4472C4",
       },
       {
         name: "Shell",
         data: [
-          buildingShellTotalValue["totalConnectionTypesScore"],
-          buildingShellTotalValue["connectionAccessibilityScore"],
-          buildingShellTotalValue["totalIndependencyScore"],
-          buildingShellTotalValue["totalGpeScore"],
-          buildingShellTotalValue["totalBarriersScore"],
+          buildingShellTotalValue["totalConnectionTypesScore"]?.toFixed(0) || 0,
+          buildingShellTotalValue["connectionAccessibilityScore"]?.toFixed(0) ||
+            0,
+          buildingShellTotalValue["totalIndependencyScore"]?.toFixed(0) || 0,
+          buildingShellTotalValue["totalGpeScore"]?.toFixed(0) || 0,
+          buildingShellTotalValue["totalBarriersScore"]?.toFixed(0) || 0,
         ],
         color: "#ED7D31",
       },
@@ -69,6 +71,9 @@ export default function ResultAndReport() {
       ],
     },
 
+    yaxis: {
+      max: 100,
+    },
     fill: {
       opacity: 1,
     },
