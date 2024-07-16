@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/utils/Button";
 import ProgressBar from "../components/utils/ProgressBar";
 import SelectDropdown from "../components/Select/SelectDropdown";
+import { calculateDPC } from "../helper/index";
 
 export default function BuildingCore() {
   const dispatch = useDispatch();
@@ -501,34 +502,6 @@ export default function BuildingCore() {
     }, 0);
   };
 
-  // Calculate DPC based on building core data
-  const calculateDPC = (data, type) => {
-    if (!data) return 0;
-
-    const CTn = data?.connectionType?.score || 0;
-    const CAn = data?.connectionAccessibility?.score || 0;
-    const IDn = data?.independency?.score || 0;
-    const GPEn = data?.gpe?.score || 0;
-    const connectionNumber = data?.connectionNumber?.score || 0;
-    // const barriersScore = data?.barriers?.score || 0;
-    const barriersNumber = data?.barriersNumber?.score || 0;
-
-    const DPcnTotalValue = 1 / CTn + 1 / CAn;
-    const DPcenTotalValue = 1 / IDn + 1 / GPEn;
-    const DPcn = 2 / DPcnTotalValue;
-    const DPcen = 2 / DPcenTotalValue;
-    const DPCSlice = 1 / DPcn + 1 / DPcen;
-    let totalDPC = (2 / DPCSlice) * 100;
-
-    if (connectionNumber === 1 && barriersNumber > 0) {
-      totalDPC = totalDPC - 10;
-    } else {
-      totalDPC = totalDPC - barriersNumber;
-    }
-
-    return totalDPC;
-  };
-
   const totalColumnAndShellElementDPC =
     isNaN(columnAndShellElementDPC) ||
     columnAndShellElementDPC == null ||
@@ -798,7 +771,7 @@ export default function BuildingCore() {
             />
           </div>
 
-          {/* Connection Accessibility */}
+          {/* Connection Accessibility  */}
           <div className="flex-1 flex flex-col gap-4 justify-between">
             <SelectDropdown
               contents={connectionAccessibilityOptions}
