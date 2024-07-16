@@ -771,7 +771,7 @@ export default function BuildingCore() {
             />
           </div>
 
-          {/* Connection Accessibility */}
+          {/* Connection Accessibility  */}
           <div className="flex-1 flex flex-col gap-4 justify-between">
             <SelectDropdown
               contents={connectionAccessibilityOptions}
