@@ -22,8 +22,7 @@ const Gauge = ({ value, className = "", widthOne, widthTwo }) => {
           currentValueText={"${value}"}
           minValue={0}
           maxValue={100}
-          value={54}
-          //  value={value}
+          value={value}
           valueTextFontSize={"24px"}
           valueTextFontWeight="500"
           valueTextFontFamily="sans-serif"
