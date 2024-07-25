@@ -264,15 +264,14 @@ export default function BuildingCore() {
     // setting total scores
     setTotalValue({
       ...totalValue,
-      totalConnectionTypesScore:
-        Math.round(totalConnectionTypeScore * 100) / 100,
-      totalColumnAndSlabScore: Math.round(totalColumnAndSlabScore * 100) / 100,
+      totalConnectionTypesScore: (totalConnectionTypeScore / 6) * 100,
+      totalColumnAndSlabScore: (totalColumnAndSlabScore / 6) * 100,
       connectionAccessibilityScore:
-        Math.round(totalConnectionAccessibilityScore * 100) / 100,
-      totalGpeScore: Math.round(totalGpeScore * 100) / 100,
-      totalIndependencyScore: Math.round(totalIndependencyScore * 100) / 100,
+        (totalConnectionAccessibilityScore / 6) * 100,
+      totalGpeScore: (totalGpeScore / 6) * 100,
+      totalIndependencyScore: (totalIndependencyScore / 6) * 100,
       totalConnectionNumberScore: connectionNumbers || 0,
-      totalBarriersScore: Math.round(totalBarriersScore * 100) / 100,
+      totalBarriersScore: (totalBarriersScore / 6) * 100,
       totalBarriersNumbers: totalBarriersNumbers,
       totalDPCOfBuildingCore: totalDPC || 0,
     });

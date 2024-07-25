@@ -27,23 +27,25 @@ export const calculateDPC = (data, type) => {
   const connectionNumber = data?.connectionNumber?.score || 0;
   const barriersScore = data?.barriers?.score || 0;
   const barriersNumber = data?.barriersNumber?.score || 0;
+  const barriersScoreAndNumbers = barriersScore * barriersNumber;
+  const barriersAddedValue = barriersScoreAndNumbers * 10;
 
   const DPcnTotalValue = 1 / CTn + 1 / CAn;
   const DPcenTotalValue = 1 / IDn + 1 / GPEn;
   const DPcn = 2 / DPcnTotalValue;
   const DPcen = 2 / DPcenTotalValue;
   const DPCSlice = 1 / DPcn + 1 / DPcen;
-  let totalDPC = (2 / DPCSlice) * 100;
+  let totalDPC = (2 / DPCSlice) * connectionNumber * 10;
 
-  if (barriersScore !== 0) {
-    if (connectionNumber === 1 && barriersNumber > 0) {
-      totalDPC = totalDPC - 10;
-    } else {
-      totalDPC = totalDPC - barriersNumber;
-    }
-  }
+  // if (barriersScore !== 0) {
+  //   if (connectionNumber === 1 && barriersNumber > 0) {
+  //     totalDPC = totalDPC - 10;
+  //   } else {
+  //     totalDPC = totalDPC - barriersNumber;
+  //   }
+  // }
 
-  return totalDPC;
+  return totalDPC - barriersAddedValue;
 };
 
 export const connectionType = [
@@ -215,6 +217,13 @@ export const connectionAccessibilityOptions = [
         value:
           "accessible_with_additional_actions_with_partially_repairable_damage",
         score: 0.4,
+      },
+      {
+        label:
+          "Not accessible - irreparable damage to the product or surrounding products",
+        value:
+          "not_accessible_irreparable_damage_to_the_product_or_surrounding_products",
+        score: 0.1,
       },
     ],
   },
