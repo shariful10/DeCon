@@ -232,15 +232,14 @@ export default function BuildingCore() {
     // setting total scores
     setTotalValue({
       ...totalValue,
-      totalConnectionTypesScore:
-        Math.round(totalConnectionTypeScore * 100) / 100,
-      totalColumnAndSlabScore: Math.round(totalColumnAndSlabScore * 100) / 100,
+      totalConnectionTypesScore: (totalConnectionTypeScore / 4) * 100,
+      totalColumnAndSlabScore: (totalColumnAndSlabScore / 4) * 100,
       connectionAccessibilityScore:
-        Math.round(totalConnectionAccessibilityScore * 100) / 100,
-      totalGpeScore: Math.round(totalGpeScore * 100) / 100,
-      totalIndependencyScore: Math.round(totalIndependencyScore * 100) / 100,
+        (totalConnectionAccessibilityScore / 4) * 100,
+      totalGpeScore: (totalGpeScore / 4) * 100,
+      totalIndependencyScore: (totalIndependencyScore / 4) * 100,
       totalConnectionNumberScore: connectionNumbers || 0,
-      totalBarriersScore: Math.round(totalBarriersScore * 100) / 100,
+      totalBarriersScore: (totalBarriersScore / 4) * 100,
       totalBarriersNumbers: totalBarriersNumbers,
       totalDPCOfBuildingCore: totalDPC || 0,
     });
@@ -266,6 +265,8 @@ export default function BuildingCore() {
     dispatch(addBuildingShellTotalValue(totalValue));
     navigate("/result-and-report");
   };
+
+  console.log("totalConnectionTypesScore");
 
   return (
     <div className="w-full px-10">
