@@ -266,8 +266,6 @@ export default function BuildingCore() {
     navigate("/result-and-report");
   };
 
-  console.log("totalConnectionTypesScore");
-
   return (
     <div className="w-full px-10">
       <form onSubmit={handleSubmit} className="flex flex-col">
