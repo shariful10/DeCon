@@ -1,11 +1,10 @@
-import React from "react";
-import Gauge from "../Gauge/Gauge";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import logo from "../../assets/images/logo.jpeg";
 import Charts from "../Chart/Chart";
 import ChartTwo from "../Chart/ChartTwo";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import Gauge from "../Gauge/Gauge";
 import ProgressBar from "../utils/ProgressBar";
-import logo from "../../assets/images/logo.jpeg";
 
 const PdfGenerate = React.forwardRef((props, ref) => {
   const [data, setData] = useState([]);
@@ -327,7 +326,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
           </div>
         </div>
         <div className="pb-16">
-          <h1 className="font-medium mt-5">Building's shell:</h1>
+          <h1 className="font-medium mt-5">Building's core and shell:</h1>
           <div className="mt-3 p-5 bg-[#c4c4c4da]">
             <div className="flex justify-between">
               <div>
@@ -436,26 +435,26 @@ const PdfGenerate = React.forwardRef((props, ref) => {
           </div>
           <div className="border-2 border-[#c4c4c4da] p-10">
             <div>
-              <div className="flex items-center justify-between gap-4">
-                <div className="w-1/2 flex flex-col items-start justify-between gap-7">
+              <div className="flex flex-col items-center justify-between gap-4">
+                <div className="flex items-start justify-between gap-7 w-full">
                   <ChartTwo
                     color="#F4B081"
                     title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
                     options={CharOptionsOne}
                   />
-                  <Charts
-                    color="#4472C4"
-                    title="Disassembly potential of the core connections DPC"
-                    data={data}
-                  />
-                </div>
-
-                <div className="w-[40%] flex flex-col items-center justify-center gap-7 px-5">
                   <Gauge
                     value={coreAndShellDPC.toFixed(2)}
                     widthOne={200}
                     widthTwo={262}
                     className="mr-[50px]"
+                  />
+                </div>
+
+                <div className="flex flex-col items-center justify-center gap-7 px-5 w-full">
+                  <Charts
+                    color="#4472C4"
+                    title="Disassembly Potential of the connections"
+                    data={data}
                   />
                 </div>
               </div>
