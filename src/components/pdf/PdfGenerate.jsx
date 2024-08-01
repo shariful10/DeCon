@@ -378,7 +378,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 				</div>
-				<div className="pt-3">
+				<div className="pt-5">
 					<h1 className="font-medium pb-2">Building's core and shell:</h1>
 					<div className="mt-3 p-5 bg-[#c4c4c4da]">
 						<div className="flex justify-between">
