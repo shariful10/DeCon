@@ -1,26 +1,24 @@
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Charts from "../components/Chart/Chart";
+import Input from "../components/Input/Input";
+import SelectDropdown from "../components/Select/SelectDropdown";
+import Button from "../components/utils/Button";
+import ProgressBar from "../components/utils/ProgressBar";
+import {
+  GeometryOfProductEdge,
+  barriers,
+  calculateDPC,
+  connectionAccessibilityOptions,
+  connectionType,
+  independency,
+} from "../helper/index";
 import {
   addBuildingShell,
   addBuildingShellInfo,
   addBuildingShellTotalValue,
 } from "../redux/features/buildingShellSlice";
-import Input from "../components/Input/Input";
-import Charts from "../components/Chart/Chart";
-import { useNavigate } from "react-router-dom";
-import Button from "../components/utils/Button";
-import ProgressBar from "../components/utils/ProgressBar";
-import SelectDropdown from "../components/Select/SelectDropdown";
-import {
-  calculateDPC,
-  connectionType,
-  connectionAccessibilityOptions,
-  independency,
-  GeometryOfProductEdge,
-  barriers,
-} from "../helper/index";
 
 export default function BuildingCore() {
   const dispatch = useDispatch();
@@ -265,8 +263,6 @@ export default function BuildingCore() {
     dispatch(addBuildingShellTotalValue(totalValue));
     navigate("/result-and-report");
   };
-
-  console.log("totalConnectionTypesScore");
 
   return (
     <div className="w-full px-10">
