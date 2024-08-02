@@ -436,7 +436,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 					<div className="border-2 border-[#c4c4c4da] p-10">
 						<div>
 							<div className="flex flex-col items-center justify-between gap-4">
-								<div className="flex items-start justify-between gap-7 w-full">
+								<div className="flex items-center justify-between gap-7 w-full">
 									<ChartTwo
 										color="#F4B081"
 										title="Disassembly potential of the core connections DPC based on the DfD criteria and barriers"
@@ -446,7 +446,7 @@ const PdfGenerate = React.forwardRef((props, ref) => {
 										value={coreAndShellDPC.toFixed(2)}
 										widthOne={200}
 										widthTwo={262}
-										className="mr-[50px]"
+										className="mr-[50px] mt-6"
 									/>
 								</div>
 
